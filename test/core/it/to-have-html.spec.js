@@ -24,7 +24,7 @@
 
 import '../../../src/index.js';
 
-describe('toHaveText', () => {
+describe('toHaveHtml', () => {
   it('should pass with a DOM node', () => {
     const html = '<div>foo</div>';
     const node = document.createElement('div');

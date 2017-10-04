@@ -43,10 +43,14 @@ import {toDomElement} from '../util/index';
  */
 export function toHaveHtml({actual, equals}, expectedHtml) {
   const node = toDomElement(actual);
+  const fragment = document.createDocumentFragment();
+  fragment.innerHTML = expectedHtml;
+
   const actualHtml = node.innerHTML;
+  const testedHtml = fragment.innerHTML;
 
   return {
-    pass: equals(actualHtml, expectedHtml),
+    pass: equals(actualHtml, testedHtml),
     message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`,
   };
 }

@@ -35,7 +35,7 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have HTML '<div>foo</div>' but was '<div>foo</div>'`,
+      message: `Expect HTMLNode [NOT] to have HTML '${html}' but was '${actual.innerHTML}'`,
     });
   });
 });
