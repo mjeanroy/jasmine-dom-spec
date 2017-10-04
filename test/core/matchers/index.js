@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+import './to-be-required.spec';
 import './to-have-id.spec';
 import './to-have-attrs.spec';
 import './to-have-css-class.spec';

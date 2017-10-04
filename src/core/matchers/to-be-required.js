@@ -22,8 +22,29 @@
  * THE SOFTWARE.
  */
 
-import './to-be-required.spec';
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-props.spec';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node property required equal
+ * to an expected value.
+ *
+ * @message Expect [actual] [NOT] to be required
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.required = true;
+ *   expect(actual).toBeRequired();
+ *
+ * @param {Object} ctx Test context.
+ * @param {string} id The expected id.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toBeRequired({actual}, id) {
+  const node = toDomElement(actual);
+  const required = node.required;
+  return {
+    pass: required === true,
+    message: `Expect ${pp(actual)} [NOT] to be required`,
+  };
+}

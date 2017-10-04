@@ -22,8 +22,28 @@
  * THE SOFTWARE.
  */
 
-import './to-be-required.spec';
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-props.spec';
+import {toBeRequired} from '../../../src/core/matchers/to-be-required';
+
+describe('toHaveId', () => {
+  it('should pass with a required input', () => {
+    const actual = document.createElement('input');
+    actual.required = true;
+
+    const result = toBeRequired({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be required`,
+    });
+  });
+
+  it('should not pass with a non-required input', () => {
+    const actual = document.createElement('input');
+    const result = toBeRequired({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be required`,
+    });
+  });
+});
