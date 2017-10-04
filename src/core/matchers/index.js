@@ -23,6 +23,7 @@
  */
 
 export {toBeChecked} from './to-be-checked';
+export {toBeIndeterminate} from './to-be-indeterminate';
 export {toBeRequired} from './to-be-required';
 export {toBeSelected} from './to-be-selected';
 export {toHaveId} from './to-have-id';

@@ -22,14 +22,29 @@
  * THE SOFTWARE.
  */
 
-import './to-be-checked.spec';
-import './to-be-indeterminate.spec';
-import './to-be-required.spec';
-import './to-be-selected.spec';
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-html.spec';
-import './to-have-props.spec';
-import './to-have-text.spec';
-import './to-have-value.spec';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node property `indeterminate` equal
+ * to `true`.
+ *
+ * @message Expect [actual] [NOT] to be checked
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.type = 'checkbox';
+ *   actual.indeterminate = true;
+ *   expect(actual).toBeIndeterminate();
+ *
+ * @param {Object} ctx Test context.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toBeIndeterminate({actual}) {
+  const node = toDomElement(actual);
+  const indeterminate = node.indeterminate;
+  return {
+    pass: indeterminate === true,
+    message: `Expect ${pp(actual)} [NOT] to be indeterminate`,
+  };
+}

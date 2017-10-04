@@ -23,6 +23,7 @@
  */
 
 import './to-be-checked.spec';
+import './to-be-indeterminate.spec';
 import './to-be-required.spec';
 import './to-be-selected.spec';
 import './to-have-id.spec';

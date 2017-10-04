@@ -22,14 +22,30 @@
  * THE SOFTWARE.
  */
 
-import './to-be-checked.spec';
-import './to-be-indeterminate.spec';
-import './to-be-required.spec';
-import './to-be-selected.spec';
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-html.spec';
-import './to-have-props.spec';
-import './to-have-text.spec';
-import './to-have-value.spec';
+import {toBeIndeterminate} from '../../../src/core/matchers/to-be-indeterminate';
+
+describe('toBeIndeterminate', () => {
+  it('should pass with an indeterminate checkbox', () => {
+    const actual = document.createElement('input');
+    actual.type = 'checkbox';
+    actual.indeterminate = true;
+
+    const result = toBeIndeterminate({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be indeterminate`,
+    });
+  });
+
+  it('should not pass with a non-indeterminate checkbox', () => {
+    const actual = document.createElement('input');
+    actual.type = 'checkbox';
+    const result = toBeIndeterminate({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be indeterminate`,
+    });
+  });
+});
