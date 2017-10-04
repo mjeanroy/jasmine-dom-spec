@@ -41,8 +41,9 @@ import {toDomElement} from '../util/index';
  */
 export function toBeFocused({actual}) {
   const node = toDomElement(actual);
+  const activeElement = document.activeElement;
   return {
-    pass: document.activeElement === node,
+    pass: activeElement === node,
     message: `Expect ${pp(actual)} [NOT] to be focused`,
   };
 }

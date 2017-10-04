@@ -39,6 +39,9 @@ describe('toBeFocused', () => {
   it('should pass with a focused element', () => {
     const actual = document.createElement('input');
     fixtures.appendChild(actual);
+
+    // Call it twice, it seems to fix a weird (and random) bug in IE8...
+    actual.focus();
     actual.focus();
 
     const result = toBeFocused({actual});
