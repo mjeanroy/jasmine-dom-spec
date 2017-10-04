@@ -82,7 +82,7 @@ module.exports = (config) => ({
   // - IE (only Windows)
   // CLI --browsers Chrome,Firefox,Safari
   browsers: [
-    'Chrome',
+    'PhantomJS',
   ],
 
   // If browser does not capture in given timeout [ms], kill it
