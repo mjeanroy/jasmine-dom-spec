@@ -42,7 +42,7 @@ describe('toBeFocused', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to be detached`,
+      message: `Expect HTMLNode [NOT] to be detached element`,
     });
   });
 
@@ -54,7 +54,7 @@ describe('toBeFocused', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to be detached`,
+      message: `Expect HTMLNode [NOT] to be detached element`,
     });
   });
 });

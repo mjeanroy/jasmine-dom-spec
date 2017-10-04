@@ -45,7 +45,12 @@ export function toBeDetachedElement({actual}) {
 
   let isDetached = true;
   let parentNode = node;
-  while (parentNode && parentNode !== document) {
+  while (parentNode) {
+    if (parentNode === document || parentNode === document.body) {
+      isDetached = false;
+      break;
+    }
+
     parentNode = parentNode.parentNode;
   }
 
