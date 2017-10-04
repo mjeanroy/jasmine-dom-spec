@@ -22,15 +22,27 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object has focus on the active document window (note that if
+ * element is not attached to the DOM, it can't have focus).
+ *
+ * @message Expect [actual] [NOT] to be focused
+ * @example
+ *   const actual = document.getElementById('my-input');
+ *   actual.focus();
+ *   expect(actual).toBeFocused();
+ *
+ * @param {Object} ctx Test context.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toBeFocused({actual}) {
+  const node = toDomElement(actual);
+  return {
+    pass: document.activeElement === node,
+    message: `Expect ${pp(actual)} [NOT] to be focused`,
+  };
+}

@@ -22,15 +22,42 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {toBeFocused} from '../../../src/core/matchers/to-be-focused';
+
+describe('toBeFocused', () => {
+  let fixtures;
+
+  beforeEach(() => {
+    fixtures = document.createElement('div');
+    document.body.appendChild(fixtures);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(fixtures);
+  });
+
+  it('should pass with a focused element', () => {
+    const actual = document.createElement('input');
+    fixtures.appendChild(actual);
+    actual.focus();
+
+    const result = toBeFocused({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be focused`,
+    });
+  });
+
+  it('should not pass with a non-focused element', () => {
+    const actual = document.createElement('input');
+    fixtures.appendChild(actual);
+
+    const result = toBeFocused({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be focused`,
+    });
+  });
+});
