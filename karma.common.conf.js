@@ -27,6 +27,7 @@
  */
 
 const path = require('path');
+const babel = require('rollup-plugin-babel');
 const conf = require('./conf');
 
 module.exports = (config) => ({
@@ -97,7 +98,7 @@ module.exports = (config) => ({
   reportSlowerThan: 500,
 
   preprocessors: {
-    'test/**/*.js': ['rollup', 'babel'],
+    'test/**/*.js': ['rollup'],
   },
 
   // Rollup test configuration
@@ -106,5 +107,8 @@ module.exports = (config) => ({
     name: 'JasmineDomSpecs', // required for 'iife' format
     legacy: true,
     sourcemap: false,
+    plugins: [
+      babel(),
+    ],
   },
 });

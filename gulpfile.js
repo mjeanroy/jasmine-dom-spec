@@ -26,10 +26,12 @@
 
 const path = require('path');
 const del = require('del');
+const rollup = require('rollup');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const eslint = require('gulp-eslint');
 const KarmaServer = require('karma').Server;
+const rollupConf = require('./rollup.conf');
 const conf = require('./conf');
 
 gulp.task('clean', () => {
@@ -57,6 +59,14 @@ gulp.task('test', (done) => {
 
 gulp.task('tdd', (done) => {
   startKarma('tdd', done);
+});
+
+gulp.task('build', ['clean'], () => {
+  return rollup
+    .rollup(rollupConf)
+    .then((bundle) => {
+      return bundle.write(rollupConf.output);
+    });
 });
 
 /**

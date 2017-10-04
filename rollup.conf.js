@@ -10,28 +10,50 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 const path = require('path');
-const ROOT = __dirname;
-const SRC = path.join(ROOT, 'src');
-const DIST = path.join(ROOT, 'dist');
+const babel = require('rollup-plugin-babel');
+const stripBanner = require('rollup-plugin-strip-banner');
+const license = require('rollup-plugin-license');
+const esformatter = require('rollup-plugin-esformatter');
+const conf = require('./conf');
 
 module.exports = {
-  root: ROOT,
-  dist: DIST,
-  src: SRC,
-  test: path.join(ROOT, 'test'),
-  entry: path.join(SRC, 'index.js'),
-  dest: path.join(DIST, 'jasmine-dom-spec.js'),
+  input: conf.entry,
+  output: {
+    file: conf.dest,
+    format: 'iife',
+  },
+
+  legacy: true,
+  sourcemap: false,
+
+  plugins: [
+    // Remove banner from single modules.
+    stripBanner(),
+
+    // Transform code to old JavaScript.
+    babel(),
+
+    // Prepend banner.
+    license({
+      banner: {
+        file: path.join(__dirname, 'LICENSE'),
+      },
+    }),
+
+    // Beautify bundle.
+    esformatter(),
+  ],
 };
