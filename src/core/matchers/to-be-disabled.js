@@ -22,18 +22,28 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeDisabled} from './to-be-disabled';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveStyle} from './to-have-style';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node property `disabled` equal
+ * to `true`.
+ *
+ * @message Expect [actual] [NOT] to be disabled
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.disabled = true;
+ *   expect(actual).toBeDisabled();
+ *
+ * @param {Object} ctx Test context.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toBeDisabled({actual}) {
+  const node = toDomElement(actual);
+  const disabled = node.disabled;
+  return {
+    pass: disabled === true,
+    message: `Expect ${pp(actual)} [NOT] to be disabled`,
+  };
+}

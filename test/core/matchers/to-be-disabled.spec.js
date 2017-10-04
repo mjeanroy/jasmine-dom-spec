@@ -22,18 +22,28 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeDisabled} from './to-be-disabled';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveStyle} from './to-have-style';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {toBeDisabled} from '../../../src/core/matchers/to-be-disabled';
+
+describe('toBeDisabled', () => {
+  it('should pass with a disabled input', () => {
+    const actual = document.createElement('input');
+    actual.disabled = true;
+
+    const result = toBeDisabled({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be disabled`,
+    });
+  });
+
+  it('should not pass with a non-disabled input', () => {
+    const actual = document.createElement('input');
+    const result = toBeDisabled({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be disabled`,
+    });
+  });
+});
