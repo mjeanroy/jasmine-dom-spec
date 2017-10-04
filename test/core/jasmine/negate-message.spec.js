@@ -26,13 +26,13 @@ import {negateMessage} from '../../../src/core/jasmine/negate-message.js';
 
 describe('negateMessage', () => {
   it('should not negate message if isNot is false', () => {
-    const message = 'Test {{not}} true';
+    const message = 'Test [NOT] true';
     const result = negateMessage(false, message);
     expect(result).toBe('Test true');
   });
 
   it('should negate message if isNot is true', () => {
-    const message = 'Test {{not}} true';
+    const message = 'Test [NOT] true';
     const result = negateMessage(true, message);
     expect(result).toBe('Test not true');
   });

@@ -22,23 +22,22 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {version, createMatcher} from './core/jasmine/index';
+import {forEach, keys} from './core/util/index';
+import * as matchers from './core/matchers/index';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
+// Create matchers and add it to the current jasmine environment.
+const jasmineMatchers = {};
+
+forEach(keys(matchers), (id) => {
+  jasmineMatchers[id] = createMatcher(matchers[id]);
+});
+
+beforeEach(function jasmineUtilBeforeEach() {
+  if (version === 1) {
+    // eslint-disable-next-line no-invalid-this
+    this.addMatchers(jasmineMatchers);
+  } else {
+    jasmine.addMatchers(jasmineMatchers);
   }
-
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
-}
+});

@@ -22,23 +22,14 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
-
 /**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
+ * Check if a key is a property of a given object (i.e this is the result
+ * of `Object.hasOwnProperty` method).
  *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
+ * @param {Object} object Object to check.
+ * @param {string} prop Property (a.k.a key) to look for.
+ * @return {boolean} `true` if `prop` is a key of `object`, `false` otherwise.
  */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
-
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
+export function has(object, prop) {
+  return Object.prototype.hasOwnProperty.call(object, prop);
 }

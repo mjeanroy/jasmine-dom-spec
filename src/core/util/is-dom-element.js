@@ -22,23 +22,16 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
-
 /**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
+ * Check if an object is a DOM node.
  *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
+ * @param {*} actual The object to test.
+ * @return {boolean} `true` if `actual` is a DOM node, `false` otherwise.
  */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
+export function isDomElement(actual) {
+  if (!(actual instanceof Element)) {
+    return false;
   }
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
+  return actual.nodeType === 1;
 }

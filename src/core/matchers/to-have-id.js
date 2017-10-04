@@ -22,23 +22,29 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
 
 /**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
+ * Check that the tested object is a DOM node with expected `id`.
  *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
+ * @message Expect [actual] [NOT] to have id [id] but was [id]
+ * @example
+ *   const actual = document.createElement('div');
+ *   actual.id = 'foo';
+ *   expect(actual).toHaveId('foo');
+ *   expect(actual).not.toHaveId('bar');
+ *
+ * @param {Object} ctx Test context.
+ * @param {string} id The expected id.
+ * @return {Object} Test result.
+ * @since 0.1.0
  */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
-
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
+export function toHaveId({actual}, id) {
+  const node = toDomElement(actual);
+  const actualId = node.id;
+  return {
+    pass: node.id === id,
+    message: `Expect ${pp(actual)} [NOT] to have id ${pp(id)} but was ${pp(actualId)}`,
+  };
 }

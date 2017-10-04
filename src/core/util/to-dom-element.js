@@ -22,23 +22,27 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {pp} from '../jasmine/index';
+import {isDomElement} from './is-dom-element';
 
 /**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
+ * Translate a value to a valid DOM Node:
+ * - Return exact DOM node if `value` is already a DOM element.
+ * - Throw error otherwise.
  *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
+ * @param {*} value Value to translate to a DOM element.
+ * @return {HTMLElement} The DOM element.
  */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
+export function toDomElement(value) {
+  let node;
+
+  if (!isDomElement(value)) {
+    // TODO Translate to DOM node.
+    // TODO Handle jQuery object, string node.
+    throw new Error(`Expect ${pp(value)} to be a DOM element`);
+  } else {
+    node = value;
   }
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
+  return node;
 }

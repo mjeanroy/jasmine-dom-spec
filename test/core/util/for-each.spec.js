@@ -22,23 +22,36 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {forEach} from '../../../src/core/util/for-each';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
+describe('forEach', () => {
+  it('should iterate over array', () => {
+    const array = [1, 2, 3];
+    const iteratee = jasmine.createSpy('iteratee');
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
-}
+    const result = forEach(array, iteratee);
+
+    expect(result).toBeUndefined();
+    expect(iteratee).toHaveBeenCalledWith(1, 0, array);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, array);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, array);
+  });
+
+  it('should iterate over array like object', () => {
+    const arrayLike = {
+      'length': 3,
+      '0': 1,
+      '1': 2,
+      '2': 3,
+    };
+
+    const iteratee = jasmine.createSpy('iteratee');
+
+    const result = forEach(arrayLike, iteratee);
+
+    expect(result).toBeUndefined();
+    expect(iteratee).toHaveBeenCalledWith(1, 0, arrayLike);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, arrayLike);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, arrayLike);
+  });
+});

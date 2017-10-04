@@ -22,23 +22,18 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {keys} from '../../../src/core/util/keys';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
+describe('keys', () => {
+  it('should return all own keys of object', () => {
+    const obj = {
+      k1: true,
+      k2: false,
+    };
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
-}
+    const results = keys(obj);
+
+    expect(results.length).toBe(2);
+    expect(results.sort()).toEqual(['k1', 'k2']);
+  });
+});

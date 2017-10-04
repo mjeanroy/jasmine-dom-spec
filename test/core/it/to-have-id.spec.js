@@ -22,23 +22,14 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import '../../../src/index.js';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
+describe('toHaveId', () => {
+  it('should pass with a DOM node', () => {
+    const id = 'foo';
+    const node = document.createElement('div');
+    node.id = id;
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
-}
+    expect(node).toHaveId(id);
+  });
+});

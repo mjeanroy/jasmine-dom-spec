@@ -22,23 +22,27 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {has} from './has.js';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
+// Use a fallback for `Object.keys` if needed (for old browsers).
+const objectKeys = Object.keys || function _keys(o) {
+  const results = [];
+
+  for (let key in o) {
+    if (has(o, key)) {
+      results.push(key);
+    }
   }
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
+  return results;
+};
+
+/**
+ * Get all own and enumerable keys of an object.
+ *
+ * @param {Object} obj Object to extract keys.
+ * @return {Array<string>} An array of all the keys in the object.
+ */
+export function keys(obj) {
+  return objectKeys(obj);
 }

@@ -22,23 +22,21 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {isDomElement} from '../../../src/core/util/is-dom-element';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
+describe('isDomNode', () => {
+  it('should return true with a DOM Node', () => {
+    const node = document.createElement('div');
+    expect(isDomElement(node)).toBe(true);
+  });
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
-}
+  it('should return false with a DOM Comment', () => {
+    const node = document.createComment('test');
+    expect(isDomElement(node)).toBe(false);
+  });
+
+  it('should return false with a string', () => {
+    const node = '<div></div>';
+    expect(isDomElement(node)).toBe(false);
+  });
+});

@@ -23,3 +23,6 @@
  */
 
 import './jasmine/index';
+import './util/index';
+import './matchers/index';
+import './it/index';

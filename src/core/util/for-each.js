@@ -22,23 +22,21 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
-
 /**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
+ * Apply a predicate function on all the values of an array (also supports array-like
+ * objects).
  *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
+ * The iteratee function will be called with three arguments:
+ *  - `value` The value for the given iteration.
+ *  - `index` The index of the value being iterated.
+ *  - `array` The array being traversed.
+ *
+ * @param {Array<*>} array The array to iterate.
+ * @param {function} iteratee The iteratee function.
+ * @return {void}
  */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
+export function forEach(array, iteratee) {
+  for (let i = 0, size = array.length; i < size; ++i) {
+    iteratee.call(null, array[i], i, array);
   }
-
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
 }

@@ -22,23 +22,19 @@
  * THE SOFTWARE.
  */
 
-const PLACEHOLDER = '[NOT]';
+import {toHaveId} from '../../../src/core/matchers/to-have-id';
 
-/**
- * Return message with the appropriate negation:
- * - If `isNot` is `true`, then the pattern `{{not}}` will be replaced by `not`.
- * - Otherwise, the pattern `{{not}}` is replaced by an empty string.
- *
- * @param {boolean} isNot Enable/disable negation.
- * @param {string} message The message.
- * @return {string} The negated message.
- */
-export function negateMessage(isNot, message) {
-  if (!message) {
-    return '';
-  }
+describe('toHaveId', () => {
+  it('should pass with a dom node with expected id', () => {
+    const id = 'foo';
+    const actual = document.createElement('div');
+    actual.id = id;
 
-  const notKey = isNot ? PLACEHOLDER : `${PLACEHOLDER} `;
-  const notValue = isNot ? 'not' : '';
-  return message.replace(notKey, notValue);
-}
+    const result = toHaveId({actual}, id);
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have id 'foo' but was 'foo'`,
+    });
+  });
+});

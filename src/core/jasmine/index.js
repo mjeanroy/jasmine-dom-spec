@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+export {version} from './version';
 export {pp} from './pp';
 export {createMatcher} from './matcher-factory';
 export {negateMessage} from './negate-message';
