@@ -8,6 +8,7 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "tdd": "gulp tdd",
+    "travis": "gulp travis",
     "build": "gulp build"
   },
   "keywords": [
@@ -35,6 +36,7 @@
     "karma-phantomjs-launcher": "1.0.4",
     "karma-rollup-preprocessor": "5.0.1",
     "karma-safari-launcher": "1.0.0",
+    "karma-sauce-launcher": "1.2.0",
     "lodash": "4.17.4",
     "phantomjs-prebuilt": "2.1.15",
     "rollup": "0.48.2",
