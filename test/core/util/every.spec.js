@@ -22,20 +22,32 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {every} from '../../../src/core/util/every.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('every', () => {
+  it('should return true if predicate always returns a truthy value', () => {
+    const array = [1, 2, 3];
+    const predicate = jasmine.createSpy('predicate').and.returnValue(true);
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+    const result = every(array, predicate);
+
+    expect(result).toBe(true);
+    expect(predicate).toHaveBeenCalledWith(1, 0, array);
+    expect(predicate).toHaveBeenCalledWith(2, 1, array);
+    expect(predicate).toHaveBeenCalledWith(3, 2, array);
+  });
+
+  it('should return false if predicate returns a falsy value', () => {
+    const array = [1, 2, 3];
+    const predicate = jasmine.createSpy('predicate').and.callFake((x) => {
+      return x < 3;
+    });
+
+    const result = every(array, predicate);
+
+    expect(result).toBe(false);
+    expect(predicate).toHaveBeenCalledWith(1, 0, array);
+    expect(predicate).toHaveBeenCalledWith(2, 1, array);
+    expect(predicate).toHaveBeenCalledWith(3, 2, array);
+  });
+});

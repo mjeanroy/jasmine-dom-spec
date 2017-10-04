@@ -22,20 +22,40 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {filter} from '../../../src/core/util/filter.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('filter', () => {
+  it('should return filtered array', () => {
+    const array = [1, 2, 3];
+    const iteratee = jasmine.createSpy('iteratee').and.callFake((a) => a % 2 === 0);
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+    const result = filter(array, iteratee);
+
+    expect(result).toBeDefined();
+    expect(result).toEqual([2]);
+    expect(iteratee).toHaveBeenCalledWith(1, 0, array);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, array);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, array);
+  });
+
+  it('should iterate over array like object and returns new filtered array', () => {
+    const arrayLike = {
+      'length': 3,
+
+      '0': 1,
+      '1': 2,
+      '2': 3,
+    };
+
+    const iteratee = jasmine.createSpy('iteratee').and.callFake((a) => a % 2 === 0);
+
+    const result = filter(arrayLike, iteratee);
+
+    expect(result).toBeDefined();
+    expect(result).toEqual([2]);
+
+    expect(iteratee).toHaveBeenCalledWith(1, 0, arrayLike);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, arrayLike);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, arrayLike);
+  });
+});

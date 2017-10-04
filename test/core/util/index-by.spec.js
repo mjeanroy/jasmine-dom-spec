@@ -22,20 +22,25 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {indexBy} from '../../../src/core/util/index-by';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('indexBy', () => {
+  it('should index elements using predicate', () => {
+    const array = ['foo', 'bar', 'quix'];
+    const iteratee = jasmine.createSpy('iteratee').and.callFake((x) => (
+      x.charAt(0)
+    ));
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+    const result = indexBy(array, iteratee);
+
+    expect(result).toEqual({
+      f: 'foo',
+      b: 'bar',
+      q: 'quix',
+    });
+
+    expect(iteratee).toHaveBeenCalledWith('foo', 0, array);
+    expect(iteratee).toHaveBeenCalledWith('bar', 1, array);
+    expect(iteratee).toHaveBeenCalledWith('quix', 2, array);
+  });
+});

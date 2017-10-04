@@ -23,19 +23,19 @@
  */
 
 /**
- * Karma Configuration.
+ * Index all elements in the array and return the result.
+ *
+ * @param {Array<*>} array Array to index.
+ * @param {function} iteratee The predicate that return the index value.
+ * @return {Object} The result as a map object.
  */
+export function indexBy(array, iteratee) {
+  const map = {};
+  const size = array.length;
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+  for (let i = 0; i < size; ++i) {
+    map[iteratee(array[i], i, array)] = array[i];
+  }
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  return map;
+}

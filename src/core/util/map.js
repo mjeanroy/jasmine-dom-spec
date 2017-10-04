@@ -22,20 +22,25 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+ /**
+  * Apply a predicate function on all the values of an array (also supports array-like
+  * objects) and returns an array of all intermediate results.
+  *
+  * The iteratee function will be called with three arguments:
+  *  - `value` The value for the given iteration.
+  *  - `index` The index of the value being iterated.
+  *  - `array` The array being traversed.
+  *
+  * @param {Array<*>} array The array to iterate.
+  * @param {function} iteratee The iteratee function.
+  * @return {Array<*>} Array containing all intermediate results.
+  */
+export function map(array, iteratee) {
+  const results = [];
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+  for (let i = 0, size = array.length; i < size; ++i) {
+    results.push(iteratee.call(null, array[i], i, array));
+  }
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  return results;
+}

@@ -22,20 +22,40 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {map} from '../../../src/core/util/map.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('map', () => {
+  it('should iterate over array and returns new array', () => {
+    const array = [1, 2, 3];
+    const iteratee = jasmine.createSpy('iteratee').and.callFake((a) => a + a);
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+    const result = map(array, iteratee);
+
+    expect(result).toBeDefined();
+    expect(result).toEqual([2, 4, 6]);
+    expect(iteratee).toHaveBeenCalledWith(1, 0, array);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, array);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, array);
+  });
+
+  it('should iterate over array like object and returns new array', () => {
+    const arrayLike = {
+      'length': 3,
+
+      '0': 1,
+      '1': 2,
+      '2': 3,
+    };
+
+    const iteratee = jasmine.createSpy('iteratee').and.callFake((a) => a + a);
+
+    const result = map(arrayLike, iteratee);
+
+    expect(result).toBeDefined();
+    expect(result).toEqual([2, 4, 6]);
+
+    expect(iteratee).toHaveBeenCalledWith(1, 0, arrayLike);
+    expect(iteratee).toHaveBeenCalledWith(2, 1, arrayLike);
+    expect(iteratee).toHaveBeenCalledWith(3, 2, arrayLike);
+  });
+});

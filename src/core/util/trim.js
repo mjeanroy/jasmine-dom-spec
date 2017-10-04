@@ -22,20 +22,18 @@
  * THE SOFTWARE.
  */
 
+const _trim = String.prototype.trim;
+
 /**
- * Karma Configuration.
+ * Trim a string (use native String#trim function if available).
+ *
+ * @param {string} str String to trim.
+ * @return {string} Trimmed string.
  */
+export function trim(str) {
+  if (_trim) {
+    return _trim.call(str);
+  }
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  return str.replace(/^\s+|\s+$/g, '');
+}

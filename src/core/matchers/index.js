@@ -23,3 +23,4 @@
  */
 
 export {toHaveId} from './to-have-id';
+export {toHaveCssClass} from './to-have-css-class';

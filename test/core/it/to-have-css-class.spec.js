@@ -22,20 +22,21 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import '../../../src/index.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('toHaveCssClass', () => {
+  it('should pass with a DOM node', () => {
+    const node = document.createElement('div');
+    node.className = 'foo bar';
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+    expect(node).toHaveCssClass('foo');
+    expect(node).toHaveCssClass('bar');
+
+    expect(node).toHaveCssClass('foo bar');
+    expect(node).toHaveCssClass('bar foo');
+    expect(node).toHaveCssClass(['bar', 'foo']);
+
+    expect(node).not.toHaveCssClass('quix');
+    expect(node).not.toHaveCssClass('foo bar baz');
+  });
+});

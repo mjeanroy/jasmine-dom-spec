@@ -22,20 +22,17 @@
  * THE SOFTWARE.
  */
 
+import {tagName} from './tag-name.js';
+
 /**
- * Karma Configuration.
+ * Check that a given value is of a given type.
+ * The type is the tag name displayed with `Object.prototype.toString`
+ * function call.
+ *
+ * @param {*} obj Value to check.
+ * @param {string} type The type id.
+ * @return {boolean} `true` if `obj` is of given type, `false` otherwise.
  */
-
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+export function is(obj, type) {
+  return tagName(obj) === `[object ${type}]`;
+}

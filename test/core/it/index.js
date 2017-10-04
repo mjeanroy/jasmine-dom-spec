@@ -23,3 +23,4 @@
  */
 
 import './to-have-id.spec';
+import './to-have-css-class.spec';

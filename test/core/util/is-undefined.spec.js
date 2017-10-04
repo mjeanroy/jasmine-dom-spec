@@ -22,20 +22,19 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {isUndefined} from '../../../src/core/util/is-undefined.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('isUndefined', () => {
+  it('should return true with undefined', () => {
+    expect(isUndefined(undefined)).toBe(true);
+    expect(isUndefined(void 0)).toBe(true);
+  });
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  it('should return false without undefined', () => {
+    expect(isUndefined(0)).toBe(false);
+    expect(isUndefined(true)).toBe(false);
+    expect(isUndefined({})).toBe(false);
+    expect(isUndefined(() => {})).toBe(false);
+    expect(isUndefined(null)).toBe(false);
+  });
+});

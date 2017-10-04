@@ -22,20 +22,18 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {is} from './is.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
+const _isArray = Array.isArray || function _isArray(obj) {
+  return is(obj, 'Array');
 };
+
+/**
+ * Check that a given value is an array.
+ *
+ * @param {*} obj Value to check.
+ * @return {boolean} `true` if `obj` is an array, `false` otherwise.
+ */
+export function isArray(obj) {
+  return _isArray(obj);
+}

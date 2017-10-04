@@ -22,6 +22,14 @@
  * THE SOFTWARE.
  */
 
+export {filter} from './filter';
 export {forEach} from './for-each';
+export {every} from './every';
+export {has} from './has';
+export {indexBy} from './index-by';
+export {isArray} from './is-array';
+export {isTruthy} from './is-truthy';
 export {keys} from './keys';
+export {map} from './map';
 export {toDomElement} from './to-dom-element';
+export {trim} from './trim';

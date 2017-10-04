@@ -22,20 +22,21 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {isArray} from '../../../src/core/util/is-array.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('isArray', () => {
+  it('should return true with array', () => {
+    expect(isArray([0, 1, 2])).toBe(true);
+    expect(isArray(Array(10))).toBe(true);
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+    // eslint-disable-next-line no-array-constructor
+    expect(isArray(new Array(1, 2, 3))).toBe(true);
+  });
+
+  it('should return false without array', () => {
+    expect(isArray(0)).toBe(false);
+    expect(isArray(true)).toBe(false);
+    expect(isArray({})).toBe(false);
+    expect(isArray(() => {})).toBe(false);
+  });
+});

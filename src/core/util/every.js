@@ -23,19 +23,24 @@
  */
 
 /**
- * Karma Configuration.
+ * Check that a predicate satisfies each elements in an array.
+ *
+ * The predicate function will be called with three arguments:
+ *  - `value` The value for the given iteration.
+ *  - `key` The key of the value being iterated.
+ *  - `array` The array being traversed.
+ *
+ * @param {Array} array The array to iterate.
+ * @param {function} predicate The predicate function.
+ * @return {boolean} `true` if the predicate returns a truthy value for each element
+ *                   in the array, `false` otherwise.
  */
+export function every(array, predicate) {
+  for (let i = 0, size = array.length; i < size; ++i) {
+    if (!predicate.call(null, array[i], i, array)) {
+      return false;
+    }
+  }
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  return true;
+}

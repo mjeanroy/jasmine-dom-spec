@@ -22,20 +22,14 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {is} from '../../../src/core/util/is.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+describe('is', () => {
+  it('should return true for expected tag name', () => {
+    expect(is('', 'String')).toBe(true);
+    expect(is(0, 'Number')).toBe(true);
+    expect(is(true, 'Boolean')).toBe(true);
+    expect(is([], 'Array')).toBe(true);
+    expect(is(new Date(), 'Date')).toBe(true);
+  });
+});

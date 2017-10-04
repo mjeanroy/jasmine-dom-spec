@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "gulp clean",
     "lint": "gulp lint",
-    "test": "gulp test"
+    "test": "gulp test",
+    "tdd": "gulp tdd"
   },
   "keywords": [
     "Jasmine",
@@ -30,6 +31,7 @@
     "karma-chrome-launcher": "2.2.0",
     "karma-firefox-launcher": "1.0.1",
     "karma-jasmine": "1.1.0",
+    "karma-jasmine-html-reporter": "0.2.2",
     "karma-phantomjs-launcher": "1.0.4",
     "karma-rollup-preprocessor": "5.0.1",
     "karma-safari-launcher": "1.0.0",

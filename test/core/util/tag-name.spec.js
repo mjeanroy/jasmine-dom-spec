@@ -22,20 +22,35 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {tagName} from '../../../src/core/util/tag-name.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('tagName', () => {
+  it('should get [object Null] with null', () => {
+    expect(tagName(null)).toBe('[object Null]');
+  });
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  it('should get [object Undefined] with undefined', () => {
+    expect(tagName(undefined)).toBe('[object Undefined]');
+  });
+
+  it('should get [object Array] with array', () => {
+    expect(tagName([])).toBe('[object Array]');
+  });
+
+  it('should get [object String] with string', () => {
+    expect(tagName('')).toBe('[object String]');
+    expect(tagName(String(''))).toBe('[object String]');
+
+    // eslint-disable-next-line no-new-wrappers
+    expect(tagName(new String(''))).toBe('[object String]');
+  });
+
+  it('should get [object Date] with date', () => {
+    expect(tagName(new Date())).toBe('[object Date]');
+  });
+
+  it('should get [object Boolean] with booleans', () => {
+    expect(tagName(true)).toBe('[object Boolean]');
+    expect(tagName(false)).toBe('[object Boolean]');
+  });
+});

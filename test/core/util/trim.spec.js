@@ -22,20 +22,13 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {trim} from '../../../src/core/util/trim.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+describe('trim', () => {
+  it('should trim string', () => {
+    expect(trim('foo')).toBe('foo');
+    expect(trim(' foo')).toBe('foo');
+    expect(trim('foo ')).toBe('foo');
+    expect(trim(' foo ')).toBe('foo');
+  });
+});

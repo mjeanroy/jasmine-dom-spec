@@ -22,20 +22,21 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {isTruthy} from '../../../src/core/util/is-truthy.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('isTruthy', () => {
+  it('should return true with a truthy value', () => {
+    expect(isTruthy(true)).toBe(true);
+    expect(isTruthy(1)).toBe(true);
+    expect(isTruthy('test')).toBe(true);
+  });
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  it('should return false with a falsy value', () => {
+    expect(isTruthy(false)).toBe(false);
+    expect(isTruthy(0)).toBe(false);
+    expect(isTruthy(null)).toBe(false);
+    expect(isTruthy(undefined)).toBe(false);
+    expect(isTruthy('')).toBe(false);
+    expect(isTruthy(NaN)).toBe(false);
+  });
+});

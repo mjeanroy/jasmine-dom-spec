@@ -22,20 +22,27 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+ /**
+  * Apply a predicate function on all the values of an array (also supports array-like
+  * objects) and returns an array without elements that satisfied the predicate.
+  *
+  * The iteratee function will be called with three arguments:
+  *  - `value` The value for the given iteration.
+  *  - `index` The index of the value being iterated.
+  *  - `array` The array being traversed.
+  *
+  * @param {Array<*>} array The array to iterate.
+  * @param {function} predicate The filter function.
+  * @return {Array<*>} Array without filtered elements.
+  */
+export function filter(array, predicate) {
+  const results = [];
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+  for (let i = 0, size = array.length; i < size; ++i) {
+    if (predicate.call(null, array[i], i, array)) {
+      results.push(array[i]);
+    }
+  }
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  return results;
+}

@@ -23,19 +23,11 @@
  */
 
 /**
- * Karma Configuration.
+ * Check that a given value is `undefined`.
+ *
+ * @param {*} obj Value to check.
+ * @return {boolean} `true` if `obj` is `undefined`, `false` otherwise.
  */
-
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
-
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+export function isUndefined(obj) {
+  return obj === undefined;
+}

@@ -22,20 +22,18 @@
  * THE SOFTWARE.
  */
 
-/**
- * Karma Configuration.
- */
+import {isNull} from '../../../src/core/util/is-null.js';
 
-const _ = require('lodash');
-const conf = require('./karma.common.conf.js');
+describe('isNull', () => {
+  it('should return true with undefined', () => {
+    expect(isNull(null)).toBe(true);
+  });
 
-module.exports = (config) => {
-  config.set(_.extend(conf(config), {
-    singleRun: false,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    captureTimeout: 10000,
-    reportSlowerThan: 2000,
-    reporters: ['progress', 'kjhtml'],
-  }));
-};
+  it('should return false without undefined', () => {
+    expect(isNull(0)).toBe(false);
+    expect(isNull(true)).toBe(false);
+    expect(isNull({})).toBe(false);
+    expect(isNull(() => {})).toBe(false);
+    expect(isNull(undefined)).toBe(false);
+  });
+});
