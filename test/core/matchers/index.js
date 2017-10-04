@@ -27,3 +27,4 @@ import './to-have-id.spec';
 import './to-have-attrs.spec';
 import './to-have-css-class.spec';
 import './to-have-props.spec';
+import './to-have-value.spec';

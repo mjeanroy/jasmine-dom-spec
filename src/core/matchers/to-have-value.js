@@ -22,9 +22,31 @@
  * THE SOFTWARE.
  */
 
-import './to-be-required.spec';
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-props.spec';
-import './to-have-value.spec';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node property `value` equal
+ * to an expected value.
+ *
+ * @message Expect [actual] [NOT] to have value [expectedValue] but was [actualValue]
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.value = 'foobar';
+ *   expect(actual).toHaveValue('foobar');
+ *   expect(actual).toHaveValue(jasmine.any(String));
+ *   expect(actual).not.toHaveValue('');
+ *
+ * @param {Object} ctx Test context.
+ * @param {*} expectedValue The expected value.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toHaveValue({actual, equals}, expectedValue) {
+  const node = toDomElement(actual);
+  const actualValue = node.value;
+  return {
+    pass: equals(actualValue, expectedValue),
+    message: `Expect ${pp(actual)} [NOT] to have value ${pp(expectedValue)} but was ${pp(actualValue)}`,
+  };
+}

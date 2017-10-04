@@ -22,9 +22,21 @@
  * THE SOFTWARE.
  */
 
-import './to-be-required.spec';
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-props.spec';
-import './to-have-value.spec';
+import {toHaveValue} from '../../../src/core/matchers/to-have-value';
+
+describe('toHaveValue', () => {
+  it('should pass with a dom node with expected value', () => {
+    const value = 'foo';
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.value = value;
+
+    const result = toHaveValue({actual, equals}, value);
+
+    expect(equals).toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have value 'foo' but was 'foo'`,
+    });
+  });
+});

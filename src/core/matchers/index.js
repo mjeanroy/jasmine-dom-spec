@@ -27,3 +27,4 @@ export {toHaveId} from './to-have-id';
 export {toHaveAttrs} from './to-have-attrs';
 export {toHaveCssClass} from './to-have-css-class';
 export {toHaveProps} from './to-have-props';
+export {toHaveValue} from './to-have-value';
