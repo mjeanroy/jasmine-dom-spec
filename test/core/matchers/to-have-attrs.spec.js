@@ -22,7 +22,36 @@
  * THE SOFTWARE.
  */
 
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-props.spec';
+import {toHaveAttrs} from '../../../src/core/matchers/to-have-attrs';
+
+describe('toHaveId', () => {
+  it('should pass with a dom node with expected id', () => {
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+
+    actual.setAttribute('data-foo', 1);
+
+    const result = toHaveAttrs({actual, equals}, 'data-foo', '1');
+
+    expect(equals).toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have attributes Object({ data-foo: '1' })`,
+    });
+  });
+
+  it('should not pass with a dom node without expected id', () => {
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+
+    actual.setAttribute('data-foo', '0');
+
+    const result = toHaveAttrs({actual, equals}, 'data-foo', '1');
+
+    expect(equals).toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to have attributes Object({ data-foo: '1' })`,
+    });
+  });
+});

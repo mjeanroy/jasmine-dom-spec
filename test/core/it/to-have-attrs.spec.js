@@ -22,7 +22,27 @@
  * THE SOFTWARE.
  */
 
-import './to-have-id.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-props.spec';
+import '../../../src/index.js';
+
+describe('toHaveAttrs', () => {
+  it('should pass with a DOM node', () => {
+    const node = document.createElement('div');
+    node.setAttribute('data-foo', 1);
+    node.setAttribute('data-bar', 2);
+
+    expect(node).toHaveAttrs('data-foo', '1');
+    expect(node).toHaveAttrs('data-bar', '2');
+
+    expect(node).toHaveAttrs({
+      'data-foo': '1',
+      'data-bar': '2',
+    });
+
+    expect(node).toHaveAttrs({
+      'data-foo': jasmine.anything(),
+      'data-bar': jasmine.anything(),
+    });
+
+    expect(node).not.toHaveAttrs('data-foo', '0');
+  });
+});
