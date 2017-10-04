@@ -22,10 +22,20 @@
  * THE SOFTWARE.
  */
 
-export {toBeRequired} from './to-be-required';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {toHaveText} from '../../../src/core/matchers/to-have-text';
+
+describe('toHaveText', () => {
+  it('should pass with a dom node with expected text content', () => {
+    const txt = 'foo';
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.innerHTML = txt;
+
+    const result = toHaveText({actual, equals}, txt);
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have text 'foo' but was 'foo'`,
+    });
+  });
+});

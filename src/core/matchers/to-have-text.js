@@ -22,10 +22,32 @@
  * THE SOFTWARE.
  */
 
-export {toBeRequired} from './to-be-required';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node with expected text content.
+ *
+ * @message Expect [actual] [NOT] to have text [expectedText] but was [actualText]
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.textContent = 'foo';
+ *   expect(actual).toHaveText('foo');
+ *   expect(actual).toHaveText(jasmine.any(String));
+ *   expect(actual).not.toHaveText('foobar');
+ *
+ * @param {Object} ctx Test context.
+ * @param {string} expectedText The expected text.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toHaveText({actual, equals}, expectedText) {
+  // IE8 does not know textContent but knows innerText.
+  const node = toDomElement(actual);
+  const actualText = 'textContent' in node ? node.textContent : node.innerText;
+
+  return {
+    pass: equals(actualText, expectedText),
+    message: `Expect ${pp(actual)} [NOT] to have text ${pp(expectedText)} but was ${pp(actualText)}`,
+  };
+}
