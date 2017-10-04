@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {isString, toDomElement} from '../util/index';
 
 /**
  * Check that the tested object is a DOM node with expected html content.
@@ -37,20 +37,34 @@ import {toDomElement} from '../util/index';
  *   expect(actual).not.toHaveHtml('<div>foo</div>');
  *
  * @param {Object} ctx Test context.
- * @param {string} expectedHtml The expected html.
+ * @param {string} html The expected html.
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveHtml({actual, equals}, expectedHtml) {
+export function toHaveHtml({actual, equals}, html) {
   const node = toDomElement(actual);
-  const fragment = document.createDocumentFragment();
-  fragment.innerHTML = expectedHtml;
-
   const actualHtml = node.innerHTML;
-  const testedHtml = fragment.innerHTML;
+
+  // Html may be a string **or** a jasmine asymetric matcher object.
+  // In the last case, do not try to normalize HTML.
+  const expectedHtml = isString(html) ? normalizeHtml(html) : html;
 
   return {
-    pass: equals(actualHtml, testedHtml),
-    message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`,
+    pass: equals(actualHtml, expectedHtml),
+    message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(html)} but was ${pp(actualHtml)}`,
   };
+}
+
+/**
+ * Normalize HTML to be able to compare HTML content
+ * using browser specific implementation (for example, IE8 turn tag name to
+ * upper case).
+ *
+ * @param {string} html Input.
+ * @return {string} output.
+ */
+function normalizeHtml(html) {
+  const fragment = document.createElement('div');
+  fragment.innerHTML = html;
+  return fragment.innerHTML;
 }

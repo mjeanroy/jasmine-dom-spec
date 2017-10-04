@@ -32,6 +32,7 @@ import './is.spec';
 import './is-array.spec';
 import './is-dom-element.spec';
 import './is-null.spec';
+import './is-string.spec';
 import './is-object.spec';
 import './is-truthy.spec';
 import './is-undefined.spec';

@@ -22,17 +22,14 @@
  * THE SOFTWARE.
  */
 
-export {dashToCamel} from './dash-to-camel';
-export {filter} from './filter';
-export {forEach} from './for-each';
-export {every} from './every';
-export {has} from './has';
-export {indexBy} from './index-by';
-export {isArray} from './is-array';
-export {isString} from './is-string';
-export {isObject} from './is-object';
-export {isTruthy} from './is-truthy';
-export {keys} from './keys';
-export {map} from './map';
-export {toDomElement} from './to-dom-element';
-export {trim} from './trim';
+import {is} from './is.js';
+
+/**
+ * Check that a given value is a string.
+ *
+ * @param {*} obj Value to check.
+ * @return {boolean} `true` if `obj` is a string, `false` otherwise.
+ */
+export function isString(obj) {
+  return is(obj, 'String');
+}

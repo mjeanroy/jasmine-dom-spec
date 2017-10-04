@@ -25,7 +25,7 @@
 import {toHaveHtml} from '../../../src/core/matchers/to-have-html';
 
 describe('toHaveHtml', () => {
-  it('should pass with a dom node with expected text content', () => {
+  it('should pass with a dom node with expected html content', () => {
     const html = '<div>foo</div>';
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);

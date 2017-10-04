@@ -22,17 +22,23 @@
  * THE SOFTWARE.
  */
 
-export {dashToCamel} from './dash-to-camel';
-export {filter} from './filter';
-export {forEach} from './for-each';
-export {every} from './every';
-export {has} from './has';
-export {indexBy} from './index-by';
-export {isArray} from './is-array';
-export {isString} from './is-string';
-export {isObject} from './is-object';
-export {isTruthy} from './is-truthy';
-export {keys} from './keys';
-export {map} from './map';
-export {toDomElement} from './to-dom-element';
-export {trim} from './trim';
+import {isString} from '../../../src/core/util/is-string.js';
+
+describe('isString', () => {
+  it('should return true with a string', () => {
+    expect(isString('test')).toBe(true);
+    expect(isString(String('test'))).toBe(true);
+
+    // eslint-disable-next-line no-new-wrappers
+    expect(isString(new String('test'))).toBe(true);
+  });
+
+  it('should return false without a string', () => {
+    expect(isString(true)).toBe(false);
+    expect(isString(0)).toBe(false);
+    expect(isString({})).toBe(false);
+    expect(isString(() => {})).toBe(false);
+    expect(isString(null)).toBe(false);
+    expect(isString(undefined)).toBe(false);
+  });
+});
