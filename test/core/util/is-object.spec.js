@@ -22,6 +22,17 @@
  * THE SOFTWARE.
  */
 
-export {toHaveId} from './to-have-id';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveProps} from './to-have-props';
+import {isObject} from '../../../src/core/util/is-object.js';
+
+describe('isObject', () => {
+  it('should return true with object', () => {
+    expect(isObject({})).toBe(true);
+  });
+
+  it('should return false without object', () => {
+    expect(isObject(0)).toBe(false);
+    expect(isObject(true)).toBe(false);
+    expect(isObject(() => {})).toBe(false);
+    expect(isObject(undefined)).toBe(false);
+  });
+});

@@ -28,6 +28,7 @@ export {every} from './every';
 export {has} from './has';
 export {indexBy} from './index-by';
 export {isArray} from './is-array';
+export {isObject} from './is-object';
 export {isTruthy} from './is-truthy';
 export {keys} from './keys';
 export {map} from './map';

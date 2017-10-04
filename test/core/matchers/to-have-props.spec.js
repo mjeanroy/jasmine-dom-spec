@@ -22,6 +22,36 @@
  * THE SOFTWARE.
  */
 
-export {toHaveId} from './to-have-id';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveProps} from './to-have-props';
+import {toHaveProps} from '../../../src/core/matchers/to-have-props';
+
+describe('toHaveId', () => {
+  it('should pass with a dom node with expected id', () => {
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+
+    actual.required = true;
+
+    const result = toHaveProps({actual, equals}, 'required', true);
+
+    expect(equals).toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have properties Object({ required: true })`,
+    });
+  });
+
+  it('should not pass with a dom node without expected id', () => {
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+
+    actual.required = true;
+
+    const result = toHaveProps({actual, equals}, 'required', false);
+
+    expect(equals).toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to have properties Object({ required: false })`,
+    });
+  });
+});

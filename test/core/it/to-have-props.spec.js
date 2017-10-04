@@ -22,6 +22,27 @@
  * THE SOFTWARE.
  */
 
-export {toHaveId} from './to-have-id';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveProps} from './to-have-props';
+import '../../../src/index.js';
+
+describe('toHaveProps', () => {
+  it('should pass with a DOM node', () => {
+    const node = document.createElement('input');
+    node.required = true;
+    node.checked = false;
+
+    expect(node).toHaveProps('required', true);
+    expect(node).toHaveProps('checked', false);
+
+    expect(node).toHaveProps({
+      required: true,
+      checked: false,
+    });
+
+    expect(node).toHaveProps({
+      required: jasmine.any(Boolean),
+      checked: jasmine.any(Boolean),
+    });
+
+    expect(node).not.toHaveProps('required', false);
+  });
+});

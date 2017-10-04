@@ -22,6 +22,12 @@
  * THE SOFTWARE.
  */
 
-export {toHaveId} from './to-have-id';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveProps} from './to-have-props';
+/**
+ * Check that a given value is an object.
+ *
+ * @param {*} obj Value to check.
+ * @return {boolean} `true` if `obj` is an object, `false` otherwise.
+ */
+export function isObject(obj) {
+  return typeof obj === 'object';
+}
