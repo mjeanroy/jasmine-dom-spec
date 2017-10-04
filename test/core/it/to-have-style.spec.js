@@ -22,21 +22,37 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-dom-element.spec';
-import './is-null.spec';
-import './is-object.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import '../../../src/index.js';
+
+describe('toHaveStyle', () => {
+  let fixtures;
+
+  beforeEach(() => {
+    fixtures = document.createElement('div');
+    document.body.appendChild(fixtures);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(fixtures);
+  });
+
+  it('should pass with a DOM node', () => {
+    const node = document.createElement('input');
+
+    fixtures.appendChild(node);
+    node.style.fontSize = '10px';
+
+    expect(node).toHaveStyle('font-size', '10px');
+    expect(node).toHaveStyle('fontSize', '10px');
+
+    expect(node).toHaveStyle({
+      fontSize: '10px',
+    });
+
+    expect(node).toHaveStyle({
+      fontSize: jasmine.any(String),
+    });
+
+    expect(node).not.toHaveStyle('font-size', '0');
+  });
+});

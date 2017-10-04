@@ -24,7 +24,7 @@
 
 import {toHaveProps} from '../../../src/core/matchers/to-have-props';
 
-describe('toHaveId', () => {
+describe('toHaveProps', () => {
   it('should pass with a dom node with expected id', () => {
     const actual = document.createElement('input');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);

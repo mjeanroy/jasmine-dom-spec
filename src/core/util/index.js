@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+export {dashToCamel} from './dash-to-camel';
 export {filter} from './filter';
 export {forEach} from './for-each';
 export {every} from './every';

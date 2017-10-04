@@ -22,21 +22,29 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-dom-element.spec';
-import './is-null.spec';
-import './is-object.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+/**
+ * Turn a string, formatted as dash-case to a string formatted as
+ * camelCase.
+ *
+ * @param {string} value The dash-case string.
+ * @return {string} The camelCase string.
+ */
+export function dashToCamel(value) {
+  if (!value) {
+    return value;
+  }
+
+  let result = '';
+  let turnToUpper = false;
+  for (let i = 0, size = value.length; i < size; ++i) {
+    const c = value.charAt(i);
+    if (c === '-') {
+      turnToUpper = true;
+    } else {
+      result += turnToUpper ? c.toUpperCase() : c;
+      turnToUpper = false;
+    }
+  }
+
+  return result;
+}

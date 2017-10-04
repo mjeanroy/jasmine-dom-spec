@@ -22,21 +22,15 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-dom-element.spec';
-import './is-null.spec';
-import './is-object.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import {dashToCamel} from '../../../src/core/util/dash-to-camel.js';
+
+describe('dashToCamel', () => {
+  it('should convert dash-case to camelCase', () => {
+    expect(dashToCamel(undefined)).toBe(undefined);
+    expect(dashToCamel(null)).toBe(null);
+    expect(dashToCamel('')).toBe('');
+    expect(dashToCamel('foo')).toBe('foo');
+    expect(dashToCamel('fooBar')).toBe('fooBar');
+    expect(dashToCamel('foo-bar')).toBe('fooBar');
+  });
+});
