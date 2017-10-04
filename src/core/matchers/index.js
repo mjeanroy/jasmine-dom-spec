@@ -28,5 +28,6 @@ export {toHaveAttrs} from './to-have-attrs';
 export {toHaveCssClass} from './to-have-css-class';
 export {toHaveHtml} from './to-have-html';
 export {toHaveProps} from './to-have-props';
+export {toBeSelected} from './to-be-selected';
 export {toHaveText} from './to-have-text';
 export {toHaveValue} from './to-have-value';

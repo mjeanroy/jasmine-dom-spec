@@ -24,7 +24,7 @@
 
 import {toBeRequired} from '../../../src/core/matchers/to-be-required';
 
-describe('toHaveId', () => {
+describe('toBeRequired', () => {
   it('should pass with a required input', () => {
     const actual = document.createElement('input');
     actual.required = true;

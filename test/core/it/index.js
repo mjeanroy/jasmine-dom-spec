@@ -28,5 +28,6 @@ import './to-have-attrs.spec';
 import './to-have-css-class.spec';
 import './to-have-html.spec';
 import './to-have-props.spec';
+import './to-be-selected.spec';
 import './to-have-text.spec';
 import './to-have-value.spec';

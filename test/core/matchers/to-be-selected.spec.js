@@ -22,28 +22,28 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {toBeSelected} from '../../../src/core/matchers/to-be-selected';
 
-/**
- * Check that the tested object is a DOM node property required equal
- * to an expected value.
- *
- * @message Expect [actual] [NOT] to be required
- * @example
- *   const actual = document.createElement('input');
- *   actual.required = true;
- *   expect(actual).toBeRequired();
- *
- * @param {Object} ctx Test context.
- * @return {Object} Test result.
- * @since 0.1.0
- */
-export function toBeRequired({actual}) {
-  const node = toDomElement(actual);
-  const required = node.required;
-  return {
-    pass: required === true,
-    message: `Expect ${pp(actual)} [NOT] to be required`,
-  };
-}
+describe('toBeSelected', () => {
+  it('should pass with a selected option', () => {
+    const actual = document.createElement('option');
+    actual.selected = true;
+
+    const result = toBeSelected({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be selected`,
+    });
+  });
+
+  it('should not pass with a non-selected option', () => {
+    const actual = document.createElement('option');
+    const result = toBeSelected({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be selected`,
+    });
+  });
+});

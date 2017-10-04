@@ -26,24 +26,24 @@ import {pp} from '../jasmine/index';
 import {toDomElement} from '../util/index';
 
 /**
- * Check that the tested object is a DOM node property required equal
- * to an expected value.
+ * Check that the tested object is a DOM node property `selected` equal
+ * to `true`.
  *
  * @message Expect [actual] [NOT] to be required
  * @example
- *   const actual = document.createElement('input');
- *   actual.required = true;
- *   expect(actual).toBeRequired();
+ *   const actual = document.createElement('option');
+ *   actual.selected = true;
+ *   expect(actual).toBeSelected();
  *
  * @param {Object} ctx Test context.
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeRequired({actual}) {
+export function toBeSelected({actual}) {
   const node = toDomElement(actual);
-  const required = node.required;
+  const selected = node.selected;
   return {
-    pass: required === true,
-    message: `Expect ${pp(actual)} [NOT] to be required`,
+    pass: selected === true,
+    message: `Expect ${pp(actual)} [NOT] to be selected`,
   };
 }
