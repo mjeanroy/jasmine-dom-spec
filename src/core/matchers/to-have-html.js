@@ -37,7 +37,7 @@ import {toDomElement} from '../util/index';
  *   expect(actual).not.toHaveHtml('<div>foo</div>');
  *
  * @param {Object} ctx Test context.
- * @param {string} expectedText The expected html.
+ * @param {string} expectedHtml The expected html.
  * @return {Object} Test result.
  * @since 0.1.0
  */
