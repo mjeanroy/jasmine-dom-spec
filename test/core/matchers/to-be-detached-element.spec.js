@@ -22,16 +22,39 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {toBeDetachedElement} from '../../../src/core/matchers/to-be-detached-element';
+
+describe('toBeFocused', () => {
+  let fixtures;
+
+  beforeEach(() => {
+    fixtures = document.createElement('div');
+    document.body.appendChild(fixtures);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(fixtures);
+  });
+
+  it('should pass with a detached element', () => {
+    const actual = document.createElement('input');
+    const result = toBeDetachedElement({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be detached`,
+    });
+  });
+
+  it('should not pass with a non-detached element', () => {
+    const actual = document.createElement('input');
+    fixtures.appendChild(actual);
+
+    const result = toBeDetachedElement({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be detached`,
+    });
+  });
+});
