@@ -22,13 +22,30 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {toBeChecked} from '../../../src/core/matchers/to-be-checked';
+
+describe('toBeChecked', () => {
+  it('should pass with a checked checkbox', () => {
+    const actual = document.createElement('input');
+    actual.type = 'checkbox';
+    actual.checked = true;
+
+    const result = toBeChecked({actual});
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to be checked`,
+    });
+  });
+
+  it('should not pass with a non-checked checkbox', () => {
+    const actual = document.createElement('input');
+    actual.type = 'checkbox';
+    const result = toBeChecked({actual});
+
+    expect(result).toEqual({
+      pass: false,
+      message: `Expect HTMLNode [NOT] to be checked`,
+    });
+  });
+});
