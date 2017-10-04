@@ -22,11 +22,16 @@
  * THE SOFTWARE.
  */
 
-export {toBeRequired} from './to-be-required';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import '../../../src/index.js';
+
+describe('toHaveText', () => {
+  it('should pass with a DOM node', () => {
+    const html = '<div>foo</div>';
+    const node = document.createElement('div');
+    node.innerHTML = html;
+
+    expect(node).toHaveHtml(html);
+    expect(node).toHaveHtml(jasmine.any(String));
+    expect(node).not.toHaveHtml('<span>foo</span>');
+  });
+});

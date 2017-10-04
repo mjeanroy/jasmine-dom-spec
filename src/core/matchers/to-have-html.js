@@ -22,11 +22,31 @@
  * THE SOFTWARE.
  */
 
-export {toBeRequired} from './to-be-required';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node with expected html content.
+ *
+ * @message Expect [actual] [NOT] to have HTML [expectedHtml] but was [actualHtml]
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.textContent = '<span>foo</span>';
+ *   expect(actual).toHaveHtml('<span>foo</span>');
+ *   expect(actual).toHaveHtml(jasmine.any(String));
+ *   expect(actual).not.toHaveHtml('<div>foo</div>');
+ *
+ * @param {Object} ctx Test context.
+ * @param {string} expectedText The expected html.
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toHaveHtml({actual, equals}, expectedHtml) {
+  const node = toDomElement(actual);
+  const actualHtml = node.innerHTML;
+
+  return {
+    pass: equals(actualHtml, expectedHtml),
+    message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`,
+  };
+}
