@@ -25,6 +25,11 @@
 import {isDomElement} from '../../../src/core/util/is-dom-element';
 
 describe('isDomNode', () => {
+  it('should return false with null or undefined', () => {
+    expect(isDomElement(null)).toBe(false);
+    expect(isDomElement(undefined)).toBe(false);
+  });
+
   it('should return true with a DOM Node', () => {
     const node = document.createElement('div');
     expect(isDomElement(node)).toBe(true);

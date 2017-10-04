@@ -22,6 +22,16 @@
  * THE SOFTWARE.
  */
 
+import {isNull} from './is-null';
+import {isUndefined} from './is-undefined';
+import {isObject} from './is-object';
+
+/**
+ * The type value for element nodes.
+ * @see https://developer.mozilla.org/fr/docs/Web/API/Node
+ */
+const ELEMENT_NODE = 1;
+
 /**
  * Check if an object is a DOM node.
  *
@@ -29,9 +39,9 @@
  * @return {boolean} `true` if `actual` is a DOM node, `false` otherwise.
  */
 export function isDomElement(actual) {
-  if (!(actual instanceof Element)) {
+  if (isNull(actual) || isUndefined(actual)) {
     return false;
   }
 
-  return actual.nodeType === 1;
+  return isObject(actual) && actual.nodeType === ELEMENT_NODE;
 }
