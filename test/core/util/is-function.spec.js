@@ -22,14 +22,20 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
+import {isFunction} from '../../../src/core/util/is-function';
 
-/**
- * Check that a given value is an object.
- *
- * @param {*} obj Value to check.
- * @return {boolean} `true` if `obj` is an object, `false` otherwise.
- */
-export function isObject(obj) {
-  return !isNull(obj) && typeof obj === 'object';
-}
+describe('isFunction', () => {
+  it('should return true with a function', () => {
+    const value = () => {};
+    const result = isFunction(value);
+    expect(result).toBe(true);
+  });
+
+  it('should return false without a function', () => {
+    expect(isFunction(true)).toBe(false);
+    expect(isFunction({})).toBe(false);
+    expect(isFunction(0)).toBe(false);
+    expect(isFunction(null)).toBe(false);
+    expect(isFunction(undefined)).toBe(false);
+  });
+});

@@ -22,14 +22,13 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
+import $ from 'jquery';
+import {isJqueryObject} from '../../../src/core/util/is-jquery-object';
 
-/**
- * Check that a given value is an object.
- *
- * @param {*} obj Value to check.
- * @return {boolean} `true` if `obj` is an object, `false` otherwise.
- */
-export function isObject(obj) {
-  return !isNull(obj) && typeof obj === 'object';
-}
+describe('isJqueryObject', () => {
+  it('should return true if object is an instance of jQuery object', () => {
+    const node = '<div></div>';
+    const jq = $(node);
+    expect(isJqueryObject(jq)).toBe(true);
+  });
+});

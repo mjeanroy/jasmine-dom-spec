@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {has} from './has.js';
-import {isNull} from './is-null.js';
-import {isUndefined} from './is-undefined.js';
+import {has} from './has';
+import {isNull} from './is-null';
+import {isUndefined} from './is-undefined';
 
 /**
  * Return the tag name of the object (a.k.a the result of `Object.prototype.toString`).
@@ -68,14 +68,4 @@ export function tagName(obj) {
   }
 
   return tag;
-}
-
-/**
- * Get the function source of parameter.
- *
- * @param {*} obj Parameter to get source.
- * @return {string} Function source.
- */
-function toSource(obj) {
-  return Function.prototype.toString.call(obj);
 }

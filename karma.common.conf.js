@@ -28,6 +28,8 @@
 
 const path = require('path');
 const babel = require('rollup-plugin-babel');
+const nodeResolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 const conf = require('./conf');
 
 module.exports = (config) => ({
@@ -108,6 +110,8 @@ module.exports = (config) => ({
     legacy: true,
     sourcemap: false,
     plugins: [
+      nodeResolve(),
+      commonjs(),
       babel(),
     ],
   },

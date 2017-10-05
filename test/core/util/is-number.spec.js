@@ -22,14 +22,19 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
+import {isNumber} from '../../../src/core/util/is-number';
 
-/**
- * Check that a given value is an object.
- *
- * @param {*} obj Value to check.
- * @return {boolean} `true` if `obj` is an object, `false` otherwise.
- */
-export function isObject(obj) {
-  return !isNull(obj) && typeof obj === 'object';
-}
+describe('isNumber', () => {
+  it('should return true with a number', () => {
+    expect(isNumber(0)).toBe(true);
+    expect(isNumber(1)).toBe(true);
+  });
+
+  it('should return false without a number', () => {
+    expect(isNumber(true)).toBe(false);
+    expect(isNumber({})).toBe(false);
+    expect(isNumber(() => {})).toBe(false);
+    expect(isNumber(null)).toBe(false);
+    expect(isNumber(undefined)).toBe(false);
+  });
+});

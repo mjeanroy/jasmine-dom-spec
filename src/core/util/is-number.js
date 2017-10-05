@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
+import {is} from './is';
 
 /**
- * Check that a given value is an object.
+ * Check that a given value is a number.
  *
  * @param {*} obj Value to check.
- * @return {boolean} `true` if `obj` is an object, `false` otherwise.
+ * @return {boolean} `true` if `obj` is a number, `false` otherwise.
  */
-export function isObject(obj) {
-  return !isNull(obj) && typeof obj === 'object';
+export function isNumber(obj) {
+  return is(obj, 'Number');
 }

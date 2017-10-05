@@ -23,6 +23,10 @@
  */
 
 import {pp} from '../jasmine/index';
+import {isString} from './is-string';
+import {isNodeCollection} from './is-node-collection';
+import {isJqueryObject} from './is-jquery-object';
+import {isArray} from './is-array';
 import {isDomElement} from './is-dom-element';
 
 /**
@@ -34,14 +38,52 @@ import {isDomElement} from './is-dom-element';
  * @return {HTMLElement} The DOM element.
  */
 export function toDomElement(value) {
-  let node;
+  if (isDomElement(value)) {
+    return value;
+  }
 
-  if (!isDomElement(value)) {
-    // TODO Translate to DOM node.
-    // TODO Handle jQuery object, string node.
-    throw new Error(`Expect ${pp(value)} to be a DOM element`);
-  } else {
-    node = value;
+  const nodes = isString(value) ? createNodes(value) : value;
+  if (isNodeCollection(nodes) || isJqueryObject(nodes) || isArray(nodes)) {
+    return extractSingleNode(nodes);
+  }
+
+  throw new Error(`Expect DOM node but found: ${pp(value)}`);
+}
+
+/**
+ * Translate HTML content to a `NodeList` element.
+ *
+ * @param {string} html HTML Content.
+ * @return {NodeList} The node list wrapper.
+ */
+function createNodes(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.childNodes;
+}
+
+/**
+ * Extract DOM from singleton array-like object and:
+ * - Throw error if collection is empty.
+ * - Throw error if collection contains more than one element.
+ *
+ * @param {Object} value Array like object (such as `NodeList`, `HTMLCollection` or `jQuery` instance).
+ * @return {HTMLElement} DOM Node.
+ */
+function extractSingleNode(value) {
+  const size = value.length;
+  if (size === 0) {
+    throw new Error('Expect valid node but found empty node list');
+  }
+
+  if (size > 1) {
+    throw new Error(`Expect single node but found node list of ${size} nodes: ${pp(value)}`);
+  }
+
+  const node = value[0];
+
+  if (!isDomElement(node)) {
+    throw new Error(`Expect single node but found value: ${pp(value)}`);
   }
 
   return node;

@@ -22,18 +22,41 @@
  * THE SOFTWARE.
  */
 
-import {isObject} from '../../../src/core/util/is-object.js';
+import {isNodeCollection} from '../../../src/core/util/is-node-collection';
 
-describe('isObject', () => {
-  it('should return true with object', () => {
-    expect(isObject({})).toBe(true);
+describe('isNodeList', () => {
+  let fixtures;
+
+  beforeEach(() => {
+    fixtures = document.createElement('div');
+
+    fixtures.appendChild(document.createElement('p'));
+    fixtures.appendChild(document.createElement('p'));
+
+    document.body.appendChild(fixtures);
   });
 
-  it('should return false without object', () => {
-    expect(isObject(0)).toBe(false);
-    expect(isObject(true)).toBe(false);
-    expect(isObject(() => {})).toBe(false);
-    expect(isObject(undefined)).toBe(false);
-    expect(isObject(null)).toBe(false);
+  afterEach(() => {
+    document.body.removeChild(fixtures);
+  });
+
+  it('should return true with NodeList instance', () => {
+    const children = fixtures.childNodes;
+    expect(isNodeCollection(children)).toBe(true);
+  });
+
+  it('should return true with HTMLCollection instance', () => {
+    const p = fixtures.getElementsByTagName('p');
+    expect(isNodeCollection(p)).toBe(true);
+  });
+
+  it('should return false without NodeList or HTMLCollection', () => {
+    expect(isNodeCollection(0)).toBe(false);
+    expect(isNodeCollection(true)).toBe(false);
+    expect(isNodeCollection({})).toBe(false);
+    expect(isNodeCollection(() => {})).toBe(false);
+    expect(isNodeCollection([])).toBe(false);
+    expect(isNodeCollection(null)).toBe(false);
+    expect(isNodeCollection(undefined)).toBe(false);
   });
 });

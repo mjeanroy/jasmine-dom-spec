@@ -22,14 +22,18 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
+import {is} from './is';
 
 /**
- * Check that a given value is an object.
+ * Check if the parameter is a node list (i.e collections of nodes such as
+ * those returned by properties such as `Node.childNodes` and
+ * the `document.querySelectorAll()` method) or an HTML Collection (i.e a
+ * generic collection (array-like object similar to `arguments`) of
+ * elements (in document order)).
  *
- * @param {*} obj Value to check.
- * @return {boolean} `true` if `obj` is an object, `false` otherwise.
+ * @param {*} obj Object to test.
+ * @return {boolean} `true` if `obj` is a `NodeList` or an `HTMLCollection`, `false` otherwise.
  */
-export function isObject(obj) {
-  return !isNull(obj) && typeof obj === 'object';
+export function isNodeCollection(obj) {
+  return is(obj, 'NodeList') || is(obj, 'HTMLCollection');
 }
