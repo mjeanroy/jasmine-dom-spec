@@ -1,6 +1,7 @@
 .babelrc
 .eslintrc
 .nvmrc
+.readme
 .travis.yml
 /conf.js
 /gulpfile.js
