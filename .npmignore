@@ -1,0 +1,10 @@
+.babelrc
+.eslintrc
+.nvmrc
+.travis.yml
+/conf.js
+/gulpfile.js
+/karma.*.conf.js
+/rollup.conf.js
+/src
+/test

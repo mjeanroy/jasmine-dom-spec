@@ -31,6 +31,10 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const eslint = require('gulp-eslint');
 const KarmaServer = require('karma').Server;
+const git = require('gulp-git');
+const bump = require('gulp-bump');
+const gulpFilter = require('gulp-filter');
+const tagVersion = require('gulp-tag-version');
 const rollupConf = require('./rollup.conf');
 const conf = require('./conf');
 
@@ -81,6 +85,45 @@ gulp.task('build', ['clean'], () => {
       return bundle.write(rollupConf.output);
     });
 });
+
+// Release tasks
+['minor', 'major', 'patch'].forEach((level) => {
+  gulp.task(`release:${level}`, ['build'], function() {
+    const jsonFilter = gulpFilter('*.json', {restore: true});
+    const pkgJsonFilter = gulpFilter('package.json', {restore: true});
+    const bundleFilter = gulpFilter('dist', {restore: true});
+
+    const src = [
+      path.join(conf.root, 'package.json'),
+      path.join(conf.root, 'bower.json'),
+      conf.dist,
+    ];
+
+    return gulp.src(src)
+
+      // Bump version.
+      .pipe(jsonFilter)
+      .pipe(bump({type: level}))
+      .pipe(gulp.dest(conf.root))
+      .pipe(jsonFilter.restore)
+
+      // Commit release.
+      .pipe(git.add({args: '-f'}))
+      .pipe(git.commit('release: release version'))
+
+      // Create tag.
+      .pipe(pkgJsonFilter)
+      .pipe(tagVersion())
+      .pipe(pkgJsonFilter.restore)
+
+      // Remove generated bundle and commit for the next release.
+      .pipe(bundleFilter)
+      .pipe(git.rm({args: '-rf'}))
+      .pipe(git.commit('release: prepare next release'));
+  });
+});
+
+gulp.task('release', ['release:minor']);
 
 /**
  * Start Karma Server and run unit tests.
