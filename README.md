@@ -227,6 +227,7 @@ Check that the tested object has expected attributes.
 it('should pass', () => {
   const actual = document.createElement('input');
   actual.setAttribute('data-id', '1');
+  expect(actual).toHaveAttrs('data-id');
   expect(actual).toHaveAttrs('data-id', '1');
   expect(actual).toHaveAttrs({'data-id': '1'});
   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
@@ -321,6 +322,7 @@ Check that the tested object is a DOM node with expected `id`.
 it('should pass', () => {
   const actual = document.createElement('div');
   actual.id = 'foo';
+  expect(actual).toHaveId();
   expect(actual).toHaveId('foo');
   expect(actual).toHaveId(jasmine.any(String));
   expect(actual).not.toHaveId('bar');
@@ -391,6 +393,35 @@ it('should pass', () => {
   expect(actual).toHaveStyle('font-size', '10px');
   expect(actual).toHaveStyle({fontSize: '10px', display: 'none'});
   expect(actual).toHaveStyle({fontSize: jasmine.anything()});
+});
+```
+
+### toHaveTagName
+
+Check that the tested object is a DOM node with expected tag name.
+
+#### Since
+
+0.1.0
+
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `tagName` | `String,Object` | The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+
+#### Message
+
+`Expect [actual] [NOT] to have tag name [expectedTagName] but was [actualTagName]`
+
+#### Example:
+
+```javascript
+it('should pass', () => {
+  const actual = document.createElement('input');
+  expect(actual).toHaveTagName('input');
+  expect(actual).toHaveTagName('INPUT');
+  expect(actual).not.toHaveTagName('div');
 });
 ```
 
