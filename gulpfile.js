@@ -95,7 +95,7 @@ gulp.task('build', ['clean'], () => {
 
 // Release tasks
 ['minor', 'major', 'patch'].forEach((level) => {
-  gulp.task(`release:${level}`, ['build'], function() {
+  gulp.task(`release:${level}`, ['build', 'docs'], function() {
     const jsonFilter = gulpFilter('*.json', {restore: true});
     const pkgJsonFilter = gulpFilter('package.json', {restore: true});
     const bundleFilter = gulpFilter('dist', {restore: true});
@@ -103,6 +103,7 @@ gulp.task('build', ['clean'], () => {
     const src = [
       path.join(conf.root, 'package.json'),
       path.join(conf.root, 'bower.json'),
+      path.join(conf.root, 'README.md'),
       conf.dist,
     ];
 
