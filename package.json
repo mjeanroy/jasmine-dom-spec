@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "description": "DOM Matchers and assertions for Jasmine framework",
   "main": "dist/jasmine-dom-spec.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mjeanroy/jasmine-dom-spec.git"
+  },
   "scripts": {
     "clean": "gulp clean",
     "lint": "gulp lint",
@@ -23,6 +27,9 @@
   ],
   "author": "Mickael Jeanroy",
   "license": "MIT",
+  "peerDependencies": {
+    "jasmine-core": ">=1.3.0"
+  },
   "devDependencies": {
     "babel-core": "6.26.0",
     "babel-preset-es2015": "6.24.1",
