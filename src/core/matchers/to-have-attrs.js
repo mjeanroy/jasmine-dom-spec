@@ -32,14 +32,13 @@ import {every, isObject, keys, toDomElement} from '../util/index';
  * @example
  *   const actual = document.createElement('input');
  *   actual.setAttribute('data-id', '1');
- *   actual.checked = false;
  *   expect(actual).toHaveAttrs('data-id', '1');
  *   expect(actual).toHaveAttrs({'data-id': '1'});
  *   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
  *
  * @param {Object} ctx Test context.
- * @param {Object|string} attrName Attribute name (or map of attributes).
- * @param {string} attrValue Attribute value.
+ * @param {String|Object} attrName Attribute name (or map of attributes).
+ * @param {String|Object} attrValue Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */

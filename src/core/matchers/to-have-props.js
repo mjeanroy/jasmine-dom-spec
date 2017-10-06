@@ -36,10 +36,10 @@ import {every, isObject, keys, toDomElement} from '../util/index';
  *   expect(actual).toHaveProps('required', true);
  *   expect(actual).toHaveProps('checked', false);
  *   expect(actual).toHaveProps({required: true, checked: false});
- *   expect(actual).toHaveProps(required: jasmine.any(Boolean));
+ *   expect(actual).toHaveProps({required: jasmine.any(Boolean)});
  *
  * @param {Object} ctx Test context.
- * @param {Object|string} propName Property name (or map of properties).
+ * @param {String|Object} propName Property name (or object of properties).
  * @param {*} propValue Property value.
  * @return {Object} Test result.
  * @since 0.1.0

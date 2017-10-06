@@ -40,8 +40,8 @@ import {dashToCamel, every, isObject, keys, toDomElement} from '../util/index';
  *   expect(actual).toHaveStyle({fontSize: jasmine.anything()});
  *
  * @param {Object} ctx Test context.
- * @param {Object|string} styleName Style name.
- * @param {string} styleValue Style value.
+ * @param {String|Object} styleName Style name or object of styles.
+ * @param {String|Object} styleValue Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */

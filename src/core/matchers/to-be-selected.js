@@ -26,10 +26,10 @@ import {pp} from '../jasmine/index';
 import {toDomElement} from '../util/index';
 
 /**
- * Check that the tested object is a DOM node property `selected` equal
+ * Check that the tested object is a DOM node with a property `selected` equal
  * to `true`.
  *
- * @message Expect [actual] [NOT] to be required
+ * @message Expect [actual] [NOT] to be selected
  * @example
  *   const actual = document.createElement('option');
  *   actual.selected = true;

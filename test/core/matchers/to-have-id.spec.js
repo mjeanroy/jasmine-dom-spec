@@ -26,11 +26,13 @@ import {toHaveId} from '../../../src/core/matchers/to-have-id';
 
 describe('toHaveId', () => {
   it('should pass with a dom node with expected id', () => {
-    const id = 'foo';
     const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const id = 'foo';
+
     actual.id = id;
 
-    const result = toHaveId({actual}, id);
+    const result = toHaveId({actual, equals}, id);
 
     expect(result).toEqual({
       pass: true,

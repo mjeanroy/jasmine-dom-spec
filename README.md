@@ -2,6 +2,7 @@ jasmine-dom-spec
 =================
 
 [![Build Status](https://travis-ci.org/mjeanroy/jasmine-dom-spec.svg?branch=master)](https://travis-ci.org/mjeanroy/jasmine-dom-spec)
+[![Npm version](https://badge.fury.io/js/jasmine-dom-spec.svg)](https://badge.fury.io/js/jasmine-dom-spec)
 
 Jasmine-Dom-Spec is a set of custom matchers to be able to test DOM nodes easily.
 
@@ -11,7 +12,7 @@ Jasmine-Dom-Spec is compatible with __Jasmine 1.3__ and __Jasmine 2.0.X__.
 
 ### toBeChecked
 
-Check that the tested object is a DOM node property `checked` equal
+Check that the tested object is a DOM node with a property `checked` equal
 to `true`.
 
 #### Since
@@ -67,7 +68,7 @@ it('should pass', () => {
 
 ### toBeDisabled
 
-Check that the tested object is a DOM node property `disabled` equal
+Check that the tested object is a DOM node with a property `disabled` equal
 to `true`.
 
 #### Since
@@ -134,7 +135,7 @@ to `true`.
 
 #### Message
 
-`Expect [actual] [NOT] to be checked`
+`Expect [actual] [NOT] to be indeterminate`
 
 #### Example:
 
@@ -149,8 +150,8 @@ it('should pass', () => {
 
 ### toBeRequired
 
-Check that the tested object is a DOM node property required equal
-to an expected value.
+Check that the tested object is a DOM node with a property `required` equal
+to `true`.
 
 #### Since
 
@@ -176,7 +177,7 @@ it('should pass', () => {
 
 ### toBeSelected
 
-Check that the tested object is a DOM node property `selected` equal
+Check that the tested object is a DOM node with a property `selected` equal
 to `true`.
 
 #### Since
@@ -189,7 +190,7 @@ to `true`.
 
 #### Message
 
-`Expect [actual] [NOT] to be required`
+`Expect [actual] [NOT] to be selected`
 
 #### Example:
 
@@ -213,8 +214,8 @@ Check that the tested object has expected attributes.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `attrName` | `Object,string` | Attribute name (or map of attributes). |
-| `attrValue` | `string` | Attribute value. |
+| `attrName` | `String,Object` | Attribute name (or map of attributes). |
+| `attrValue` | `String,Object` | Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -226,7 +227,6 @@ Check that the tested object has expected attributes.
 it('should pass', () => {
   const actual = document.createElement('input');
   actual.setAttribute('data-id', '1');
-  actual.checked = false;
   expect(actual).toHaveAttrs('data-id', '1');
   expect(actual).toHaveAttrs({'data-id': '1'});
   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
@@ -245,7 +245,7 @@ Check that the tested object has expected css classes.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expected` | `Array.<string>,string` | The expected class name. |
+| `expected` | `Array.<string>,String` | The expected class name. |
 
 #### Message
 
@@ -279,7 +279,7 @@ Check that the tested object is a DOM node with expected html content.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `html` | `string` | The expected html. |
+| `html` | `String,Object` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -290,7 +290,7 @@ Check that the tested object is a DOM node with expected html content.
 ```javascript
 it('should pass', () => {
   const actual = document.createElement('input');
-  actual.textContent = '<span>foo</span>';
+  actual.innerHTML = '<span>foo</span>';
   expect(actual).toHaveHtml('<span>foo</span>');
   expect(actual).toHaveHtml(jasmine.any(String));
   expect(actual).not.toHaveHtml('<div>foo</div>');
@@ -309,7 +309,7 @@ Check that the tested object is a DOM node with expected `id`.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `id` | `string` | The expected id. |
+| `id` | `String,Object` | The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -322,6 +322,7 @@ it('should pass', () => {
   const actual = document.createElement('div');
   actual.id = 'foo';
   expect(actual).toHaveId('foo');
+  expect(actual).toHaveId(jasmine.any(String));
   expect(actual).not.toHaveId('bar');
 });
 ```
@@ -338,7 +339,7 @@ Check that the tested object has expected properties.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `propName` | `Object,string` | Property name (or map of properties). |
+| `propName` | `String,Object` | Property name (or object of properties). |
 | `propValue` | `*` | Property value. |
 
 #### Message
@@ -355,7 +356,7 @@ it('should pass', () => {
   expect(actual).toHaveProps('required', true);
   expect(actual).toHaveProps('checked', false);
   expect(actual).toHaveProps({required: true, checked: false});
-  expect(actual).toHaveProps(required: jasmine.any(Boolean));
+  expect(actual).toHaveProps({required: jasmine.any(Boolean)});
 });
 ```
 
@@ -372,8 +373,8 @@ name can dash-cased, such as `font-size`, or camel cased, such as `fontSize`).
 
 | Name | Type | Description |
 |------|------|-------------|
-| `styleName` | `Object,string` | Style name. |
-| `styleValue` | `string` | Style value. |
+| `styleName` | `String,Object` | Style name or object of styles. |
+| `styleValue` | `String,Object` | Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -405,7 +406,7 @@ Check that the tested object is a DOM node with expected text content.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expectedText` | `string` | The expected text. |
+| `expectedText` | `String,Object` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -436,7 +437,7 @@ to an expected value.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expectedValue` | `*` | The expected value. |
+| `expectedValue` | `String,Object` | The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 

@@ -26,7 +26,7 @@ import {pp} from '../jasmine/index';
 import {toDomElement} from '../util/index';
 
 /**
- * Check that the tested object is a DOM node property `checked` equal
+ * Check that the tested object is a DOM node with a property `checked` equal
  * to `true`.
  *
  * @message Expect [actual] [NOT] to be checked

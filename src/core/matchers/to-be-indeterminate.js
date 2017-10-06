@@ -29,7 +29,7 @@ import {toDomElement} from '../util/index';
  * Check that the tested object is a DOM node property `indeterminate` equal
  * to `true`.
  *
- * @message Expect [actual] [NOT] to be checked
+ * @message Expect [actual] [NOT] to be indeterminate
  * @example
  *   const actual = document.createElement('input');
  *   actual.type = 'checkbox';

@@ -38,7 +38,7 @@ import {toDomElement} from '../util/index';
  *   expect(actual).not.toHaveValue('');
  *
  * @param {Object} ctx Test context.
- * @param {*} expectedValue The expected value.
+ * @param {String|Object} expectedValue The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */

@@ -33,18 +33,19 @@ import {toDomElement} from '../util/index';
  *   const actual = document.createElement('div');
  *   actual.id = 'foo';
  *   expect(actual).toHaveId('foo');
+ *   expect(actual).toHaveId(jasmine.any(String));
  *   expect(actual).not.toHaveId('bar');
  *
  * @param {Object} ctx Test context.
- * @param {string} id The expected id.
+ * @param {String|Object} id The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveId({actual}, id) {
+export function toHaveId({actual, equals}, id) {
   const node = toDomElement(actual);
   const actualId = node.id;
   return {
-    pass: node.id === id,
+    pass: equals(node.id, id),
     message: `Expect ${pp(actual)} [NOT] to have id ${pp(id)} but was ${pp(actualId)}`,
   };
 }

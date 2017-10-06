@@ -26,8 +26,8 @@ import {pp} from '../jasmine/index';
 import {toDomElement} from '../util/index';
 
 /**
- * Check that the tested object is a DOM node property required equal
- * to an expected value.
+ * Check that the tested object is a DOM node with a property `required` equal
+ * to `true`.
  *
  * @message Expect [actual] [NOT] to be required
  * @example

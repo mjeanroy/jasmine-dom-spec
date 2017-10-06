@@ -41,7 +41,7 @@ import {isArray, every, has, filter, indexBy, isTruthy, map, toDomElement, trim}
  *   expect(actual).not.toHaveCssClass('foo bar baz');
  *
  * @param {Object} ctx Test context.
- * @param {Array<string>|string} expected The expected class name.
+ * @param {Array<string>|String} expected The expected class name.
  * @return {Object} Test result.
  * @since 0.1.0
  */

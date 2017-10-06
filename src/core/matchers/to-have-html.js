@@ -31,13 +31,13 @@ import {isString, toDomElement} from '../util/index';
  * @message Expect [actual] [NOT] to have HTML [expectedHtml] but was [actualHtml]
  * @example
  *   const actual = document.createElement('input');
- *   actual.textContent = '<span>foo</span>';
+ *   actual.innerHTML = '<span>foo</span>';
  *   expect(actual).toHaveHtml('<span>foo</span>');
  *   expect(actual).toHaveHtml(jasmine.any(String));
  *   expect(actual).not.toHaveHtml('<div>foo</div>');
  *
  * @param {Object} ctx Test context.
- * @param {string} html The expected html.
+ * @param {String|Object} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
