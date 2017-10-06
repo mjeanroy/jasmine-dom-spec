@@ -24,8 +24,8 @@
 
 import {toHaveAttrs} from '../../../src/core/matchers/to-have-attrs';
 
-describe('toHaveId', () => {
-  it('should pass with a dom node with expected id', () => {
+describe('toHaveAttrs', () => {
+  it('should pass with a dom node with expected attributes', () => {
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
 
@@ -40,7 +40,22 @@ describe('toHaveId', () => {
     });
   });
 
-  it('should not pass with a dom node without expected id', () => {
+  it('should pass without attribute value', () => {
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+
+    actual.setAttribute('data-foo', 1);
+
+    const result = toHaveAttrs({actual, equals}, 'data-foo');
+
+    expect(equals).not.toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have attributes Object({ data-foo: undefined })`,
+    });
+  });
+
+  it('should not pass with a dom node without expected attributes', () => {
     const actual = document.createElement('input');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
 

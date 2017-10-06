@@ -45,4 +45,12 @@ describe('toHaveAttrs', () => {
 
     expect(node).not.toHaveAttrs('data-foo', '0');
   });
+
+  it('should pass without attribute value', () => {
+    const node = document.createElement('div');
+    node.setAttribute('data-foo', 1);
+
+    expect(node).toHaveAttrs('data-foo');
+    expect(node).not.toHaveAttrs('data-bar');
+  });
 });

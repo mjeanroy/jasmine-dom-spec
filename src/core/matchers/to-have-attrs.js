@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {every, isObject, keys, toDomElement} from '../util/index';
+import {every, isObject, isUndefined, keys, toDomElement} from '../util/index';
 
 /**
  * Check that the tested object has expected attributes.
@@ -32,6 +32,7 @@ import {every, isObject, keys, toDomElement} from '../util/index';
  * @example
  *   const actual = document.createElement('input');
  *   actual.setAttribute('data-id', '1');
+ *   expect(actual).toHaveAttrs('data-id');
  *   expect(actual).toHaveAttrs('data-id', '1');
  *   expect(actual).toHaveAttrs({'data-id': '1'});
  *   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
@@ -47,7 +48,7 @@ export function toHaveAttrs({actual, equals}, attrName, attrValue) {
   const expected = isObject(attrName) ? attrName : {[attrName]: attrValue};
   const props = keys(expected);
   const ok = every(props, (attr) => (
-    node.hasAttribute(attr) && equals(node.getAttribute(attr), expected[attr])
+    node.hasAttribute(attr) && (isUndefined(expected[attr]) || equals(node.getAttribute(attr), expected[attr]))
   ));
 
   return {
