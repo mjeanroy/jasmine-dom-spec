@@ -26,21 +26,22 @@ import {pp} from '../jasmine/index';
 import {dashToCamel, every, isObject, keys, toDomElement} from '../util/index';
 
 /**
- * Check that the tested object has expected properties.
+ * Check that the tested object has expected style value (the css style property
+ * name can dash-cased, such as `font-size`, or camel cased, such as `fontSize`).
  *
- * @message Expect [actual] [NOT] to have properties [expected]
+ * @message Expect [actual] [NOT] to have styles [expected]
  * @example
  *   const actual = document.createElement('input');
  *   actual.required = true;
  *   actual.checked = false;
- *   expect(actual).toHaveProps('required', true);
- *   expect(actual).toHaveProps('checked', false);
- *   expect(actual).toHaveProps({required: true, checked: false});
- *   expect(actual).toHaveProps(required: jasmine.any(Boolean));
+ *   expect(actual).toHaveStyle('display', 'none');
+ *   expect(actual).toHaveStyle('font-size', '10px');
+ *   expect(actual).toHaveStyle({fontSize: '10px', display: 'none'});
+ *   expect(actual).toHaveStyle({fontSize: jasmine.anything()});
  *
  * @param {Object} ctx Test context.
- * @param {Object|string} propName Property name (or map of properties).
- * @param {*} propValue Property value.
+ * @param {Object|string} styleName Style name.
+ * @param {string} styleValue Style value.
  * @return {Object} Test result.
  * @since 0.1.0
  */

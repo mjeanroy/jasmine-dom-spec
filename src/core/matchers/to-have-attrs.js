@@ -39,7 +39,7 @@ import {every, isObject, keys, toDomElement} from '../util/index';
  *
  * @param {Object} ctx Test context.
  * @param {Object|string} attrName Attribute name (or map of attributes).
- * @param {string} attrValue Attribute value.
+ * @param {string} attrValue Attribute value.
  * @return {Object} Test result.
  * @since 0.1.0
  */

@@ -40,7 +40,7 @@ import {every, isObject, keys, toDomElement} from '../util/index';
  *
  * @param {Object} ctx Test context.
  * @param {Object|string} propName Property name (or map of properties).
- * @param {*} propValue Property value.
+ * @param {*} propValue Property value.
  * @return {Object} Test result.
  * @since 0.1.0
  */
