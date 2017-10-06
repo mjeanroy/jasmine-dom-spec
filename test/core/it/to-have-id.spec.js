@@ -33,4 +33,12 @@ describe('toHaveId', () => {
     expect(node).toHaveId(id);
     expect(node).toHaveId(jasmine.any(String));
   });
+
+  it('should pass without parameter', () => {
+    const node = document.createElement('div');
+    expect(node).not.toHaveId();
+
+    node.id = 'foo';
+    expect(node).toHaveId();
+  });
 });

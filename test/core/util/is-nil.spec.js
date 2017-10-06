@@ -22,27 +22,19 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import {isNil} from '../../../src/core/util/is-nil.js';
+
+describe('isNil', () => {
+  it('should return true with undefined or null', () => {
+    expect(isNil(null)).toBe(true);
+    expect(isNil(undefined)).toBe(true);
+    expect(isNil(void 0)).toBe(true);
+  });
+
+  it('should return false without undefined', () => {
+    expect(isNil(0)).toBe(false);
+    expect(isNil(true)).toBe(false);
+    expect(isNil({})).toBe(false);
+    expect(isNil(() => {})).toBe(false);
+  });
+});

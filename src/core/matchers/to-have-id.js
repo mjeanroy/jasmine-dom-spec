@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {isNil, isUndefined, toDomElement} from '../util/index';
 
 /**
  * Check that the tested object is a DOM node with expected `id`.
@@ -32,6 +32,7 @@ import {toDomElement} from '../util/index';
  * @example
  *   const actual = document.createElement('div');
  *   actual.id = 'foo';
+ *   expect(actual).toHaveId();
  *   expect(actual).toHaveId('foo');
  *   expect(actual).toHaveId(jasmine.any(String));
  *   expect(actual).not.toHaveId('bar');
@@ -44,8 +45,16 @@ import {toDomElement} from '../util/index';
 export function toHaveId({actual, equals}, id) {
   const node = toDomElement(actual);
   const actualId = node.id;
+
+  let message = `Expect ${pp(actual)} [NOT] to have id`;
+  let pass = !isNil(actualId) && actualId !== '';
+  if (!isUndefined(id)) {
+    message += ` ${pp(id)} but was ${pp(actualId)}`;
+    pass = pass && equals(actualId, id);
+  }
+
   return {
-    pass: equals(node.id, id),
-    message: `Expect ${pp(actual)} [NOT] to have id ${pp(id)} but was ${pp(actualId)}`,
+    pass,
+    message,
   };
 }

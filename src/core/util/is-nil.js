@@ -22,27 +22,15 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import {isNull} from './is-null';
+import {isUndefined} from './is-undefined';
+
+/**
+ * Check that a given value is NIL (`null` or `undefined`).
+ *
+ * @param {*} obj Value to check.
+ * @return {boolean} `true` if `obj` is `null` or `undefined`, `false` otherwise.
+ */
+export function isNil(obj) {
+  return isNull(obj) || isUndefined(obj);
+}

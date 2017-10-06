@@ -34,9 +34,24 @@ describe('toHaveId', () => {
 
     const result = toHaveId({actual, equals}, id);
 
+    expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
       message: `Expect HTMLNode [NOT] to have id 'foo' but was 'foo'`,
+    });
+  });
+
+  it('should pass without parameter', () => {
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.id = 'foo';
+
+    const result = toHaveId({actual, equals});
+
+    expect(equals).not.toHaveBeenCalled();
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have id`,
     });
   });
 });
