@@ -22,19 +22,20 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeDisabled} from './to-be-disabled';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveStyle} from './to-have-style';
-export {toHaveTagName} from './to-have-tag-name';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {toHaveTagName} from '../../../src/core/matchers/to-have-tag-name';
+
+describe('toHaveTagName', () => {
+  it('should pass with a dom node with expected tag name', () => {
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => (
+      x.toLowerCase() === y.toLowerCase())
+    );
+
+    const result = toHaveTagName({actual, equals}, 'input');
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have tag name 'input' but was '${actual.tagName}'`,
+    });
+  });
+});

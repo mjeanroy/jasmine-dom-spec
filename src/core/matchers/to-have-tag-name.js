@@ -22,19 +22,32 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeDisabled} from './to-be-disabled';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveStyle} from './to-have-style';
-export {toHaveTagName} from './to-have-tag-name';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import {pp} from '../jasmine/index';
+import {toDomElement} from '../util/index';
+
+/**
+ * Check that the tested object is a DOM node with expected tag name.
+ *
+ * @message Expect [actual] [NOT] to have tag name [expectedTagName] but was [actualTagName]
+ * @example
+ *   const actual = document.createElement('input');
+ *   expect(actual).toHaveTagName('input');
+ *   expect(actual).toHaveTagName('INPUT');
+ *   expect(actual).not.toHaveTagName('div');
+ *
+ * @param {Object} ctx Test context.
+ * @param {String|Object} tagName The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @return {Object} Test result.
+ * @since 0.1.0
+ */
+export function toHaveTagName({actual, equals}, tagName) {
+  // IE8 does not know textContent but knows innerText.
+  const node = toDomElement(actual);
+  const actualTagName = node.tagName;
+  const ok = equals(actualTagName, tagName);
+
+  return {
+    pass: ok,
+    message: `Expect ${pp(actual)} [NOT] to have tag name ${pp(tagName)} but was ${pp(actualTagName)}`,
+  };
+}

@@ -22,19 +22,14 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeDisabled} from './to-be-disabled';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveStyle} from './to-have-style';
-export {toHaveTagName} from './to-have-tag-name';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+import '../../../src/index.js';
+
+describe('toHaveTagName', () => {
+  it('should pass with a DOM node', () => {
+    const node = document.createElement('input');
+
+    expect(node).toHaveTagName('input');
+    expect(node).toHaveTagName('INPUT');
+    expect(node).not.toHaveTagName('div');
+  });
+});
