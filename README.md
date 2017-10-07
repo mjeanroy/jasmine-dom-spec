@@ -272,6 +272,8 @@ it('should pass', () => {
 ### toHaveHtml
 
 Check that the tested object is a DOM node with expected html content.
+If the expected html parameter is a `number` or a `boolean`, it will be
+converted to a `string` using its `toString` method.
 
 #### Since
 
@@ -281,7 +283,7 @@ Check that the tested object is a DOM node with expected html content.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `html` | `String,Object` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `html` | `String,Number,Boolean,Object` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -429,6 +431,8 @@ it('should pass', () => {
 ### toHaveText
 
 Check that the tested object is a DOM node with expected text content.
+If the expected text parameter is a `number` or a `boolean`, it will be
+converted to a `string` using its `toString` method.
 
 #### Since
 
@@ -438,7 +442,7 @@ Check that the tested object is a DOM node with expected text content.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expectedText` | `String,Object` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `text` | `String,Number,Boolean,Object` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -449,8 +453,9 @@ Check that the tested object is a DOM node with expected text content.
 ```javascript
 it('should pass', () => {
   const actual = document.createElement('input');
-  actual.textContent = 'foo';
-  expect(actual).toHaveText('foo');
+  actual.textContent = '1';
+  expect(actual).toHaveText('1');
+  expect(actual).toHaveText(1);
   expect(actual).toHaveText(jasmine.any(String));
   expect(actual).not.toHaveText('foobar');
 });
