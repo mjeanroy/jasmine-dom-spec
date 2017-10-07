@@ -34,4 +34,18 @@ describe('toHaveText', () => {
     expect(node).toHaveText(jasmine.any(String));
     expect(node).not.toHaveText(`${txt} ${txt}`);
   });
+
+  it('should pass with a number', () => {
+    const nb = 1;
+    const node = document.createElement('div');
+    node.innerHTML = nb;
+    expect(node).toHaveText(nb);
+  });
+
+  it('should pass with a boolean', () => {
+    const nb = true;
+    const node = document.createElement('div');
+    node.innerHTML = nb;
+    expect(node).toHaveText(nb);
+  });
 });

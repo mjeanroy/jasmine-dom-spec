@@ -22,29 +22,20 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-boolean.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-primitive.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import {isPrimitive} from '../../../src/core/util/is-primitive.js';
+
+describe('isPrimitive', () => {
+  it('should return true with null, undefined, a number, a string or a boolean', () => {
+    expect(isPrimitive('')).toBe(true);
+    expect(isPrimitive(0)).toBe(true);
+    expect(isPrimitive(true)).toBe(true);
+  });
+
+  it('should return false without null, undefined, a number, a string or a boolean', () => {
+    expect(isPrimitive(null)).toBe(false);
+    expect(isPrimitive(undefined)).toBe(false);
+    expect(isPrimitive({})).toBe(false);
+    expect(isPrimitive([])).toBe(false);
+    expect(isPrimitive(new Date())).toBe(false);
+  });
+});

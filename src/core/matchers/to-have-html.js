@@ -23,10 +23,12 @@
  */
 
 import {pp} from '../jasmine/index';
-import {isString, toDomElement} from '../util/index';
+import {isPrimitive, toDomElement} from '../util/index';
 
 /**
  * Check that the tested object is a DOM node with expected html content.
+ * If the expected html parameter is a `number` or a `boolean`, it will be
+ * converted to a `string` using its `toString` method.
  *
  * @message Expect [actual] [NOT] to have HTML [expectedHtml] but was [actualHtml]
  * @example
@@ -37,7 +39,7 @@ import {isString, toDomElement} from '../util/index';
  *   expect(actual).not.toHaveHtml('<div>foo</div>');
  *
  * @param {Object} ctx Test context.
- * @param {String|Object} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|Object} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -47,11 +49,11 @@ export function toHaveHtml({actual, equals}, html) {
 
   // Html may be a string **or** a jasmine asymetric matcher object.
   // In the last case, do not try to normalize HTML.
-  const expectedHtml = isString(html) ? normalizeHtml(html) : html;
+  const expectedHtml = isPrimitive(html) ? normalizeHtml(html.toString()) : html;
 
   return {
     pass: equals(actualHtml, expectedHtml),
-    message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(html)} but was ${pp(actualHtml)}`,
+    message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`,
   };
 }
 

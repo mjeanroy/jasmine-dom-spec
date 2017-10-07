@@ -26,7 +26,24 @@ import {toHaveHtml} from '../../../src/core/matchers/to-have-html';
 
 describe('toHaveHtml', () => {
   it('should pass with a dom node with expected html content', () => {
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
     const html = '<div>foo</div>';
+    actual.innerHTML = html;
+
+    const result = toHaveHtml({actual, equals}, html);
+
+    const expected = document.createElement('div');
+    expected.innerHTML = html;
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`,
+    });
+  });
+
+  it('should pass with a dom node with expected number content', () => {
+    const html = 1;
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
     actual.innerHTML = html;
@@ -35,7 +52,21 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have HTML '${html}' but was '${actual.innerHTML}'`,
+      message: `Expect HTMLNode [NOT] to have HTML '1' but was '1'`,
+    });
+  });
+
+  it('should pass with a dom node with expected boolean content', () => {
+    const html = true;
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.innerHTML = html;
+
+    const result = toHaveHtml({actual, equals}, html);
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have HTML 'true' but was 'true'`,
     });
   });
 });

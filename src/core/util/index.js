@@ -32,6 +32,7 @@ export {isArray} from './is-array';
 export {isNil} from './is-nil';
 export {isString} from './is-string';
 export {isObject} from './is-object';
+export {isPrimitive} from './is-primitive';
 export {isTruthy} from './is-truthy';
 export {isUndefined} from './is-undefined';
 export {keys} from './keys';

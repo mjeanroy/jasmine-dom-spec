@@ -22,29 +22,24 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-boolean.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-primitive.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import {isBoolean} from '../../../src/core/util/is-boolean.js';
+
+describe('isBoolean', () => {
+  it('should return true with a true or false', () => {
+    expect(isBoolean(true)).toBe(true);
+    expect(isBoolean(false)).toBe(true);
+    expect(isBoolean(Boolean(0))).toBe(true);
+
+    // eslint-disable-next-line no-new-wrappers
+    expect(isBoolean(new Boolean(true))).toBe(true);
+  });
+
+  it('should return false without a boolean', () => {
+    expect(isBoolean('')).toBe(false);
+    expect(isBoolean(0)).toBe(false);
+    expect(isBoolean({})).toBe(false);
+    expect(isBoolean(() => {})).toBe(false);
+    expect(isBoolean(null)).toBe(false);
+    expect(isBoolean(undefined)).toBe(false);
+  });
+});

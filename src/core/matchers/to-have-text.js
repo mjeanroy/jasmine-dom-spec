@@ -23,28 +23,32 @@
  */
 
 import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {isPrimitive, toDomElement} from '../util/index';
 
 /**
  * Check that the tested object is a DOM node with expected text content.
+ * If the expected text parameter is a `number` or a `boolean`, it will be
+ * converted to a `string` using its `toString` method.
  *
  * @message Expect [actual] [NOT] to have text [expectedText] but was [actualText]
  * @example
  *   const actual = document.createElement('input');
- *   actual.textContent = 'foo';
- *   expect(actual).toHaveText('foo');
+ *   actual.textContent = '1';
+ *   expect(actual).toHaveText('1');
+ *   expect(actual).toHaveText(1);
  *   expect(actual).toHaveText(jasmine.any(String));
  *   expect(actual).not.toHaveText('foobar');
  *
  * @param {Object} ctx Test context.
- * @param {String|Object} expectedText The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|Object} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveText({actual, equals}, expectedText) {
+export function toHaveText({actual, equals}, text) {
   // IE8 does not know textContent but knows innerText.
   const node = toDomElement(actual);
   const actualText = 'textContent' in node ? node.textContent : node.innerText;
+  const expectedText = isPrimitive(text) ? text.toString() : text;
 
   return {
     pass: equals(actualText, expectedText),

@@ -38,4 +38,32 @@ describe('toHaveText', () => {
       message: `Expect HTMLNode [NOT] to have text 'foo' but was 'foo'`,
     });
   });
+
+  it('should pass with a dom node with expected number content', () => {
+    const txt = 1;
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.innerHTML = txt;
+
+    const result = toHaveText({actual, equals}, txt);
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have text '1' but was '1'`,
+    });
+  });
+
+  it('should pass with a dom node with expected boolean content', () => {
+    const txt = true;
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.innerHTML = txt;
+
+    const result = toHaveText({actual, equals}, txt);
+
+    expect(result).toEqual({
+      pass: true,
+      message: `Expect HTMLNode [NOT] to have text 'true' but was 'true'`,
+    });
+  });
 });

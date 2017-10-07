@@ -34,4 +34,18 @@ describe('toHaveHtml', () => {
     expect(node).toHaveHtml(jasmine.any(String));
     expect(node).not.toHaveHtml('<span>foo</span>');
   });
+
+  it('should pass with a DOM node and number content', () => {
+    const html = 1;
+    const node = document.createElement('div');
+    node.innerHTML = html;
+    expect(node).toHaveHtml(html);
+  });
+
+  it('should pass with a DOM node and boolean content', () => {
+    const html = true;
+    const node = document.createElement('div');
+    node.innerHTML = html;
+    expect(node).toHaveHtml(html);
+  });
 });

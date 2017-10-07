@@ -22,29 +22,14 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array.spec';
-import './is-boolean.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-primitive.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './trim.spec';
+import {is} from './is';
+
+/**
+ * Check that a given value is a boolean.
+ *
+ * @param {*} obj Value to test.
+ * @return {boolean} `true` if `obj` is a boolean, `false` otherwise.
+ */
+export function isBoolean(obj) {
+  return obj === true || obj === false || is(obj, 'Boolean');
+}
