@@ -3,6 +3,7 @@ jasmine-dom-spec
 
 [![Build Status](https://travis-ci.org/mjeanroy/jasmine-dom-spec.svg?branch=master)](https://travis-ci.org/mjeanroy/jasmine-dom-spec)
 [![Npm version](https://badge.fury.io/js/jasmine-dom-spec.svg)](https://badge.fury.io/js/jasmine-dom-spec)
+[![Greenkeeper badge](https://badges.greenkeeper.io/mjeanroy/jasmine-dom-spec.svg)](https://greenkeeper.io/)
 
 Jasmine-Dom-Spec is a set of custom matchers to be able to test DOM nodes easily.
 
