@@ -47,4 +47,5 @@ import './keys.spec';
 import './map.spec';
 import './tag-name.spec';
 import './to-dom-element.spec';
+import './to-lower.spec';
 import './trim.spec';

@@ -22,32 +22,15 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
-import {toDomElement, toLower} from '../util/index';
+import {isString} from './is-string';
 
 /**
- * Check that the tested object is a DOM node with expected tag name.
+ * Turn a `string` to a lower case string.
+ * If the argument is not a `string`, it is automatically returned.
  *
- * @message Expect [actual] [NOT] to have tag name [expectedTagName] but was [actualTagName]
- * @example
- *   const actual = document.createElement('input');
- *   expect(actual).toHaveTagName('input');
- *   expect(actual).toHaveTagName('INPUT');
- *   expect(actual).not.toHaveTagName('div');
- *
- * @param {Object} ctx Test context.
- * @param {String|Object} tagName The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`).
- * @return {Object} Test result.
- * @since 0.1.0
+ * @param {*} value Value to turn to a lower case string.
+ * @return {*} The lower case string, or the argument if it is not a string.
  */
-export function toHaveTagName({actual, equals}, tagName) {
-  // IE8 does not know textContent but knows innerText.
-  const node = toDomElement(actual);
-  const actualTagName = node.tagName;
-  const ok = equals(toLower(actualTagName), toLower(tagName));
-
-  return {
-    pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have tag name ${pp(tagName)} but was ${pp(actualTagName)}`,
-  };
+export function toLower(value) {
+  return isString(value) ? value.toLowerCase() : value;
 }

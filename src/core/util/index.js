@@ -39,4 +39,5 @@ export {isUndefined} from './is-undefined';
 export {keys} from './keys';
 export {map} from './map';
 export {toDomElement} from './to-dom-element';
+export {toLower} from './to-lower';
 export {trim} from './trim';

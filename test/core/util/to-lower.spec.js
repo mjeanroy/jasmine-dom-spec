@@ -22,32 +22,17 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
-import {toDomElement, toLower} from '../util/index';
+import {toLower} from '../../../src/core/util/to-lower.js';
 
-/**
- * Check that the tested object is a DOM node with expected tag name.
- *
- * @message Expect [actual] [NOT] to have tag name [expectedTagName] but was [actualTagName]
- * @example
- *   const actual = document.createElement('input');
- *   expect(actual).toHaveTagName('input');
- *   expect(actual).toHaveTagName('INPUT');
- *   expect(actual).not.toHaveTagName('div');
- *
- * @param {Object} ctx Test context.
- * @param {String|Object} tagName The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`).
- * @return {Object} Test result.
- * @since 0.1.0
- */
-export function toHaveTagName({actual, equals}, tagName) {
-  // IE8 does not know textContent but knows innerText.
-  const node = toDomElement(actual);
-  const actualTagName = node.tagName;
-  const ok = equals(toLower(actualTagName), toLower(tagName));
+describe('toLower', () => {
+  it('should return lower case string', () => {
+    expect(toLower('')).toBe('');
+    expect(toLower('FOO')).toBe('foo');
+    expect(toLower('foo')).toBe('foo');
 
-  return {
-    pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have tag name ${pp(tagName)} but was ${pp(actualTagName)}`,
-  };
-}
+    expect(toLower(true)).toBe(true);
+    expect(toLower(0)).toBe(0);
+    expect(toLower(null)).toBe(null);
+    expect(toLower(undefined)).toBe(undefined);
+  });
+});
