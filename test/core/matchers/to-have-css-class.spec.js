@@ -33,7 +33,7 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have css class 'foo'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`,
     });
   });
 
@@ -45,7 +45,7 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have css class 'bar foo'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`,
     });
   });
 
@@ -57,7 +57,7 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have css class [ 'foo', 'bar' ]`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`,
     });
   });
 
@@ -69,7 +69,7 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to have css class 'foo bar'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`,
     });
   });
 
@@ -81,7 +81,7 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to have css class [ 'foo', 'bar' ]`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`,
     });
   });
 });

@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+import {isDomElement} from '../util/index';
+
 /**
  * Pretty-Print object (use `jasmine.pp` by default).
  *
@@ -30,7 +32,8 @@
  */
 export function pp(value) {
   try {
-    return jasmine.pp(value);
+    const str = (isDomElement(value) && 'outerHTML' in value) ? value.outerHTML : value;
+    return jasmine.pp(str);
   } catch (e) {
     // Fallback using object `toString` implementation.
     // Don't worry about `null` or `undefined` since it should be handled

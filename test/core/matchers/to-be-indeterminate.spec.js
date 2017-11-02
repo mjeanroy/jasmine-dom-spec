@@ -34,7 +34,7 @@ describe('toBeIndeterminate', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to be indeterminate`,
+      message: `Expect '${actual.outerHTML}' [NOT] to be indeterminate`,
     });
   });
 
@@ -45,7 +45,7 @@ describe('toBeIndeterminate', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to be indeterminate`,
+      message: `Expect '${actual.outerHTML}' [NOT] to be indeterminate`,
     });
   });
 });

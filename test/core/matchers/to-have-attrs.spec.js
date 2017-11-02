@@ -36,7 +36,7 @@ describe('toHaveAttrs', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have attributes Object({ data-foo: '1' })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`,
     });
   });
 
@@ -51,7 +51,7 @@ describe('toHaveAttrs', () => {
     expect(equals).not.toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have attributes Object({ data-foo: undefined })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: undefined })`,
     });
   });
 
@@ -66,7 +66,7 @@ describe('toHaveAttrs', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to have attributes Object({ data-foo: '1' })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`,
     });
   });
 });

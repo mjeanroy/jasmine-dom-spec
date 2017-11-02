@@ -38,7 +38,7 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`,
     });
   });
 
@@ -52,7 +52,7 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have HTML '1' but was '1'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`,
     });
   });
 
@@ -66,7 +66,7 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have HTML 'true' but was 'true'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`,
     });
   });
 });

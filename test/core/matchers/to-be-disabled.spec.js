@@ -33,7 +33,7 @@ describe('toBeDisabled', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to be disabled`,
+      message: `Expect '${actual.outerHTML}' [NOT] to be disabled`,
     });
   });
 
@@ -43,7 +43,7 @@ describe('toBeDisabled', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to be disabled`,
+      message: `Expect '${actual.outerHTML}' [NOT] to be disabled`,
     });
   });
 });

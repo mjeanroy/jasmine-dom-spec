@@ -35,7 +35,7 @@ describe('toHaveTagName', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have tag name 'input' but was '${actual.tagName}'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`,
     });
   });
 });

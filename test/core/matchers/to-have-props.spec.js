@@ -36,7 +36,7 @@ describe('toHaveProps', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have properties Object({ required: true })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`,
     });
   });
 
@@ -51,7 +51,7 @@ describe('toHaveProps', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to have properties Object({ required: false })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`,
     });
   });
 });

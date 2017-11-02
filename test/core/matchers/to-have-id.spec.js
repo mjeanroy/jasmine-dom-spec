@@ -37,7 +37,7 @@ describe('toHaveId', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have id 'foo' but was 'foo'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`,
     });
   });
 
@@ -51,7 +51,7 @@ describe('toHaveId', () => {
     expect(equals).not.toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have id`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have id`,
     });
   });
 });

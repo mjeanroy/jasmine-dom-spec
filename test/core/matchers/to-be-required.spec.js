@@ -33,7 +33,7 @@ describe('toBeRequired', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to be required`,
+      message: `Expect '${actual.outerHTML}' [NOT] to be required`,
     });
   });
 
@@ -43,7 +43,7 @@ describe('toBeRequired', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect HTMLNode [NOT] to be required`,
+      message: `Expect '${actual.outerHTML}' [NOT] to be required`,
     });
   });
 });

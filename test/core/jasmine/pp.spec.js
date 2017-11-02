@@ -36,4 +36,10 @@ describe('pp', () => {
   it('should pretty-print empty array', () => {
     expect(pp([])).toBe('[  ]');
   });
+
+  it('should pretty-print DOM Node', () => {
+    const value = document.createElement('div');
+    const str = pp(value);
+    expect(str).toBe(`'${value.outerHTML}'`);
+  });
 });

@@ -50,7 +50,7 @@ describe('toHaveStyle', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have styles Object({ fontSize: '10px' })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`,
     });
   });
 
@@ -70,7 +70,7 @@ describe('toHaveStyle', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have styles Object({ fontSize: '10px' })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`,
     });
   });
 
@@ -88,7 +88,7 @@ describe('toHaveStyle', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have styles Object({ font-size: '10px' })`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: '10px' })`,
     });
   });
 });

@@ -35,7 +35,7 @@ describe('toHaveText', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have text 'foo' but was 'foo'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have text 'foo' but was 'foo'`,
     });
   });
 
@@ -49,7 +49,7 @@ describe('toHaveText', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have text '1' but was '1'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have text '1' but was '1'`,
     });
   });
 
@@ -63,7 +63,7 @@ describe('toHaveText', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have text 'true' but was 'true'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have text 'true' but was 'true'`,
     });
   });
 });

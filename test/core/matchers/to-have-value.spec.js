@@ -36,7 +36,7 @@ describe('toHaveValue', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect HTMLNode [NOT] to have value 'foo' but was 'foo'`,
+      message: `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`,
     });
   });
 });
