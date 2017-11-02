@@ -27,10 +27,7 @@ import {toHaveTagName} from '../../../src/core/matchers/to-have-tag-name';
 describe('toHaveTagName', () => {
   it('should pass with a dom node with expected tag name', () => {
     const actual = document.createElement('input');
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => (
-      x.toLowerCase() === y.toLowerCase())
-    );
-
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
     const result = toHaveTagName({actual, equals}, 'input');
 
     expect(result).toEqual({
