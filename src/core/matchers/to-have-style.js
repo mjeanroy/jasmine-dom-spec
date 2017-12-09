@@ -56,6 +56,8 @@ export function toHaveStyle({actual, equals}, styleName, styleValue) {
 
   return {
     pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have styles ${pp(expected)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have styles ${pp(expected)}`;
+    },
   };
 }

@@ -44,6 +44,8 @@ export function toBeSelected({actual}) {
   const selected = node.selected;
   return {
     pass: selected === true,
-    message: `Expect ${pp(actual)} [NOT] to be selected`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be selected`;
+    },
   };
 }

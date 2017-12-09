@@ -36,8 +36,12 @@ describe('toHaveProps', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`
+    );
   });
 
   it('should not pass with a dom node without expected id', () => {
@@ -51,7 +55,11 @@ describe('toHaveProps', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`
+    );
   });
 });

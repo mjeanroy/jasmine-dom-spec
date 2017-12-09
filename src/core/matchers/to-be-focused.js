@@ -44,6 +44,8 @@ export function toBeFocused({actual}) {
   const activeElement = document.activeElement;
   return {
     pass: activeElement === node,
-    message: `Expect ${pp(actual)} [NOT] to be focused`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be focused`;
+    },
   };
 }

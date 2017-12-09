@@ -37,8 +37,12 @@ describe('toHaveId', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`
+    );
   });
 
   it('should pass without parameter', () => {
@@ -51,7 +55,11 @@ describe('toHaveId', () => {
     expect(equals).not.toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have id`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have id`
+    );
   });
 });

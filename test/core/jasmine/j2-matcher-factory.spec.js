@@ -49,9 +49,12 @@ describe('jasmine2MatcherFactory', () => {
     });
 
     it('should execute matcher with the compare function', () => {
+      const pass = true;
+      const message = jasmine.createSpy('message').and.returnValue('A [NOT] message');
+
       matcher.and.returnValue({
-        pass: true,
-        message: 'a message',
+        pass,
+        message,
       });
 
       const actual = {};
@@ -60,7 +63,11 @@ describe('jasmine2MatcherFactory', () => {
       const result = j2Matcher(util, customEqualityTesters).compare(actual, arg0, arg1);
 
       expect(result).toBeDefined();
-      expect(matcher).toHaveBeenCalled();
+      expect(result.pass).toEqual(pass);
+      expect(result.message).not.toBe(message);
+      expect(message).not.toHaveBeenCalled();
+      expect(result.message()).toBe('A message');
+      expect(message).toHaveBeenCalled();
 
       const args = matcher.calls.mostRecent().args;
 
@@ -78,9 +85,12 @@ describe('jasmine2MatcherFactory', () => {
     });
 
     it('should execute matcher with the negativeCompare function', () => {
+      const pass = true;
+      const message = jasmine.createSpy('message').and.returnValue('A [NOT] message');
+
       matcher.and.returnValue({
-        pass: true,
-        message: 'a message',
+        pass,
+        message,
       });
 
       const actual = {};
@@ -89,7 +99,11 @@ describe('jasmine2MatcherFactory', () => {
       const result = j2Matcher(util, customEqualityTesters).negativeCompare(actual, arg0, arg1);
 
       expect(result).toBeDefined();
-      expect(matcher).toHaveBeenCalled();
+      expect(result.pass).toBe(!pass);
+      expect(result.message).not.toBe(message);
+      expect(message).not.toHaveBeenCalled();
+      expect(result.message()).toBe('A not message');
+      expect(message).toHaveBeenCalled();
 
       const args = matcher.calls.mostRecent().args;
 

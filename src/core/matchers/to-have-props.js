@@ -54,6 +54,8 @@ export function toHaveProps({actual, equals}, propName, propValue) {
 
   return {
     pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have properties ${pp(expected)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have properties ${pp(expected)}`;
+    },
   };
 }

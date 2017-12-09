@@ -56,6 +56,8 @@ export function toBeDetachedElement({actual}) {
 
   return {
     pass: isDetached,
-    message: `Expect ${pp(actual)} [NOT] to be detached element`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be detached element`;
+    },
   };
 }

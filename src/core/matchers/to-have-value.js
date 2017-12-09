@@ -47,6 +47,8 @@ export function toHaveValue({actual, equals}, expectedValue) {
   const actualValue = node.value;
   return {
     pass: equals(actualValue, expectedValue),
-    message: `Expect ${pp(actual)} [NOT] to have value ${pp(expectedValue)} but was ${pp(actualValue)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have value ${pp(expectedValue)} but was ${pp(actualValue)}`;
+    },
   };
 }

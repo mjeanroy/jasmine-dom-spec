@@ -48,6 +48,8 @@ export function toHaveTagName({actual, equals}, tagName) {
 
   return {
     pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have tag name ${pp(tagName)} but was ${pp(actualTagName)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have tag name ${pp(tagName)} but was ${pp(actualTagName)}`;
+    },
   };
 }

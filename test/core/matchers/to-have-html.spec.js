@@ -38,8 +38,12 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`
+    );
   });
 
   it('should pass with a dom node with expected number content', () => {
@@ -52,8 +56,12 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`
+    );
   });
 
   it('should pass with a dom node with expected boolean content', () => {
@@ -66,7 +74,11 @@ describe('toHaveHtml', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`
+    );
   });
 });

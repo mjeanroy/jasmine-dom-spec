@@ -36,7 +36,11 @@ describe('toHaveValue', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`
+    );
   });
 });

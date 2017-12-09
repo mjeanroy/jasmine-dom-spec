@@ -34,8 +34,12 @@ describe('toBeIndeterminate', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to be indeterminate`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
+    );
   });
 
   it('should not pass with a non-indeterminate checkbox', () => {
@@ -45,7 +49,11 @@ describe('toBeIndeterminate', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to be indeterminate`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
+    );
   });
 });

@@ -34,8 +34,12 @@ describe('toBeChecked', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to be checked`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be checked`
+    );
   });
 
   it('should not pass with a non-checked checkbox', () => {
@@ -45,7 +49,11 @@ describe('toBeChecked', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to be checked`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be checked`
+    );
   });
 });

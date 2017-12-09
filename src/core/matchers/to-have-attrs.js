@@ -53,6 +53,8 @@ export function toHaveAttrs({actual, equals}, attrName, attrValue) {
 
   return {
     pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have attributes ${pp(expected)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have attributes ${pp(expected)}`;
+    },
   };
 }

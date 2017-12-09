@@ -50,8 +50,12 @@ describe('toHaveStyle', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`
+    );
   });
 
   it('should pass with a dom node with expected style as object', () => {
@@ -70,8 +74,12 @@ describe('toHaveStyle', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`
+    );
   });
 
   it('should pass with a dom node with expected style using dash-case', () => {
@@ -88,7 +96,11 @@ describe('toHaveStyle', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: '10px' })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: '10px' })`
+    );
   });
 });

@@ -32,7 +32,11 @@ describe('toHaveTagName', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`
+    );
   });
 });

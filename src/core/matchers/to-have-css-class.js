@@ -54,7 +54,9 @@ export function toHaveCssClass({actual}, expected) {
 
   return {
     pass: ok,
-    message: `Expect ${pp(actual)} [NOT] to have css class ${pp(expected)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have css class ${pp(expected)}`;
+    },
   };
 }
 

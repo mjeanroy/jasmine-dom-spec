@@ -53,7 +53,9 @@ export function toHaveHtml({actual, equals}, html) {
 
   return {
     pass: equals(actualHtml, expectedHtml),
-    message: `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`;
+    },
   };
 }
 

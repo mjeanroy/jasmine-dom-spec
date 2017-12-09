@@ -52,6 +52,8 @@ export function toHaveText({actual, equals}, text) {
 
   return {
     pass: equals(actualText, expectedText),
-    message: `Expect ${pp(actual)} [NOT] to have text ${pp(expectedText)} but was ${pp(actualText)}`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to have text ${pp(expectedText)} but was ${pp(actualText)}`;
+    },
   };
 }

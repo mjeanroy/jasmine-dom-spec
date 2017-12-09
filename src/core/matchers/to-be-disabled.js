@@ -44,6 +44,8 @@ export function toBeDisabled({actual}) {
   const disabled = node.disabled;
   return {
     pass: disabled === true,
-    message: `Expect ${pp(actual)} [NOT] to be disabled`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be disabled`;
+    },
   };
 }

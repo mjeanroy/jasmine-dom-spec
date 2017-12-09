@@ -45,16 +45,22 @@ import {isNil, isUndefined, toDomElement} from '../util/index';
 export function toHaveId({actual, equals}, id) {
   const node = toDomElement(actual);
   const actualId = node.id;
+  const checkId = !isUndefined(id);
 
-  let message = `Expect ${pp(actual)} [NOT] to have id`;
   let pass = !isNil(actualId) && actualId !== '';
-  if (!isUndefined(id)) {
-    message += ` ${pp(id)} but was ${pp(actualId)}`;
+  if (checkId) {
     pass = pass && equals(actualId, id);
   }
 
   return {
     pass,
-    message,
+    message() {
+      let msg = `Expect ${pp(actual)} [NOT] to have id`;
+      if (checkId) {
+        msg += ` ${pp(id)} but was ${pp(actualId)}`;
+      }
+
+      return msg;
+    },
   };
 }

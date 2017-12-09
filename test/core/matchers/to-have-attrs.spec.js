@@ -36,8 +36,12 @@ describe('toHaveAttrs', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
+    );
   });
 
   it('should pass without attribute value', () => {
@@ -51,8 +55,12 @@ describe('toHaveAttrs', () => {
     expect(equals).not.toHaveBeenCalled();
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: undefined })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: undefined })`
+    );
   });
 
   it('should not pass with a dom node without expected attributes', () => {
@@ -66,7 +74,11 @@ describe('toHaveAttrs', () => {
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
+    );
   });
 });

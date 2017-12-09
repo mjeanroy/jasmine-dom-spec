@@ -35,8 +35,12 @@ describe('toHaveText', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have text 'foo' but was 'foo'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have text 'foo' but was 'foo'`
+    );
   });
 
   it('should pass with a dom node with expected number content', () => {
@@ -49,8 +53,12 @@ describe('toHaveText', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have text '1' but was '1'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have text '1' but was '1'`
+    );
   });
 
   it('should pass with a dom node with expected boolean content', () => {
@@ -63,7 +71,11 @@ describe('toHaveText', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have text 'true' but was 'true'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have text 'true' but was 'true'`
+    );
   });
 });

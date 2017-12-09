@@ -33,8 +33,12 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`
+    );
   });
 
   it('should pass with a list of classes', () => {
@@ -45,8 +49,12 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`
+    );
   });
 
   it('should pass with an array of classes', () => {
@@ -57,8 +65,12 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
+    );
   });
 
   it('should not pass if a css class is missing with a list of classes', () => {
@@ -69,8 +81,12 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`
+    );
   });
 
   it('should not pass if a css class is missing with an array of classes', () => {
@@ -81,7 +97,11 @@ describe('toHaveCssClass', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
+    );
   });
 });

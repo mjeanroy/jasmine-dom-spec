@@ -44,6 +44,8 @@ export function toBeRequired({actual}) {
   const required = node.required;
   return {
     pass: required === true,
-    message: `Expect ${pp(actual)} [NOT] to be required`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be required`;
+    },
   };
 }

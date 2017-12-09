@@ -45,6 +45,8 @@ export function toBeIndeterminate({actual}) {
   const indeterminate = node.indeterminate;
   return {
     pass: indeterminate === true,
-    message: `Expect ${pp(actual)} [NOT] to be indeterminate`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be indeterminate`;
+    },
   };
 }

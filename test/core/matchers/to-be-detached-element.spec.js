@@ -42,8 +42,12 @@ describe('toBeFocused', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to be detached element`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be detached element`
+    );
   });
 
   it('should not pass with a non-detached element', () => {
@@ -54,7 +58,11 @@ describe('toBeFocused', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to be detached element`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be detached element`
+    );
   });
 });

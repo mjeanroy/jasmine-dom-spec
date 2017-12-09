@@ -45,6 +45,8 @@ export function toBeChecked({actual}) {
   const checked = node.checked;
   return {
     pass: checked === true,
-    message: `Expect ${pp(actual)} [NOT] to be checked`,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be checked`;
+    },
   };
 }

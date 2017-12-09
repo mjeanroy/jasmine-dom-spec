@@ -33,8 +33,12 @@ describe('toBeRequired', () => {
 
     expect(result).toEqual({
       pass: true,
-      message: `Expect '${actual.outerHTML}' [NOT] to be required`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be required`
+    );
   });
 
   it('should not pass with a non-required input', () => {
@@ -43,7 +47,11 @@ describe('toBeRequired', () => {
 
     expect(result).toEqual({
       pass: false,
-      message: `Expect '${actual.outerHTML}' [NOT] to be required`,
+      message: jasmine.any(Function),
     });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to be required`
+    );
   });
 });

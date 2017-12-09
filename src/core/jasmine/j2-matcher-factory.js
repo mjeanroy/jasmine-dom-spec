@@ -81,7 +81,9 @@ export function jasmine2MatcherFactory(fn) {
         const result = fn(...[ctx].concat(args));
         return {
           pass: result.pass,
-          message: negateMessage(false, result.message),
+          message() {
+            return negateMessage(false, result.message());
+          },
         };
       },
 
@@ -100,7 +102,9 @@ export function jasmine2MatcherFactory(fn) {
         const result = fn(...[ctx].concat(args));
         return {
           pass: !result.pass,
-          message: negateMessage(true, result.message),
+          message() {
+            return negateMessage(true, result.message());
+          },
         };
       },
     };
