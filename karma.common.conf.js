@@ -105,14 +105,18 @@ module.exports = (config) => ({
 
   // Rollup test configuration
   rollupPreprocessor: {
-    format: 'iife',
-    name: 'JasmineDomSpecs', // required for 'iife' format
-    legacy: true,
-    sourcemap: false,
+    output: {
+      format: 'iife',
+      name: 'JasmineDomSpecs',
+      sourcemap: false,
+    },
+
     plugins: [
       nodeResolve(),
       commonjs(),
       babel(),
     ],
+
+    legacy: true,
   },
 });
