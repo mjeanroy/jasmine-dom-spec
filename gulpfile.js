@@ -30,7 +30,8 @@ const _ = require('lodash');
 const del = require('del');
 const rollup = require('rollup');
 const gulp = require('gulp');
-const gutil = require('gulp-util');
+const log = require('fancy-log');
+const colors = require('ansi-colors');
 const eslint = require('gulp-eslint');
 const KarmaServer = require('karma').Server;
 const git = require('gulp-git');
@@ -78,7 +79,7 @@ gulp.task('saucelab', (done) => {
 
 gulp.task('travis', (done) => {
   if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
-    gutil.log(gutil.colors.grey('SauceLab environment not set, running classic test suite'));
+    log(colors.grey('SauceLab environment not set, running classic test suite'));
     startKarma('test', done);
   } else {
     startKarma('saucelab', done);
@@ -159,7 +160,7 @@ gulp.task('docs', (done) => {
     )
 
     .catch((err) => {
-      gutil.log(gutil.colors.red(`Error occured while generating documentation: ${err}`));
+      log(colors.red(`Error occured while generating documentation: ${err}`));
     })
 
     .finally(() => {
@@ -179,11 +180,11 @@ function startKarma(mode, done) {
   const configFile = path.join(conf.root, fileName);
 
   const karma = new KarmaServer({configFile}, () => {
-    gutil.log(gutil.colors.grey('Calling done callback of Karma'));
+    log(colors.grey('Calling done callback of Karma'));
     done();
   });
 
-  gutil.log(gutil.colors.grey(`Running karma with configuration: ${fileName}`));
+  log(colors.grey(`Running karma with configuration: ${fileName}`));
   karma.start();
 }
 
@@ -223,7 +224,7 @@ function listFiles(dir) {
 function readFile(file) {
   const deferred = Q.defer();
 
-  gutil.log(gutil.colors.grey(`Reading: ${file}`));
+  log(colors.grey(`Reading: ${file}`));
 
   fs.readFile(file, 'utf-8', (err, data) => {
     if (err) {
@@ -248,7 +249,7 @@ function readFile(file) {
 function writeFile(file, content) {
   const deferred = Q.defer();
 
-  gutil.log(gutil.colors.grey(`Writing: ${file}`));
+  log(colors.grey(`Writing: ${file}`));
 
   touch(file, (err) => {
     if (err) {
