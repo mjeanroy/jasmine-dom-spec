@@ -23,7 +23,9 @@
  */
 
 import {pp} from '../jasmine/index';
-import {isPrimitive, toDomElement} from '../util/index';
+import {isPrimitive} from '../util/is-primitive';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with expected html content.
@@ -35,11 +37,12 @@ import {isPrimitive, toDomElement} from '../util/index';
  *   const actual = document.createElement('input');
  *   actual.innerHTML = '<span>foo</span>';
  *   expect(actual).toHaveHtml('<span>foo</span>');
+ *   expect(actual).toHaveHtml('/foo/');
  *   expect(actual).toHaveHtml(jasmine.any(String));
  *   expect(actual).not.toHaveHtml('<div>foo</div>');
  *
  * @param {Object} ctx Test context.
- * @param {String|Number|Boolean|Object} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|RegExp|Object} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -50,9 +53,10 @@ export function toHaveHtml({actual, equals}, html) {
   // Html may be a string **or** a jasmine asymetric matcher object.
   // In the last case, do not try to normalize HTML.
   const expectedHtml = isPrimitive(html) ? normalizeHtml(html.toString()) : html;
+  const ok = matchOrEquals(actualHtml, expectedHtml, equals);
 
   return {
-    pass: equals(actualHtml, expectedHtml),
+    pass: ok,
     message() {
       return `Expect ${pp(actual)} [NOT] to have HTML ${pp(expectedHtml)} but was ${pp(actualHtml)}`;
     },

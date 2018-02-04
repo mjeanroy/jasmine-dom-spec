@@ -78,4 +78,22 @@ describe('toHaveText', () => {
       `Expect '${actual.outerHTML}' [NOT] to have text 'true' but was 'true'`
     );
   });
+
+  it('should pass with a dom node with expected regexp content', () => {
+    const regexp = /true/;
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.innerHTML = 'true';
+
+    const result = toHaveText({actual, equals}, regexp);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have text /true/ but was 'true'`
+    );
+  });
 });

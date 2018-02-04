@@ -44,6 +44,7 @@ describe('toHaveStyle', () => {
 
     expect(node).toHaveStyle('font-size', '10px');
     expect(node).toHaveStyle('fontSize', '10px');
+    expect(node).toHaveStyle('font-size', /10px/);
 
     expect(node).toHaveStyle({
       fontSize: '10px',
@@ -51,6 +52,10 @@ describe('toHaveStyle', () => {
 
     expect(node).toHaveStyle({
       fontSize: jasmine.any(String),
+    });
+
+    expect(node).toHaveStyle({
+      fontSize: /10px/,
     });
 
     expect(node).not.toHaveStyle('font-size', '0');

@@ -23,7 +23,12 @@
  */
 
 import {pp} from '../jasmine/index';
-import {dashToCamel, every, isObject, keys, toDomElement} from '../util/index';
+import {dashToCamel} from '../util/dash-to-camel';
+import {every} from '../util/every';
+import {isObject} from '../util/is-object';
+import {keys} from '../util/keys';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object has expected style value (the css style property
@@ -36,12 +41,14 @@ import {dashToCamel, every, isObject, keys, toDomElement} from '../util/index';
  *   actual.checked = false;
  *   expect(actual).toHaveStyle('display', 'none');
  *   expect(actual).toHaveStyle('font-size', '10px');
+ *   expect(actual).toHaveStyle('font-size', /10/);
  *   expect(actual).toHaveStyle({fontSize: '10px', display: 'none'});
+ *   expect(actual).toHaveStyle({fontSize: /10/, display: 'none'});
  *   expect(actual).toHaveStyle({fontSize: jasmine.anything()});
  *
  * @param {Object} ctx Test context.
  * @param {String|Object} styleName Style name or object of styles.
- * @param {String|Object} styleValue Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|RegExp|Object} styleValue Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -51,7 +58,9 @@ export function toHaveStyle({actual, equals}, styleName, styleValue) {
   const props = keys(expected);
   const ok = every(props, (name) => {
     const camelCaseName = dashToCamel(name);
-    return equals(node.style[camelCaseName], expected[name]);
+    const actualValue = node.style[camelCaseName];
+    const expectedValue = expected[name];
+    return matchOrEquals(actualValue, expectedValue, equals);
   });
 
   return {

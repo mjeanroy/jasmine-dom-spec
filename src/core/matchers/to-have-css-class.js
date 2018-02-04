@@ -23,7 +23,18 @@
  */
 
 import {pp} from '../jasmine/index';
-import {isArray, every, has, filter, indexBy, isTruthy, map, toDomElement, trim} from '../util/index';
+import {isArray} from '../util/is-array';
+import {every} from '../util/every';
+import {has} from '../util/has';
+import {filter} from '../util/filter';
+import {indexBy} from '../util/index-by';
+import {isRegExp} from '../util/is-regexp';
+import {isTruthy} from '../util/is-truthy';
+import {map} from '../util/map';
+import {matchOrEquals} from '../util/match-or-equals';
+import {some} from '../util/some';
+import {toDomElement} from '../util/to-dom-element';
+import {trim} from '../util/trim';
 
 /**
  * Check that the tested object has expected css classes.
@@ -34,9 +45,11 @@ import {isArray, every, has, filter, indexBy, isTruthy, map, toDomElement, trim}
  *   actual.className = 'foo bar';
  *   expect(actual).toHaveCssClass('foo');
  *   expect(actual).toHaveCssClass('bar');
+ *   expect(actual).toHaveCssClass(/foo/);
  *   expect(actual).toHaveCssClass('foo bar');
  *   expect(actual).toHaveCssClass('bar foo');
  *   expect(actual).toHaveCssClass(['bar', 'foo']);
+ *   expect(actual).toHaveCssClass([/bar/, /foo/]);
  *   expect(actual).not.toHaveCssClass('foobar');
  *   expect(actual).not.toHaveCssClass('foo bar baz');
  *
@@ -50,7 +63,9 @@ export function toHaveCssClass({actual}, expected) {
   const actualClasses = extract(node.className);
   const expectedClasses = isArray(expected) ? expected : extract(expected);
   const mapOfClasses = indexBy(actualClasses, (x) => x);
-  const ok = every(expectedClasses, (cssClass) => has(mapOfClasses, cssClass));
+  const ok = every(expectedClasses, (cssClass) => (
+    isRegExp(cssClass) ? matchOne(actualClasses, cssClass) : has(mapOfClasses, cssClass))
+  );
 
   return {
     pass: ok,
@@ -63,10 +78,28 @@ export function toHaveCssClass({actual}, expected) {
 /**
  * Extract array of all css classes, removing useless whitespaces.
  * @param {string} classes The class names.
- * @return {Array<string>} Array of all class names.
+ * @return {Array<string|RegExp>} Array of all class names.
  */
 function extract(classes) {
+  if (isRegExp(classes)) {
+    return [classes];
+  }
+
   const arrayOfClasses = classes.split(' ');
   const trimmedClasses = map(arrayOfClasses, (x) => trim(x));
   return filter(trimmedClasses, (x) => isTruthy(x));
+}
+
+/**
+ * Check if the given regexp match at least one element in the
+ * array.
+ *
+ * @param {array<string>} array Input array.
+ * @param {RegExp} regexp The regexp to check.
+ * @return {boolean} `true` if the `regexp` match at least one element in `array`, `false` otherwise.
+ */
+function matchOne(array, regexp) {
+  return some(array, (x) => (
+    matchOrEquals(x, regexp, (x, y) => x === y)
+  ));
 }

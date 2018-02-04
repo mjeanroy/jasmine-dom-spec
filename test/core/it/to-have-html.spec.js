@@ -31,6 +31,7 @@ describe('toHaveHtml', () => {
     node.innerHTML = html;
 
     expect(node).toHaveHtml(html);
+    expect(node).toHaveHtml(new RegExp(html, 'i'));
     expect(node).toHaveHtml(jasmine.any(String));
     expect(node).not.toHaveHtml('<span>foo</span>');
   });

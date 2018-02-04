@@ -23,7 +23,12 @@
  */
 
 import {pp} from '../jasmine/index';
-import {every, isObject, isUndefined, keys, toDomElement} from '../util/index';
+import {every} from '../util/every';
+import {isObject} from '../util/is-object';
+import {isUndefined} from '../util/is-undefined';
+import {keys} from '../util/keys';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object has expected attributes.
@@ -34,12 +39,14 @@ import {every, isObject, isUndefined, keys, toDomElement} from '../util/index';
  *   actual.setAttribute('data-id', '1');
  *   expect(actual).toHaveAttrs('data-id');
  *   expect(actual).toHaveAttrs('data-id', '1');
+ *   expect(actual).toHaveAttrs('data-id', /1/);
  *   expect(actual).toHaveAttrs({'data-id': '1'});
+ *   expect(actual).toHaveAttrs({'data-id': /1/});
  *   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
  *
  * @param {Object} ctx Test context.
  * @param {String|Object} attrName Attribute name (or map of attributes).
- * @param {String|Object} attrValue Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|RegExp|Object} attrValue Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -47,9 +54,19 @@ export function toHaveAttrs({actual, equals}, attrName, attrValue) {
   const node = toDomElement(actual);
   const expected = isObject(attrName) ? attrName : {[attrName]: attrValue};
   const props = keys(expected);
-  const ok = every(props, (attr) => (
-    node.hasAttribute(attr) && (isUndefined(expected[attr]) || equals(node.getAttribute(attr), expected[attr]))
-  ));
+  const ok = every(props, (attr) => {
+    if (!node.hasAttribute(attr)) {
+      return false;
+    }
+
+    const expectedValue = expected[attr];
+    if (isUndefined(expectedValue)) {
+      return true;
+    }
+
+    const actualValue = node.getAttribute(attr);
+    return matchOrEquals(actualValue, expectedValue, equals);
+  });
 
   return {
     pass: ok,

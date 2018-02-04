@@ -31,6 +31,7 @@ describe('toHaveValue', () => {
     node.value = value;
 
     expect(node).toHaveValue(value);
+    expect(node).toHaveValue(new RegExp(value));
     expect(node).not.toHaveValue('');
   });
 });

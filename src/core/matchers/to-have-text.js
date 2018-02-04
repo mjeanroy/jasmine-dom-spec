@@ -23,7 +23,9 @@
  */
 
 import {pp} from '../jasmine/index';
-import {isPrimitive, toDomElement} from '../util/index';
+import {isPrimitive} from '../util/is-primitive';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with expected text content.
@@ -36,11 +38,12 @@ import {isPrimitive, toDomElement} from '../util/index';
  *   actual.textContent = '1';
  *   expect(actual).toHaveText('1');
  *   expect(actual).toHaveText(1);
+ *   expect(actual).toHaveText(/1/);
  *   expect(actual).toHaveText(jasmine.any(String));
  *   expect(actual).not.toHaveText('foobar');
  *
  * @param {Object} ctx Test context.
- * @param {String|Number|Boolean|Object} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|RegExp|Object} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -49,9 +52,10 @@ export function toHaveText({actual, equals}, text) {
   const node = toDomElement(actual);
   const actualText = 'textContent' in node ? node.textContent : node.innerText;
   const expectedText = isPrimitive(text) ? text.toString() : text;
+  const ok = matchOrEquals(actualText, expectedText, equals);
 
   return {
-    pass: equals(actualText, expectedText),
+    pass: ok,
     message() {
       return `Expect ${pp(actual)} [NOT] to have text ${pp(expectedText)} but was ${pp(actualText)}`;
     },

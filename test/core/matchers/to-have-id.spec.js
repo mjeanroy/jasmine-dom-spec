@@ -62,4 +62,21 @@ describe('toHaveId', () => {
       `Expect '${actual.outerHTML}' [NOT] to have id`
     );
   });
+
+  it('should pass with a dom node with regexp', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const actual = document.createElement('div');
+    actual.id = 'foo';
+
+    const result = toHaveId({actual, equals}, /foo/);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have id /foo/ but was 'foo'`
+    );
+  });
 });

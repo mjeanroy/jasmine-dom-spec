@@ -23,7 +23,8 @@
  */
 
 import {pp} from '../jasmine/index';
-import {isIn, toDomElement} from '../util/index';
+import {isIn} from '../util/is-in';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object is displayed: it means that it does not

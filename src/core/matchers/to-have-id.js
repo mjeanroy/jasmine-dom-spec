@@ -23,7 +23,10 @@
  */
 
 import {pp} from '../jasmine/index';
-import {isNil, isUndefined, toDomElement} from '../util/index';
+import {isNil} from '../util/is-nil';
+import {isUndefined} from '../util/is-undefined';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with expected `id`.
@@ -38,7 +41,7 @@ import {isNil, isUndefined, toDomElement} from '../util/index';
  *   expect(actual).not.toHaveId('bar');
  *
  * @param {Object} ctx Test context.
- * @param {String|Object} id The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|RegExp|Object} id The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -49,7 +52,7 @@ export function toHaveId({actual, equals}, id) {
 
   let pass = !isNil(actualId) && actualId !== '';
   if (checkId) {
-    pass = pass && equals(actualId, id);
+    pass = pass && matchOrEquals(actualId, id, equals);
   }
 
   return {

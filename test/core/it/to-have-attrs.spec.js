@@ -32,10 +32,17 @@ describe('toHaveAttrs', () => {
 
     expect(node).toHaveAttrs('data-foo', '1');
     expect(node).toHaveAttrs('data-bar', '2');
+    expect(node).toHaveAttrs('data-foo', /1/);
+    expect(node).toHaveAttrs('data-bar', /2/);
 
     expect(node).toHaveAttrs({
       'data-foo': '1',
       'data-bar': '2',
+    });
+
+    expect(node).toHaveAttrs({
+      'data-foo': /1/,
+      'data-bar': /2/,
     });
 
     expect(node).toHaveAttrs({

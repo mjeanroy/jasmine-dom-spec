@@ -31,6 +31,7 @@ describe('toHaveText', () => {
     node.innerHTML = txt;
 
     expect(node).toHaveText(txt);
+    expect(node).toHaveText(new RegExp(txt));
     expect(node).toHaveText(jasmine.any(String));
     expect(node).not.toHaveText(`${txt} ${txt}`);
   });

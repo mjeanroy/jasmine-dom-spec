@@ -81,4 +81,22 @@ describe('toHaveHtml', () => {
       `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`
     );
   });
+
+  it('should pass with a dom node with expected regexp', () => {
+    const html = /true/;
+    const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.innerHTML = 'true';
+
+    const result = toHaveHtml({actual, equals}, html);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have HTML /true/ but was 'true'`
+    );
+  });
 });

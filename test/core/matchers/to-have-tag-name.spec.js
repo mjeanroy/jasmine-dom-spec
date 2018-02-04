@@ -39,4 +39,19 @@ describe('toHaveTagName', () => {
       `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`
     );
   });
+
+  it('should pass with a dom node with a regexp', () => {
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const result = toHaveTagName({actual, equals}, /input|select/i);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have tag name /input|select/i but was '${actual.tagName}'`
+    );
+  });
 });

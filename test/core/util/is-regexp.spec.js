@@ -22,22 +22,17 @@
  * THE SOFTWARE.
  */
 
-import {isDomElement} from '../util/is-dom-element';
+import {isRegExp} from '../../../src/core/util/is-regexp.js';
 
-/**
- * Pretty-Print object (use `jasmine.pp` by default).
- *
- * @param {*} value Object to pretty-print.
- * @return {string} The string representation of object.
- */
-export function pp(value) {
-  try {
-    const str = (isDomElement(value) && 'outerHTML' in value) ? value.outerHTML : value;
-    return jasmine.pp(str);
-  } catch (e) {
-    // Fallback using object `toString` implementation.
-    // Don't worry about `null` or `undefined` since it should be handled
-    // by `jasmine.pp`
-    return value.toString();
-  }
-}
+describe('isRegExp', () => {
+  it('should check if value is a regexp', () => {
+    expect(isRegExp(/foo/)).toBe(true);
+    expect(isRegExp(new RegExp('foo'))).toBe(true);
+    expect(isRegExp(RegExp('foo'))).toBe(true);
+
+    expect(isRegExp(null)).toBe(false);
+    expect(isRegExp(undefined)).toBe(false);
+    expect(isRegExp('')).toBe(false);
+    expect(isRegExp(0)).toBe(false);
+  });
+});

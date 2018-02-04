@@ -23,7 +23,8 @@
  */
 
 import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node property `value` equal
@@ -34,11 +35,12 @@ import {toDomElement} from '../util/index';
  *   const actual = document.createElement('input');
  *   actual.value = 'foobar';
  *   expect(actual).toHaveValue('foobar');
+ *   expect(actual).toHaveValue(/foobar/);
  *   expect(actual).toHaveValue(jasmine.any(String));
  *   expect(actual).not.toHaveValue('');
  *
  * @param {Object} ctx Test context.
- * @param {String|Object} expectedValue The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|RegExp|Object} expectedValue The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -46,7 +48,7 @@ export function toHaveValue({actual, equals}, expectedValue) {
   const node = toDomElement(actual);
   const actualValue = node.value;
   return {
-    pass: equals(actualValue, expectedValue),
+    pass: matchOrEquals(actualValue, expectedValue, equals),
     message() {
       return `Expect ${pp(actual)} [NOT] to have value ${pp(expectedValue)} but was ${pp(actualValue)}`;
     },

@@ -104,4 +104,52 @@ describe('toHaveCssClass', () => {
       `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
     );
   });
+
+  it('should pass with a dom node with expected regexp class', () => {
+    const actual = document.createElement('div');
+    actual.className = 'foo bar';
+
+    const result = toHaveCssClass({actual}, /foo/);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class /foo/`
+    );
+  });
+
+  it('should pass with a dom node with expected array of regexp class', () => {
+    const actual = document.createElement('div');
+    actual.className = 'foo bar';
+
+    const result = toHaveCssClass({actual}, [/foo/, /bar/]);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
+    );
+  });
+
+  it('should not pass with a dom node with missing regexp in array', () => {
+    const actual = document.createElement('div');
+    actual.className = 'foo';
+
+    const result = toHaveCssClass({actual}, [/foo/, /bar/]);
+
+    expect(result).toEqual({
+      pass: false,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
+    );
+  });
 });

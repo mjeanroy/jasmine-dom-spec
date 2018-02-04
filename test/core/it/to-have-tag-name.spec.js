@@ -30,6 +30,7 @@ describe('toHaveTagName', () => {
 
     expect(node).toHaveTagName('input');
     expect(node).toHaveTagName('INPUT');
+    expect(node).toHaveTagName(/input/i);
     expect(node).not.toHaveTagName('div');
   });
 });

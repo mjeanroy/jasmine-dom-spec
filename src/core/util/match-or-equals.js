@@ -22,23 +22,25 @@
  * THE SOFTWARE.
  */
 
-export {dashToCamel} from './dash-to-camel';
-export {filter} from './filter';
-export {forEach} from './for-each';
-export {every} from './every';
-export {has} from './has';
-export {indexBy} from './index-by';
-export {isArray} from './is-array';
-export {isDomElement} from './is-dom-element';
-export {isIn} from './is-in';
-export {isNil} from './is-nil';
-export {isString} from './is-string';
-export {isObject} from './is-object';
-export {isPrimitive} from './is-primitive';
-export {isTruthy} from './is-truthy';
-export {isUndefined} from './is-undefined';
-export {keys} from './keys';
-export {map} from './map';
-export {toDomElement} from './to-dom-element';
-export {toLower} from './to-lower';
-export {trim} from './trim';
+import {isArray} from './is-array';
+import {isNil} from './is-nil';
+import {isRegExp} from './is-regexp';
+
+/**
+ * Check if a `string` match a regexp or is equal to an expected other `string`
+ * using a custom equal function.
+ *
+ * @param {string} actual Actual string to compare.
+ * @param {string|RegExp} expected The expected string, or the regexp to test.
+ * @param {function} equalsFn The equals function, used if `expected` is not a regexp.
+ * @return {boolean} `true` if `actual` match or is equal to `expected`, `false` otherwise.
+ */
+export function matchOrEquals(actual, expected, equalsFn) {
+  if (isRegExp(expected)) {
+    const actualStr = isNil(actual) ? actual : actual.toString();
+    const results = isNil(actualStr) ? null : actualStr.match(expected);
+    return isArray(results);
+  }
+
+  return equalsFn(actual, expected);
+}

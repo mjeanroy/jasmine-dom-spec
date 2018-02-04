@@ -23,7 +23,11 @@
  */
 
 import {pp} from '../jasmine/index';
-import {every, isObject, keys, toDomElement} from '../util/index';
+import {every} from '../util/every';
+import {isObject} from '../util/is-object';
+import {keys} from '../util/keys';
+import {matchOrEquals} from '../util/match-or-equals';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object has expected properties.
@@ -31,8 +35,11 @@ import {every, isObject, keys, toDomElement} from '../util/index';
  * @message Expect [actual] [NOT] to have properties [expected]
  * @example
  *   const actual = document.createElement('input');
+ *   actual.id = 'node-id';
  *   actual.required = true;
  *   actual.checked = false;
+ *   expect(actual).toHaveProps('id', 'node-id');
+ *   expect(actual).toHaveProps('id', /node-id/);
  *   expect(actual).toHaveProps('required', true);
  *   expect(actual).toHaveProps('checked', false);
  *   expect(actual).toHaveProps({required: true, checked: false});
@@ -49,7 +56,7 @@ export function toHaveProps({actual, equals}, propName, propValue) {
   const expected = isObject(propName) ? propName : {[propName]: propValue};
   const props = keys(expected);
   const ok = every(props, (p) => (
-    equals(node[p], expected[p])
+    matchOrEquals(node[p], expected[p], equals)
   ));
 
   return {

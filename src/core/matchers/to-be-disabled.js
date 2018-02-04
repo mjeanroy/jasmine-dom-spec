@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with a property `disabled` equal

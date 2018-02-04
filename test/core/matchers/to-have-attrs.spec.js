@@ -81,4 +81,40 @@ describe('toHaveAttrs', () => {
       `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
     );
   });
+
+  it('should pass with a dom node with matching attribute regexp', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const actual = document.createElement('div');
+    actual.setAttribute('data-foo', 1);
+
+    const result = toHaveAttrs({actual, equals}, 'data-foo', /1/);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: /1/ })`
+    );
+  });
+
+  it('should pass with a dom node with matching attribute object containing a regexp', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const actual = document.createElement('div');
+    actual.setAttribute('data-foo', 1);
+
+    const result = toHaveAttrs({actual, equals}, {
+      'data-foo': /1/,
+    });
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: /1/ })`
+    );
+  });
 });

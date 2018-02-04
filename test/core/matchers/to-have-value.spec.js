@@ -43,4 +43,21 @@ describe('toHaveValue', () => {
       `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`
     );
   });
+
+  it('should pass with a dom node with expected regexp value', () => {
+    const actual = document.createElement('input');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    actual.value = 'foo';
+
+    const result = toHaveValue({actual, equals}, /foo/);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have value /foo/ but was 'foo'`
+    );
+  });
 });

@@ -103,4 +103,48 @@ describe('toHaveStyle', () => {
       `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: '10px' })`
     );
   });
+
+  it('should pass with a dom node with expected regexp style', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const actual = document.createElement('input');
+    const name = 'fontSize';
+    const value = /10/;
+
+    fixtures.appendChild(actual);
+    actual.style[name] = '10px';
+
+    const result = toHaveStyle({actual, equals}, 'font-size', value);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: /10/ })`
+    );
+  });
+
+  it('should pass with a dom node with expected style as object containing regexp', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const actual = document.createElement('input');
+    const name = 'fontSize';
+    const value = /10/;
+
+    fixtures.appendChild(actual);
+    actual.style[name] = '10px';
+
+    const result = toHaveStyle({actual, equals}, {
+      [name]: value,
+    });
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: /10/ })`
+    );
+  });
 });

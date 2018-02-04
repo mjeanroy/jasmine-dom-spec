@@ -62,4 +62,42 @@ describe('toHaveProps', () => {
       `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`
     );
   });
+
+  it('should pass with a dom node with expected id regexp', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const actual = document.createElement('input');
+    actual.id = 'awesome-id-123456';
+
+    const result = toHaveProps({actual, equals}, 'id', /awesome-id/);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/ })`
+    );
+  });
+
+  it('should pass with a dom node with expected props object containing regexp', () => {
+    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const actual = document.createElement('input');
+    actual.id = 'awesome-id-123456';
+    actual.required = true;
+
+    const result = toHaveProps({actual, equals}, {
+      id: /awesome-id/,
+      required: /true/,
+    });
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/, required: /true/ })`
+    );
+  });
 });

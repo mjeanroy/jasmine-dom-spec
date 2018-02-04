@@ -32,10 +32,17 @@ describe('toHaveProps', () => {
 
     expect(node).toHaveProps('required', true);
     expect(node).toHaveProps('checked', false);
+    expect(node).toHaveProps('required', /true/);
+    expect(node).toHaveProps('checked', /false/);
 
     expect(node).toHaveProps({
       required: true,
       checked: false,
+    });
+
+    expect(node).toHaveProps({
+      required: /true/,
+      checked: /false/,
     });
 
     expect(node).toHaveProps({

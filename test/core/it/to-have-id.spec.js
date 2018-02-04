@@ -31,6 +31,7 @@ describe('toHaveId', () => {
     node.id = id;
 
     expect(node).toHaveId(id);
+    expect(node).toHaveId(new RegExp(id));
     expect(node).toHaveId(jasmine.any(String));
   });
 

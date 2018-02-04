@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {toDomElement} from '../util/index';
+import {toDomElement} from '../util/to-dom-element';
 
 /**
  * Check that the tested object has focus on the active document window (note that if

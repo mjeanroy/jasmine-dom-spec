@@ -31,12 +31,16 @@ describe('toHaveCssClass', () => {
 
     expect(node).toHaveCssClass('foo');
     expect(node).toHaveCssClass('bar');
+    expect(node).toHaveCssClass(/foo/);
+    expect(node).toHaveCssClass(/bar/);
 
     expect(node).toHaveCssClass('foo bar');
     expect(node).toHaveCssClass('bar foo');
     expect(node).toHaveCssClass(['bar', 'foo']);
+    expect(node).toHaveCssClass([/bar/, /foo/]);
 
     expect(node).not.toHaveCssClass('quix');
     expect(node).not.toHaveCssClass('foo bar baz');
+    expect(node).not.toHaveCssClass(/quix/);
   });
 });

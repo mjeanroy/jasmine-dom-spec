@@ -22,22 +22,25 @@
  * THE SOFTWARE.
  */
 
-import {isDomElement} from '../util/is-dom-element';
-
 /**
- * Pretty-Print object (use `jasmine.pp` by default).
+ * Check that a predicate satisfies at least one element in an array.
  *
- * @param {*} value Object to pretty-print.
- * @return {string} The string representation of object.
+ * The predicate function will be called with three arguments:
+ *  - `value` The value for the given iteration.
+ *  - `key` The key of the value being iterated.
+ *  - `array` The array being traversed.
+ *
+ * @param {Array} array The array to iterate.
+ * @param {function} predicate The predicate function.
+ * @return {boolean} `true` if the predicate returns a truthy value for one element
+ *                   in the array, `false` otherwise.
  */
-export function pp(value) {
-  try {
-    const str = (isDomElement(value) && 'outerHTML' in value) ? value.outerHTML : value;
-    return jasmine.pp(str);
-  } catch (e) {
-    // Fallback using object `toString` implementation.
-    // Don't worry about `null` or `undefined` since it should be handled
-    // by `jasmine.pp`
-    return value.toString();
+export function some(array, predicate) {
+  for (let i = 0, size = array.length; i < size; ++i) {
+    if (predicate.call(null, array[i], i, array)) {
+      return true;
+    }
   }
+
+  return false;
 }
