@@ -94,6 +94,35 @@ it('should pass', () => {
 });
 ```
 
+### toBeDisplayed
+
+Check that the tested object is displayed: it means that it does not
+have a `display` style set to `none`..
+
+#### Since
+
+0.4.0
+
+#### Parameters
+
+*No parameters*
+
+#### Message
+
+`Expect [actual] [NOT] to be displayed`
+
+#### Example:
+
+```javascript
+it('should pass', () => {
+  const actual = document.createElement('div');
+  expect(actual).toBeDisplayed();
+  
+  actual.style.display = 'none';
+  expect(actual).not.toBeDisplayed();
+});
+```
+
 ### toBeFocused
 
 Check that the tested object has focus on the active document window (note that if
