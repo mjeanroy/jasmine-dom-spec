@@ -33,6 +33,7 @@ import './is-array.spec';
 import './is-boolean.spec';
 import './is-dom-element.spec';
 import './is-function.spec';
+import './is-in.spec';
 import './is-jquery-object.spec';
 import './is-node-collection.spec';
 import './is-nil.spec';

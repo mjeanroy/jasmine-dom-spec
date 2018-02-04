@@ -24,7 +24,7 @@
 
 import {has} from '../../../src/core/util/has';
 
-describe('keys', () => {
+describe('has', () => {
   it('should return true if object has key', () => {
     const obj = {
       k1: true,

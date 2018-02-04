@@ -22,20 +22,27 @@
  * THE SOFTWARE.
  */
 
-import './to-be-checked.spec';
-import './to-be-detached-element.spec';
-import './to-be-disabled.spec';
-import './to-be-displayed.spec';
-import './to-be-focused.spec';
-import './to-be-indeterminate.spec';
-import './to-be-required.spec';
-import './to-be-selected.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-html.spec';
-import './to-have-id.spec';
-import './to-have-props.spec';
-import './to-have-style.spec';
-import './to-have-tag-name.spec';
-import './to-have-text.spec';
-import './to-have-value.spec';
+import '../../../src/index.js';
+
+describe('toBeDisplayed', () => {
+  let fixtures;
+
+  beforeEach(() => {
+    fixtures = document.createElement('div');
+    document.body.appendChild(fixtures);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(fixtures);
+  });
+
+  it('should pass with a default node', () => {
+    const div = document.createElement('div');
+    fixtures.appendChild(div);
+
+    expect(div).toBeDisplayed();
+
+    div.style.display = 'none';
+    expect(div).not.toBeDisplayed();
+  });
+});

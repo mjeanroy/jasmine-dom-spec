@@ -30,6 +30,7 @@ export {has} from './has';
 export {indexBy} from './index-by';
 export {isArray} from './is-array';
 export {isDomElement} from './is-dom-element';
+export {isIn} from './is-in';
 export {isNil} from './is-nil';
 export {isString} from './is-string';
 export {isObject} from './is-object';

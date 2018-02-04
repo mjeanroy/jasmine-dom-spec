@@ -25,6 +25,7 @@
 export {toBeChecked} from './to-be-checked';
 export {toBeDetachedElement} from './to-be-detached-element';
 export {toBeDisabled} from './to-be-disabled';
+export {toBeDisplayed} from './to-be-displayed';
 export {toBeFocused} from './to-be-focused';
 export {toBeIndeterminate} from './to-be-indeterminate';
 export {toBeRequired} from './to-be-required';

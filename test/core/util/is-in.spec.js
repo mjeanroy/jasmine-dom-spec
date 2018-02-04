@@ -22,20 +22,27 @@
  * THE SOFTWARE.
  */
 
-import './to-be-checked.spec';
-import './to-be-detached-element.spec';
-import './to-be-disabled.spec';
-import './to-be-displayed.spec';
-import './to-be-focused.spec';
-import './to-be-indeterminate.spec';
-import './to-be-required.spec';
-import './to-be-selected.spec';
-import './to-have-attrs.spec';
-import './to-have-css-class.spec';
-import './to-have-html.spec';
-import './to-have-id.spec';
-import './to-have-props.spec';
-import './to-have-style.spec';
-import './to-have-tag-name.spec';
-import './to-have-text.spec';
-import './to-have-value.spec';
+import {isIn} from '../../../src/core/util/is-in';
+
+describe('isIn', () => {
+  it('should return true if object has key in its prototype chain', () => {
+    const obj = {
+      k1: true,
+      k2: false,
+    };
+
+    expect(isIn(obj, 'k1')).toBe(true);
+    expect(isIn(obj, 'k2')).toBe(true);
+    expect(isIn(obj, 'toString')).toBe(true);
+  });
+
+  it('should return false if object does not have key in its prototype chain', () => {
+    const obj = {
+      k1: true,
+      k2: false,
+    };
+
+    expect(isIn(obj, 'k3')).toBe(false);
+    expect(isIn(obj, 'foobar')).toBe(false);
+  });
+});

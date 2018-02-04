@@ -25,6 +25,7 @@
 import './to-be-checked.spec';
 import './to-be-detached-element.spec';
 import './to-be-disabled.spec';
+import './to-be-displayed.spec';
 import './to-be-focused.spec';
 import './to-be-indeterminate.spec';
 import './to-be-required.spec';
