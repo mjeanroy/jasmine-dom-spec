@@ -36,7 +36,6 @@ const eslint = require('gulp-eslint');
 const KarmaServer = require('karma').Server;
 const git = require('gulp-git');
 const bump = require('gulp-bump');
-const gulpFilter = require('gulp-filter');
 const tagVersion = require('gulp-tag-version');
 const glob = require('glob');
 const touch = require('touch');
@@ -96,40 +95,32 @@ gulp.task('build', ['clean'], () => {
 
 // Release tasks
 ['minor', 'major', 'patch'].forEach((level) => {
-  gulp.task(`release:${level}`, ['build', 'docs'], function() {
-    const jsonFilter = gulpFilter('*.json', {restore: true});
-    const pkgJsonFilter = gulpFilter('package.json', {restore: true});
-    const bundleFilter = gulpFilter('dist', {restore: true});
+  const PKG_JSON = path.join(conf.root, 'package.json');
+  const BOWER_JSON = path.join(conf.root, 'bower.json');
+  const README = path.join(conf.root, 'README.md');
+  const DIST = conf.dist;
 
-    const src = [
-      path.join(conf.root, 'package.json'),
-      path.join(conf.root, 'bower.json'),
-      path.join(conf.root, 'README.md'),
-      conf.dist,
-    ];
-
-    return gulp.src(src)
-
-      // Bump version.
-      .pipe(jsonFilter)
+  gulp.task(`bump:${level}`, () => (
+    gulp.src([PKG_JSON, BOWER_JSON])
       .pipe(bump({type: level}))
       .pipe(gulp.dest(conf.root))
-      .pipe(jsonFilter.restore)
+  ));
 
-      // Commit release.
+  gulp.task(`release:prepare:${level}`, ['build', 'docs', `bump:${level}`], () => (
+    gulp.src([DIST, PKG_JSON, BOWER_JSON, README])
       .pipe(git.add({args: '-f'}))
       .pipe(git.commit('release: release version'))
+  ));
 
-      // Create tag.
-      .pipe(pkgJsonFilter)
-      .pipe(tagVersion())
-      .pipe(pkgJsonFilter.restore)
+  gulp.task(`tag:${level}`, [`release:prepare:${level}`], () => (
+    gulp.src([PKG_JSON]).pipe(tagVersion())
+  ));
 
-      // Remove generated bundle and commit for the next release.
-      .pipe(bundleFilter)
+  gulp.task(`release:${level}`, ['build', 'docs', `tag:${level}`], () => (
+    gulp.src([DIST])
       .pipe(git.rm({args: '-rf'}))
-      .pipe(git.commit('release: prepare next release'));
-  });
+      .pipe(git.commit('release: prepare next release'))
+  ));
 });
 
 gulp.task('release', ['release:minor']);
