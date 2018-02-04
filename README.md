@@ -245,7 +245,7 @@ Check that the tested object has expected attributes.
 | Name | Type | Description |
 |------|------|-------------|
 | `attrName` | `String,Object` | Attribute name (or map of attributes). |
-| `attrValue` | `String,Object` | Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `attrValue` | `String,RegExp,Object` | Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -259,7 +259,9 @@ it('should pass', () => {
   actual.setAttribute('data-id', '1');
   expect(actual).toHaveAttrs('data-id');
   expect(actual).toHaveAttrs('data-id', '1');
+  expect(actual).toHaveAttrs('data-id', /1/);
   expect(actual).toHaveAttrs({'data-id': '1'});
+  expect(actual).toHaveAttrs({'data-id': /1/});
   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
 });
 ```
@@ -290,9 +292,11 @@ it('should pass', () => {
   actual.className = 'foo bar';
   expect(actual).toHaveCssClass('foo');
   expect(actual).toHaveCssClass('bar');
+  expect(actual).toHaveCssClass(/foo/);
   expect(actual).toHaveCssClass('foo bar');
   expect(actual).toHaveCssClass('bar foo');
   expect(actual).toHaveCssClass(['bar', 'foo']);
+  expect(actual).toHaveCssClass([/bar/, /foo/]);
   expect(actual).not.toHaveCssClass('foobar');
   expect(actual).not.toHaveCssClass('foo bar baz');
 });
@@ -312,7 +316,7 @@ converted to a `string` using its `toString` method.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `html` | `String,Number,Boolean,Object` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `html` | `String,Number,Boolean,RegExp,Object` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -325,6 +329,7 @@ it('should pass', () => {
   const actual = document.createElement('input');
   actual.innerHTML = '<span>foo</span>';
   expect(actual).toHaveHtml('<span>foo</span>');
+  expect(actual).toHaveHtml('/foo/');
   expect(actual).toHaveHtml(jasmine.any(String));
   expect(actual).not.toHaveHtml('<div>foo</div>');
 });
@@ -342,7 +347,7 @@ Check that the tested object is a DOM node with expected `id`.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `id` | `String,Object` | The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `id` | `String,RegExp,Object` | The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -385,8 +390,11 @@ Check that the tested object has expected properties.
 ```javascript
 it('should pass', () => {
   const actual = document.createElement('input');
+  actual.id = 'node-id';
   actual.required = true;
   actual.checked = false;
+  expect(actual).toHaveProps('id', 'node-id');
+  expect(actual).toHaveProps('id', /node-id/);
   expect(actual).toHaveProps('required', true);
   expect(actual).toHaveProps('checked', false);
   expect(actual).toHaveProps({required: true, checked: false});
@@ -408,7 +416,7 @@ name can dash-cased, such as `font-size`, or camel cased, such as `fontSize`).
 | Name | Type | Description |
 |------|------|-------------|
 | `styleName` | `String,Object` | Style name or object of styles. |
-| `styleValue` | `String,Object` | Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `styleValue` | `String,RegExp,Object` | Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -423,7 +431,9 @@ it('should pass', () => {
   actual.checked = false;
   expect(actual).toHaveStyle('display', 'none');
   expect(actual).toHaveStyle('font-size', '10px');
+  expect(actual).toHaveStyle('font-size', /10/);
   expect(actual).toHaveStyle({fontSize: '10px', display: 'none'});
+  expect(actual).toHaveStyle({fontSize: /10/, display: 'none'});
   expect(actual).toHaveStyle({fontSize: jasmine.anything()});
 });
 ```
@@ -440,7 +450,7 @@ Check that the tested object is a DOM node with expected tag name.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `tagName` | `String,Object` | The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `tagName` | `String,Object,RegExp` | The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -453,6 +463,7 @@ it('should pass', () => {
   const actual = document.createElement('input');
   expect(actual).toHaveTagName('input');
   expect(actual).toHaveTagName('INPUT');
+  expect(actual).toHaveTagName(/input|select/i);
   expect(actual).not.toHaveTagName('div');
 });
 ```
@@ -471,7 +482,7 @@ converted to a `string` using its `toString` method.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `text` | `String,Number,Boolean,Object` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `text` | `String,Number,Boolean,RegExp,Object` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -485,6 +496,7 @@ it('should pass', () => {
   actual.textContent = '1';
   expect(actual).toHaveText('1');
   expect(actual).toHaveText(1);
+  expect(actual).toHaveText(/1/);
   expect(actual).toHaveText(jasmine.any(String));
   expect(actual).not.toHaveText('foobar');
 });
@@ -503,7 +515,7 @@ to an expected value.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expectedValue` | `String,Object` | The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `expectedValue` | `String,RegExp,Object` | The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -516,6 +528,7 @@ it('should pass', () => {
   const actual = document.createElement('input');
   actual.value = 'foobar';
   expect(actual).toHaveValue('foobar');
+  expect(actual).toHaveValue(/foobar/);
   expect(actual).toHaveValue(jasmine.any(String));
   expect(actual).not.toHaveValue('');
 });
