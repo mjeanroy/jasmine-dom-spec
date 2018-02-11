@@ -28,7 +28,10 @@ import {jasmine2MatcherFactory} from './j2-matcher-factory.js';
 
 const factories = {
   1: jasmine1MatcherFactory,
+
+  // Api for custom matchers with jasmine 2 and jasmine 3 is the same.
   2: jasmine2MatcherFactory,
+  3: jasmine2MatcherFactory,
 };
 
 /**
