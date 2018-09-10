@@ -37,7 +37,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`
     );
   });
 
@@ -53,7 +53,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`
     );
   });
 
@@ -69,7 +69,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
+        `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
     );
   });
 
@@ -85,7 +85,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`
+        `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`
     );
   });
 
@@ -101,7 +101,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
+        `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
     );
   });
 
@@ -117,7 +117,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class /foo/`
+        `Expect '${actual.outerHTML}' [NOT] to have css class /foo/`
     );
   });
 
@@ -133,7 +133,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
+        `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
     );
   });
 
@@ -149,7 +149,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
+        `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
     );
   });
 });

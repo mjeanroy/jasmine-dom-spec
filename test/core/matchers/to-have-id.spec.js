@@ -41,7 +41,7 @@ describe('toHaveId', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`
     );
   });
 
@@ -59,7 +59,7 @@ describe('toHaveId', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have id`
+        `Expect '${actual.outerHTML}' [NOT] to have id`
     );
   });
 
@@ -76,7 +76,7 @@ describe('toHaveId', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have id /foo/ but was 'foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have id /foo/ but was 'foo'`
     );
   });
 });

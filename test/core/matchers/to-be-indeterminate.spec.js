@@ -38,7 +38,7 @@ describe('toBeIndeterminate', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
+        `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
     );
   });
 
@@ -53,7 +53,7 @@ describe('toBeIndeterminate', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
+        `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
     );
   });
 });

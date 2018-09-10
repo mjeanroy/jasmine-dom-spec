@@ -40,7 +40,7 @@ describe('toHaveValue', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`
     );
   });
 
@@ -57,7 +57,7 @@ describe('toHaveValue', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have value /foo/ but was 'foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have value /foo/ but was 'foo'`
     );
   });
 });

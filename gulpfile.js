@@ -59,9 +59,9 @@ gulp.task('lint', () => {
   ];
 
   return gulp.src(sources)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
 });
 
 gulp.task('test', (done) => {
@@ -87,10 +87,10 @@ gulp.task('travis', (done) => {
 
 gulp.task('build', ['clean'], () => {
   return rollup
-    .rollup(rollupConf)
-    .then((bundle) => {
-      return bundle.write(rollupConf.output);
-    });
+      .rollup(rollupConf)
+      .then((bundle) => {
+        return bundle.write(rollupConf.output);
+      });
 });
 
 // Release tasks
@@ -102,14 +102,14 @@ gulp.task('build', ['clean'], () => {
 
   gulp.task(`bump:${level}`, () => (
     gulp.src([PKG_JSON, BOWER_JSON])
-      .pipe(bump({type: level}))
-      .pipe(gulp.dest(conf.root))
+        .pipe(bump({type: level}))
+        .pipe(gulp.dest(conf.root))
   ));
 
   gulp.task(`release:prepare:${level}`, ['build', 'docs', `bump:${level}`], () => (
     gulp.src([DIST, PKG_JSON, BOWER_JSON, README])
-      .pipe(git.add({args: '-f'}))
-      .pipe(git.commit('release: release version'))
+        .pipe(git.add({args: '-f'}))
+        .pipe(git.commit('release: release version'))
   ));
 
   gulp.task(`tag:${level}`, [`release:prepare:${level}`], () => (
@@ -118,8 +118,8 @@ gulp.task('build', ['clean'], () => {
 
   gulp.task(`release:${level}`, ['build', 'docs', `tag:${level}`], () => (
     gulp.src([DIST])
-      .pipe(git.rm({args: '-rf'}))
-      .pipe(git.commit('release: prepare next release'))
+        .pipe(git.rm({args: '-rf'}))
+        .pipe(git.commit('release: prepare next release'))
   ));
 });
 
@@ -127,36 +127,36 @@ gulp.task('release', ['release:minor']);
 
 gulp.task('docs', (done) => {
   listFiles(path.join(conf.src, 'core', 'matchers'))
-    // Read JSDoc
-    .then((files) => {
-      return Q.all(_.map(files, (file) => readFile(file)
-        .then((content) => dox.parseComments(content, {raw: true}))
-        .then((jsdoc) => keepFunctions(jsdoc))
-        .then((api) => parseComments(api))
-      ));
-    })
+      // Read JSDoc
+      .then((files) => {
+        return Q.all(_.map(files, (file) => readFile(file)
+            .then((content) => dox.parseComments(content, {raw: true}))
+            .then((jsdoc) => keepFunctions(jsdoc))
+            .then((api) => parseComments(api))
+        ));
+      })
 
-    // Generate Markdown
-    .then((comments) => {
-      return readFile(path.join(conf.root, '.readme'))
-        .then((template) => Handlebars.compile(template, {noEscape: true}))
-        .then((templateFn) => templateFn({
-          matchers: _.map(comments, (comment) => comment[0]),
-        }));
-    })
+      // Generate Markdown
+      .then((comments) => {
+        return readFile(path.join(conf.root, '.readme'))
+            .then((template) => Handlebars.compile(template, {noEscape: true}))
+            .then((templateFn) => templateFn({
+              matchers: _.map(comments, (comment) => comment[0]),
+            }));
+      })
 
-    // Write Markdown
-    .then((result) => (
-      writeFile(path.join(conf.root, 'README.md'), result))
-    )
+      // Write Markdown
+      .then((result) => (
+        writeFile(path.join(conf.root, 'README.md'), result))
+      )
 
-    .catch((err) => {
-      log(colors.red(`Error occured while generating documentation: ${err}`));
-    })
+      .catch((err) => {
+        log(colors.red(`Error occured while generating documentation: ${err}`));
+      })
 
-    .finally(() => {
-      done();
-    });
+      .finally(() => {
+        done();
+      });
 });
 
 /**
@@ -195,9 +195,9 @@ function listFiles(dir) {
       deferred.reject(err);
     } else {
       deferred.resolve(_.chain(files)
-        .reject((f) => path.basename(f) === 'index.js')
-        .sortBy((f) => path.basename(f))
-        .value());
+          .reject((f) => path.basename(f) === 'index.js')
+          .sortBy((f) => path.basename(f))
+          .value());
     }
   });
 
@@ -299,25 +299,25 @@ function parseComments(comments) {
       code: comment.code,
 
       since: _(tags.since)
-        .map('string')
-        .map(trimAll)
-        .value()[0],
+          .map('string')
+          .map(trimAll)
+          .value()[0],
 
       messages: _(tags.message)
-        .map('string')
-        .map(trimAll)
-        .value(),
+          .map('string')
+          .map(trimAll)
+          .value(),
 
       examples: _(tags.example)
-        .map('string')
-        .flatMap((x) => x.split('\n'))
-        .map(trimAll)
-        .value(),
+          .map('string')
+          .flatMap((x) => x.split('\n'))
+          .map(trimAll)
+          .value(),
 
       params: _(tags.param)
-        .slice(1)
-        .map((param) => _.assign(param, {types: _.isEmpty(param.types) ? ['*'] : param.types}))
-        .value(),
+          .slice(1)
+          .map((param) => _.assign(param, {types: _.isEmpty(param.types) ? ['*'] : param.types}))
+          .value(),
     };
   });
 }

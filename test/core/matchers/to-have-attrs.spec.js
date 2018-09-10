@@ -40,7 +40,7 @@ describe('toHaveAttrs', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
+        `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
     );
   });
 
@@ -59,7 +59,7 @@ describe('toHaveAttrs', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: undefined })`
+        `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: undefined })`
     );
   });
 
@@ -78,7 +78,7 @@ describe('toHaveAttrs', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
+        `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: '1' })`
     );
   });
 
@@ -95,7 +95,7 @@ describe('toHaveAttrs', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: /1/ })`
+        `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: /1/ })`
     );
   });
 
@@ -114,7 +114,7 @@ describe('toHaveAttrs', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: /1/ })`
+        `Expect '${actual.outerHTML}' [NOT] to have attributes Object({ data-foo: /1/ })`
     );
   });
 });

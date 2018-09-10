@@ -37,7 +37,7 @@ describe('toBeSelected', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be selected`
+        `Expect '${actual.outerHTML}' [NOT] to be selected`
     );
   });
 
@@ -51,7 +51,7 @@ describe('toBeSelected', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be selected`
+        `Expect '${actual.outerHTML}' [NOT] to be selected`
     );
   });
 });

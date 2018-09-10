@@ -36,7 +36,7 @@ describe('toHaveTagName', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`
+        `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`
     );
   });
 
@@ -51,7 +51,7 @@ describe('toHaveTagName', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have tag name /input|select/i but was '${actual.tagName}'`
+        `Expect '${actual.outerHTML}' [NOT] to have tag name /input|select/i but was '${actual.tagName}'`
     );
   });
 });

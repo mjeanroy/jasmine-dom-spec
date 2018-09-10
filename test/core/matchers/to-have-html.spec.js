@@ -42,7 +42,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`
+        `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`
     );
   });
 
@@ -60,7 +60,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`
+        `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`
     );
   });
 
@@ -78,7 +78,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`
+        `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`
     );
   });
 
@@ -96,7 +96,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have HTML /true/ but was 'true'`
+        `Expect '${actual.outerHTML}' [NOT] to have HTML /true/ but was 'true'`
     );
   });
 });
