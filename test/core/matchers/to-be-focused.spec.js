@@ -52,7 +52,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be focused`
+        `Expect '${actual.outerHTML}' [NOT] to be focused`
     );
   });
 
@@ -68,7 +68,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be focused`
+        `Expect '${actual.outerHTML}' [NOT] to be focused`
     );
   });
 });

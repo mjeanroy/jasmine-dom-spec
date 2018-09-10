@@ -40,7 +40,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`
+        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`
     );
   });
 
@@ -59,7 +59,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`
+        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`
     );
   });
 
@@ -76,7 +76,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/ })`
+        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/ })`
     );
   });
 
@@ -97,7 +97,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/, required: /true/ })`
+        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/, required: /true/ })`
     );
   });
 });

@@ -46,7 +46,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be detached element`
+        `Expect '${actual.outerHTML}' [NOT] to be detached element`
     );
   });
 
@@ -62,7 +62,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be detached element`
+        `Expect '${actual.outerHTML}' [NOT] to be detached element`
     );
   });
 });

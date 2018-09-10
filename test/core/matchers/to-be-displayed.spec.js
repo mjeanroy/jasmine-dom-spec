@@ -49,7 +49,7 @@ describe('toBeDisplayed', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be displayed`
+        `Expect '${actual.outerHTML}' [NOT] to be displayed`
     );
   });
 
@@ -67,7 +67,7 @@ describe('toBeDisplayed', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be displayed`
+        `Expect '${actual.outerHTML}' [NOT] to be displayed`
     );
   });
 
@@ -82,7 +82,7 @@ describe('toBeDisplayed', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be displayed`
+        `Expect '${actual.outerHTML}' [NOT] to be displayed`
     );
   });
 });

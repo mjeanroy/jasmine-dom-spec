@@ -38,7 +38,7 @@ describe('toBeChecked', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be checked`
+        `Expect '${actual.outerHTML}' [NOT] to be checked`
     );
   });
 
@@ -53,7 +53,7 @@ describe('toBeChecked', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be checked`
+        `Expect '${actual.outerHTML}' [NOT] to be checked`
     );
   });
 });

@@ -37,7 +37,7 @@ describe('toBeRequired', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be required`
+        `Expect '${actual.outerHTML}' [NOT] to be required`
     );
   });
 
@@ -51,7 +51,7 @@ describe('toBeRequired', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be required`
+        `Expect '${actual.outerHTML}' [NOT] to be required`
     );
   });
 });

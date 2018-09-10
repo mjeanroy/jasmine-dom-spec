@@ -37,7 +37,7 @@ describe('toBeDisabled', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be disabled`
+        `Expect '${actual.outerHTML}' [NOT] to be disabled`
     );
   });
 
@@ -51,7 +51,7 @@ describe('toBeDisabled', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to be disabled`
+        `Expect '${actual.outerHTML}' [NOT] to be disabled`
     );
   });
 });

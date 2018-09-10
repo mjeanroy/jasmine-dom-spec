@@ -100,7 +100,7 @@ describe('toDomElement', () => {
 
     const nodeList = fixtures.childNodes;
     expect(() => toDomElement(nodeList)).toThrow(
-      Error(`Expect single node but found node list of 2 nodes: ${jasmine.pp(nodeList)}`)
+        Error(`Expect single node but found node list of 2 nodes: ${jasmine.pp(nodeList)}`)
     );
   });
 
@@ -112,7 +112,7 @@ describe('toDomElement', () => {
 
     const nodes = $(fixtures).children();
     expect(() => toDomElement(nodes)).toThrow(
-      Error(`Expect single node but found node list of 2 nodes: ${jasmine.pp(nodes)}`)
+        Error(`Expect single node but found node list of 2 nodes: ${jasmine.pp(nodes)}`)
     );
   });
 
@@ -128,7 +128,7 @@ describe('toDomElement', () => {
   it('should fail to return DOM Node with a date', () => {
     const value = new Date();
     expect(() => toDomElement(value)).toThrow(
-      Error(`Expect DOM node but found: ${jasmine.pp(value)}`)
+        Error(`Expect DOM node but found: ${jasmine.pp(value)}`)
     );
   });
 

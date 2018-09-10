@@ -39,7 +39,7 @@ describe('toHaveText', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have text 'foo' but was 'foo'`
+        `Expect '${actual.outerHTML}' [NOT] to have text 'foo' but was 'foo'`
     );
   });
 
@@ -57,7 +57,7 @@ describe('toHaveText', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have text '1' but was '1'`
+        `Expect '${actual.outerHTML}' [NOT] to have text '1' but was '1'`
     );
   });
 
@@ -75,7 +75,7 @@ describe('toHaveText', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have text 'true' but was 'true'`
+        `Expect '${actual.outerHTML}' [NOT] to have text 'true' but was 'true'`
     );
   });
 
@@ -93,7 +93,7 @@ describe('toHaveText', () => {
     });
 
     expect(result.message()).toBe(
-      `Expect '${actual.outerHTML}' [NOT] to have text /true/ but was 'true'`
+        `Expect '${actual.outerHTML}' [NOT] to have text /true/ but was 'true'`
     );
   });
 });
