@@ -22,16 +22,32 @@
  * THE SOFTWARE.
  */
 
-const path = require('path');
-const ROOT = __dirname;
-const SRC = path.join(ROOT, 'src');
-const DIST = path.join(ROOT, 'dist');
+'use strict';
+
+const log = require('fancy-log');
+const colors = require('ansi-colors');
+
+/**
+ * Log message with `DEBUG` level.
+ *
+ * @param {string} msg The message to log.
+ * @return {void}
+ */
+function debug(msg) {
+  log(colors.grey(msg));
+}
+
+/**
+ * Log message with `ERROR` level.
+ *
+ * @param {string} msg The message to log.
+ * @return {void}
+ */
+function error(msg) {
+  log(colors.red(msg));
+}
 
 module.exports = {
-  root: ROOT,
-  dist: DIST,
-  src: SRC,
-  test: path.join(ROOT, 'test'),
-  entry: path.join(SRC, 'index.js'),
-  dest: path.join(DIST, 'jasmine-dom-spec.js'),
+  debug,
+  error,
 };
