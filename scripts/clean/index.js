@@ -22,27 +22,13 @@
  * THE SOFTWARE.
  */
 
-import {has} from './has.js';
+'use strict';
 
-// Use a fallback for `Object.keys` if needed (for old browsers).
-const objectKeys = Object.keys || function _keys(o) {
-  const results = [];
+const del = require('del');
+const config = require('../config');
 
-  for (const key in o) {
-    if (has(o, key)) {
-      results.push(key);
-    }
-  }
-
-  return results;
+module.exports = function clean() {
+  return del([
+    config.dist,
+  ]);
 };
-
-/**
- * Get all own and enumerable keys of an object.
- *
- * @param {Object} obj Object to extract keys.
- * @return {Array<string>} An array of all the keys in the object.
- */
-export function keys(obj) {
-  return objectKeys(obj);
-}
