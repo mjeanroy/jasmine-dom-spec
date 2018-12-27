@@ -30,18 +30,19 @@ const path = require('path');
 const babel = require('rollup-plugin-babel');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-const conf = require('./conf');
+const conf = require('../config');
+const entryPoint = path.join(conf.test, 'index.js');
 
 module.exports = (config) => ({
   // base path, that will be used to resolve files and exclude
-  basePath: '.',
+  basePath: conf.root,
 
   frameworks: [
     'jasmine',
   ],
 
   files: [
-    path.join(conf.test, 'index.js'),
+    entryPoint,
   ],
 
   exclude: [
@@ -100,7 +101,7 @@ module.exports = (config) => ({
   reportSlowerThan: 500,
 
   preprocessors: {
-    'test/**/*.js': ['rollup'],
+    [entryPoint]: ['rollup'],
   },
 
   // Rollup test configuration
@@ -116,7 +117,5 @@ module.exports = (config) => ({
       commonjs(),
       babel(),
     ],
-
-    legacy: true,
   },
 });

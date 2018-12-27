@@ -22,27 +22,23 @@
  * THE SOFTWARE.
  */
 
-import {has} from './has.js';
+'use strict';
 
-// Use a fallback for `Object.keys` if needed (for old browsers).
-const objectKeys = Object.keys || function _keys(o) {
-  const results = [];
+const path = require('path');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const config = require('../config');
 
-  for (const key in o) {
-    if (has(o, key)) {
-      results.push(key);
-    }
-  }
+module.exports = function lint() {
+  const sources = [
+    path.join(config.root, '*.js'),
+    path.join(config.src, '**', '*.js'),
+    path.join(config.test, '**', '*.js'),
+    path.join(config.scripts, '**', '*.js'),
+  ];
 
-  return results;
+  return gulp.src(sources)
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
 };
-
-/**
- * Get all own and enumerable keys of an object.
- *
- * @param {Object} obj Object to extract keys.
- * @return {Array<string>} An array of all the keys in the object.
- */
-export function keys(obj) {
-  return objectKeys(obj);
-}
