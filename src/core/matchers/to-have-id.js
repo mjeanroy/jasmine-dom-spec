@@ -41,7 +41,7 @@ import {toDomElement} from '../util/to-dom-element';
  *   expect(actual).not.toHaveId('bar');
  *
  * @param {Object} ctx Test context.
- * @param {String|RegExp|Object} id The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|RegExp|jasmine.Any|jasmine.Anything} id The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */

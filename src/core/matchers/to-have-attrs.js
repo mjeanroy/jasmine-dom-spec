@@ -46,7 +46,7 @@ import {toDomElement} from '../util/to-dom-element';
  *
  * @param {Object} ctx Test context.
  * @param {String|Object} attrName Attribute name (or map of attributes).
- * @param {String|RegExp|Object} attrValue Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|RegExp|jasmine.Any|jasmine.Anything} attrValue Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */

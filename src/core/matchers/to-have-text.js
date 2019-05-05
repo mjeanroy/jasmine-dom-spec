@@ -43,7 +43,7 @@ import {toDomElement} from '../util/to-dom-element';
  *   expect(actual).not.toHaveText('foobar');
  *
  * @param {Object} ctx Test context.
- * @param {String|Number|Boolean|RegExp|Object} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|RegExp|jasmine.Any|jasmine.Anything} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */

@@ -42,7 +42,7 @@ import {toDomElement} from '../util/to-dom-element';
  *   expect(actual).not.toHaveHtml('<div>foo</div>');
  *
  * @param {Object} ctx Test context.
- * @param {String|Number|Boolean|RegExp|Object} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|RegExp|jasmine.Any|jasmine.Anything} html The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
