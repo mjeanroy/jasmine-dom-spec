@@ -32,4 +32,5 @@
 /src
 /test
 /scripts
+/tslint.json
 /npm-debug.log

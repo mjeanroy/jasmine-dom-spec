@@ -27,18 +27,48 @@
 const path = require('path');
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
+const tslint = require('gulp-tslint');
 const config = require('../config');
 
-module.exports = function lint() {
-  const sources = [
-    path.join(config.root, '*.js'),
-    path.join(config.src, '**', '*.js'),
-    path.join(config.test, '**', '*.js'),
-    path.join(config.scripts, '**', '*.js'),
+/**
+ * Get all potential sources to run against lint validator.
+ *
+ * @param {string} ext The file exstension to look for.
+ * @return {void}
+ */
+function getSources(ext) {
+  return [
+    path.join(config.root, `*.${ext}`),
+    path.join(config.scripts, '**', `*.${ext}`),
+    path.join(config.src, '**', `*.${ext}`),
+    path.join(config.test, '**', `*.${ext}`),
   ];
+}
 
-  return gulp.src(sources)
+/**
+ * Run ESLint against JS source files.
+ *
+ * @return {WritableStream} The stream pipeline.
+ */
+function runESLint() {
+  return gulp.src(getSources('js'))
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
-};
+}
+
+/**
+ * Run TSLint against TypeScript source files.
+ *
+ * @return {WritableStream} The stream pipeline.
+ */
+function runTSLint() {
+  return gulp.src(getSources('ts'))
+      .pipe(tslint({formatter: 'verbose'}))
+      .pipe(tslint.report());
+}
+
+module.exports = gulp.series(
+    runESLint,
+    runTSLint
+);

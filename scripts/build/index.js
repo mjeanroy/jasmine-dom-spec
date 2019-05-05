@@ -24,11 +24,49 @@
 
 'use strict';
 
+const path = require('path');
+const gulp = require('gulp');
+const rename = require('gulp-rename');
 const rollup = require('rollup');
 const rollupConf = require('./rollup.conf');
+const log = require('../log');
+const config = require('../config');
 
-module.exports = function build() {
+/**
+ * Generate final bundle.
+ *
+ * @return {Promise} The promise, resolved when bundle is written to disk.
+ */
+function bundle() {
+  log.debug('Generating rollup bundle');
   return rollup
       .rollup(rollupConf)
       .then((bundle) => bundle.write(rollupConf.output));
-};
+}
+
+/**
+ * Copy typings to final destination.
+ *
+ * @return {Stream} The stream pipeline.
+ */
+function typings() {
+  const input = config.entry;
+  const output = config.dest;
+
+  const inputName = path.basename(input, '.js');
+  const outputName = path.basename(output, '.js');
+
+  const src = `${inputName}.d.ts`;
+  const dest = `${outputName}.d.ts`;
+
+  log.debug(`Copy typings from ${src} to ${dest}`);
+
+  return gulp.src(path.join(config.src, src))
+      .pipe(rename(dest))
+      .pipe(gulp.dest(config.dist));
+}
+
+module.exports = gulp.series(
+    bundle,
+    typings
+);
