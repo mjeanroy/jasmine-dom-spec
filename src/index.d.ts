@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-type MatcherResult = boolean;
-
 type NodeId = string | RegExp | jasmine.Any;
 type NodeTagName = string | RegExp | jasmine.Any;
 type NodeContent = string | number | boolean | RegExp | jasmine.Any;
@@ -47,25 +45,25 @@ interface NodePropsDictionary {
 
 declare namespace jasmine {
   interface Matchers<T> {
-    toBeChecked(): MatcherResult;
-    toBeDetachedElement(): MatcherResult;
-    toBeDisabled(): MatcherResult;
-    toBeDisplayed(expected: any): MatcherResult;
-    toBeFocused(): MatcherResult;
-    toBeIndeterminate(): MatcherResult;
-    toBeRequired(): MatcherResult;
-    toBeSelected(): MatcherResult;
-    toHaveAttrs(name: string, value?: NodeAttribute): MatcherResult;
-    toHaveAttrs(attrs: NodeAttributeDictionary): MatcherResult;
-    toHaveCssClass(classNames: NodeClassName | NodeClassName[]): MatcherResult;
-    toHaveHtml(text: NodeContent): MatcherResult;
-    toHaveId(id: NodeId): MatcherResult;
-    toHaveProps(name: string, value: NodeProps): MatcherResult;
-    toHaveProps(props: NodePropsDictionary): MatcherResult;
-    toHaveStyle(name: string, value: NodeStyle): MatcherResult;
-    toHaveStyle(styles: NodeStyleDictionary): MatcherResult;
-    toHaveTagName(tagName: NodeTagName): MatcherResult;
-    toHaveText(text: NodeContent): MatcherResult;
-    toHaveValue(value: NodeInputValue): MatcherResult;
+    toBeChecked(): boolean;
+    toBeDetachedElement(): boolean;
+    toBeDisabled(): boolean;
+    toBeDisplayed(expected: any): boolean;
+    toBeFocused(): boolean;
+    toBeIndeterminate(): boolean;
+    toBeRequired(): boolean;
+    toBeSelected(): boolean;
+    toHaveAttrs(name: string, value?: NodeAttribute): boolean;
+    toHaveAttrs(attrs: NodeAttributeDictionary): boolean;
+    toHaveCssClass(classNames: NodeClassName | NodeClassName[]): boolean;
+    toHaveHtml(text: NodeContent): boolean;
+    toHaveId(id: NodeId): boolean;
+    toHaveProps(name: string, value: NodeProps): boolean;
+    toHaveProps(props: NodePropsDictionary): boolean;
+    toHaveStyle(name: string, value: NodeStyle): boolean;
+    toHaveStyle(styles: NodeStyleDictionary): boolean;
+    toHaveTagName(tagName: NodeTagName): boolean;
+    toHaveText(text: NodeContent): boolean;
+    toHaveValue(value: NodeInputValue): boolean;
   }
 }
