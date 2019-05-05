@@ -55,7 +55,7 @@ declare namespace jasmine {
     toBeIndeterminate(): MatcherResult;
     toBeRequired(): MatcherResult;
     toBeSelected(): MatcherResult;
-    toHaveAttrs(name: string, value?: AttributeValue): MatcherResult;
+    toHaveAttrs(name: string, value?: NodeAttribute): MatcherResult;
     toHaveAttrs(attrs: NodeAttributeDictionary): MatcherResult;
     toHaveCssClass(classNames: NodeClassName | NodeClassName[]): MatcherResult;
     toHaveHtml(text: NodeContent): MatcherResult;
