@@ -50,20 +50,14 @@ export function toHaveId({actual, equals}, id) {
   const actualId = node.id;
   const checkId = !isUndefined(id);
 
-  let pass = !isNil(actualId) && actualId !== '';
-  if (checkId) {
-    pass = pass && matchOrEquals(actualId, id, equals);
-  }
+  const isIdFilled = !isNil(actualId) && actualId !== '';
+  const isExpectedId = checkId ? matchOrEquals(actualId, id, equals) : true;
+  const pass = isIdFilled && isExpectedId;
 
   return {
     pass,
     message() {
-      let msg = `Expect ${pp(actual)} [NOT] to have id`;
-      if (checkId) {
-        msg += ` ${pp(id)} but was ${pp(actualId)}`;
-      }
-
-      return msg;
+      return `Expect ${pp(actual)} [NOT] to have id` + (checkId ? ` ${pp(id)} but was ${pp(actualId)}` : '');
     },
   };
 }
