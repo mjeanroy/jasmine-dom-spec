@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {hasIn} from '../util/has-in';
+import {ensureHasIn} from '../preconditions/ensure-has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -43,11 +43,7 @@ import {toDomElement} from '../util/to-dom-element';
 export function toBeDisabled({actual}) {
   const node = toDomElement(actual);
 
-  if (!hasIn(node, 'disabled')) {
-    throw new Error(
-        'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property'
-    );
-  }
+  ensureHasIn(node, 'disabled', 'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property');
 
   return {
     pass: node.disabled === true,

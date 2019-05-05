@@ -22,8 +22,4 @@
  * THE SOFTWARE.
  */
 
-import './jasmine/index';
-import './preconditions/index';
-import './util/index';
-import './matchers/index';
-import './it/index';
+import './ensure-has-in.spec';

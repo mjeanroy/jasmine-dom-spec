@@ -22,8 +22,20 @@
  * THE SOFTWARE.
  */
 
-import './jasmine/index';
-import './preconditions/index';
-import './util/index';
-import './matchers/index';
-import './it/index';
+import {hasIn} from '../util/has-in';
+
+/**
+ * Check that given object has given property in its prototype chain.
+ *
+ * @param {Object} o The object.
+ * @param {string} prop Property name.
+ * @param {string} message The error message.
+ * @return {Object} The original object.
+ */
+export function ensureHasIn(o, prop, message) {
+  if (!hasIn(o, prop)) {
+    throw new Error(message);
+  }
+
+  return o;
+}

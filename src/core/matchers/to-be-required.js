@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {hasIn} from '../util/has-in';
+import {ensureHasIn} from '../preconditions/ensure-has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -43,11 +43,7 @@ import {toDomElement} from '../util/to-dom-element';
 export function toBeRequired({actual}) {
   const node = toDomElement(actual);
 
-  if (!hasIn(node, 'required')) {
-    throw new Error(
-        'Cannot run `toBeRequired` matcher on a DOM node without `required` property'
-    );
-  }
+  ensureHasIn(node, 'required', 'Cannot run `toBeRequired` matcher on a DOM node without `required` property');
 
   return {
     pass: node.required === true,

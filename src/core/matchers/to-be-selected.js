@@ -23,7 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
-import {hasIn} from '../util/has-in';
+import {ensureHasIn} from '../preconditions/ensure-has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -43,11 +43,7 @@ import {toDomElement} from '../util/to-dom-element';
 export function toBeSelected({actual}) {
   const node = toDomElement(actual);
 
-  if (!hasIn(node, 'selected')) {
-    throw new Error(
-        'Cannot run `toBeSelected` matcher on a DOM node without `selected` property'
-    );
-  }
+  ensureHasIn(node, 'selected', 'Cannot run `toBeSelected` matcher on a DOM node without `selected` property');
 
   return {
     pass: node.selected === true,
