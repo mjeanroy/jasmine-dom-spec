@@ -56,4 +56,11 @@ describe('toBeIndeterminate', () => {
         `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
     );
   });
+
+  it('should fail with a DOM node missing an `indeterminate` property', () => {
+    const actual = document.createElement('div');
+    expect(() => toBeIndeterminate({actual})).toThrow(new Error(
+        'Cannot run `toBeIndeterminate` matcher on a DOM node without `indeterminate` property'
+    ));
+  });
 });

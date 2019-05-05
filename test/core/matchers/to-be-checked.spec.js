@@ -56,4 +56,11 @@ describe('toBeChecked', () => {
         `Expect '${actual.outerHTML}' [NOT] to be checked`
     );
   });
+
+  it('should fail without a checked checkbox', () => {
+    const actual = document.createElement('div');
+    expect(() => toBeChecked({actual})).toThrow(new Error(
+        'Cannot run `toBeChecked` matcher on a DOM node without `checked` property'
+    ));
+  });
 });

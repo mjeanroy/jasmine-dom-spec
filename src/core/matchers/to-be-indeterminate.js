@@ -23,6 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
+import {hasIn} from '../util/has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -42,9 +43,15 @@ import {toDomElement} from '../util/to-dom-element';
  */
 export function toBeIndeterminate({actual}) {
   const node = toDomElement(actual);
-  const indeterminate = node.indeterminate;
+
+  if (!hasIn(node, 'indeterminate')) {
+    throw new Error(
+        'Cannot run `toBeIndeterminate` matcher on a DOM node without `indeterminate` property'
+    );
+  }
+
   return {
-    pass: indeterminate === true,
+    pass: node.indeterminate === true,
     message() {
       return `Expect ${pp(actual)} [NOT] to be indeterminate`;
     },

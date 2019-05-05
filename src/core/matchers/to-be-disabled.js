@@ -23,6 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
+import {hasIn} from '../util/has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -41,9 +42,15 @@ import {toDomElement} from '../util/to-dom-element';
  */
 export function toBeDisabled({actual}) {
   const node = toDomElement(actual);
-  const disabled = node.disabled;
+
+  if (!hasIn(node, 'disabled')) {
+    throw new Error(
+        'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property'
+    );
+  }
+
   return {
-    pass: disabled === true,
+    pass: node.disabled === true,
     message() {
       return `Expect ${pp(actual)} [NOT] to be disabled`;
     },

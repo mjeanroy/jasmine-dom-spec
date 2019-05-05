@@ -54,4 +54,11 @@ describe('toBeSelected', () => {
         `Expect '${actual.outerHTML}' [NOT] to be selected`
     );
   });
+
+  it('should fail with a DOM node without `selected` property', () => {
+    const actual = document.createElement('div');
+    expect(() => toBeSelected({actual})).toThrow(new Error(
+        'Cannot run `toBeSelected` matcher on a DOM node without `selected` property'
+    ));
+  });
 });

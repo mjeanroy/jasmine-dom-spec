@@ -23,6 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
+import {hasIn} from '../util/has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -41,9 +42,15 @@ import {toDomElement} from '../util/to-dom-element';
  */
 export function toBeSelected({actual}) {
   const node = toDomElement(actual);
-  const selected = node.selected;
+
+  if (!hasIn(node, 'selected')) {
+    throw new Error(
+        'Cannot run `toBeSelected` matcher on a DOM node without `selected` property'
+    );
+  }
+
   return {
-    pass: selected === true,
+    pass: node.selected === true,
     message() {
       return `Expect ${pp(actual)} [NOT] to be selected`;
     },

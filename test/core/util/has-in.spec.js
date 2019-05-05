@@ -22,43 +22,26 @@
  * THE SOFTWARE.
  */
 
-import {toBeRequired} from '../../../src/core/matchers/to-be-required';
+import {hasIn} from '../../../src/core/util/has-in';
 
-describe('toBeRequired', () => {
-  it('should pass with a required input', () => {
-    const actual = document.createElement('input');
-    actual.required = true;
+describe('hasIn', () => {
+  it('should return true if object has key', () => {
+    const obj = {
+      k1: true,
+      k2: false,
+    };
 
-    const result = toBeRequired({actual});
-
-    expect(result).toEqual({
-      pass: true,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
-    );
+    expect(hasIn(obj, 'k1')).toBe(true);
+    expect(hasIn(obj, 'k2')).toBe(true);
+    expect(hasIn(obj, 'toString')).toBe(true);
   });
 
-  it('should not pass with a non-required input', () => {
-    const actual = document.createElement('input');
-    const result = toBeRequired({actual});
+  it('should return false if object does not have key', () => {
+    const obj = {
+      k1: true,
+      k2: false,
+    };
 
-    expect(result).toEqual({
-      pass: false,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
-    );
-  });
-
-  it('should fail with a DOM node without `required` property', () => {
-    const actual = document.createElement('div');
-    expect(() => toBeRequired({actual})).toThrow(new Error(
-        'Cannot run `toBeRequired` matcher on a DOM node without `required` property'
-    ));
+    expect(hasIn(obj, 'k3')).toBe(false);
   });
 });

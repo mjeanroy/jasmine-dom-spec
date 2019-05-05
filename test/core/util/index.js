@@ -26,6 +26,7 @@ import './dash-to-camel.spec';
 import './filter.spec';
 import './for-each.spec';
 import './every.spec';
+import './has-in.spec';
 import './has.spec';
 import './index-by.spec';
 import './is.spec';

@@ -33,7 +33,25 @@ module.exports = (config) => {
   config.set(_.extend(commonConf(config), {
     autoWatch: false,
     singleRun: true,
-    browsers: ['PhantomJS'],
-    reporters: ['progress'],
+    concurrency: 1,
+
+    browsers: [
+      'CustomHeadlessChrome',
+      'PhantomJS',
+    ],
+
+    reporters: [
+      'progress',
+    ],
+
+    customLaunchers: {
+      CustomHeadlessChrome: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--disable-translate',
+          '--disable-extensions',
+        ],
+      },
+    },
   }));
 };

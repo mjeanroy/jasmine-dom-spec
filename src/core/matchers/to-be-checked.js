@@ -23,6 +23,7 @@
  */
 
 import {pp} from '../jasmine/index';
+import {hasIn} from '../util/has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -42,9 +43,15 @@ import {toDomElement} from '../util/to-dom-element';
  */
 export function toBeChecked({actual}) {
   const node = toDomElement(actual);
-  const checked = node.checked;
+
+  if (!hasIn(node, 'checked')) {
+    throw new Error(
+        'Cannot run `toBeChecked` matcher on a DOM node without `checked` property'
+    );
+  }
+
   return {
-    pass: checked === true,
+    pass: node.checked === true,
     message() {
       return `Expect ${pp(actual)} [NOT] to be checked`;
     },

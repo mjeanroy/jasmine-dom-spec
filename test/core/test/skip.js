@@ -22,43 +22,16 @@
  * THE SOFTWARE.
  */
 
-import {toBeRequired} from '../../../src/core/matchers/to-be-required';
-
-describe('toBeRequired', () => {
-  it('should pass with a required input', () => {
-    const actual = document.createElement('input');
-    actual.required = true;
-
-    const result = toBeRequired({actual});
-
-    expect(result).toEqual({
-      pass: true,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
-    );
-  });
-
-  it('should not pass with a non-required input', () => {
-    const actual = document.createElement('input');
-    const result = toBeRequired({actual});
-
-    expect(result).toEqual({
-      pass: false,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
-    );
-  });
-
-  it('should fail with a DOM node without `required` property', () => {
-    const actual = document.createElement('div');
-    expect(() => toBeRequired({actual})).toThrow(new Error(
-        'Cannot run `toBeRequired` matcher on a DOM node without `required` property'
-    ));
-  });
-});
+/**
+ * Check for a given predicate and mark current test as pending if predicate returns a truthy
+ * value.
+ *
+ * @param {string} message The skipped message.
+ * @param {function} fn Predicate function.
+ * @return {void}
+ */
+export function skip(message, fn) {
+  if (fn()) {
+    pending(message);
+  }
+}

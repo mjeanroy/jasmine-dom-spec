@@ -23,6 +23,7 @@
  */
 
 import {toBeDisabled} from '../../../src/core/matchers/to-be-disabled';
+import {assumeNotIE} from '../test/assume-not-ie';
 
 describe('toBeDisabled', () => {
   it('should pass with a disabled input', () => {
@@ -53,5 +54,16 @@ describe('toBeDisabled', () => {
     expect(result.message()).toBe(
         `Expect '${actual.outerHTML}' [NOT] to be disabled`
     );
+  });
+
+  it('should fail with a DOM node missing a `disabled` property', () => {
+    // Skip test on Internet Explorer because the `disabled` property is part of `Element.prototype`, so
+    // every DOM node has a `disabled` in these browsers.
+    assumeNotIE();
+
+    const actual = document.createElement('div');
+    expect(() => toBeDisabled({actual})).toThrow(new Error(
+        'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property'
+    ));
   });
 });

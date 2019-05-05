@@ -22,43 +22,13 @@
  * THE SOFTWARE.
  */
 
-import {toBeRequired} from '../../../src/core/matchers/to-be-required';
-
-describe('toBeRequired', () => {
-  it('should pass with a required input', () => {
-    const actual = document.createElement('input');
-    actual.required = true;
-
-    const result = toBeRequired({actual});
-
-    expect(result).toEqual({
-      pass: true,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
-    );
-  });
-
-  it('should not pass with a non-required input', () => {
-    const actual = document.createElement('input');
-    const result = toBeRequired({actual});
-
-    expect(result).toEqual({
-      pass: false,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
-    );
-  });
-
-  it('should fail with a DOM node without `required` property', () => {
-    const actual = document.createElement('div');
-    expect(() => toBeRequired({actual})).toThrow(new Error(
-        'Cannot run `toBeRequired` matcher on a DOM node without `required` property'
-    ));
-  });
-});
+/**
+ * Check if a key is a property of a given object or an inherited property.
+ *
+ * @param {Object} object Object to check.
+ * @param {string} prop Property (a.k.a key) to look for.
+ * @return {boolean} `true` if `prop` is a key in `object`, `false` otherwise.
+ */
+export function hasIn(object, prop) {
+  return prop in object;
+}

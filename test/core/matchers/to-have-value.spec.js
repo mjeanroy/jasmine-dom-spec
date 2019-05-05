@@ -60,4 +60,11 @@ describe('toHaveValue', () => {
         `Expect '${actual.outerHTML}' [NOT] to have value /foo/ but was 'foo'`
     );
   });
+
+  it('should fail with a DOM node without `value` property', () => {
+    const actual = document.createElement('div');
+    expect(() => toHaveValue({actual})).toThrow(new Error(
+        'Cannot run `toHaveValue` matcher on a DOM node without `value` property'
+    ));
+  });
 });

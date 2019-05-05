@@ -24,6 +24,7 @@
 
 import {pp} from '../jasmine/index';
 import {matchOrEquals} from '../util/match-or-equals';
+import {hasIn} from '../util/has-in';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -46,6 +47,13 @@ import {toDomElement} from '../util/to-dom-element';
  */
 export function toHaveValue({actual, equals}, expectedValue) {
   const node = toDomElement(actual);
+
+  if (!hasIn(node, 'value')) {
+    throw new Error(
+        'Cannot run `toHaveValue` matcher on a DOM node without `value` property'
+    );
+  }
+
   const actualValue = node.value;
   return {
     pass: matchOrEquals(actualValue, expectedValue, equals),
