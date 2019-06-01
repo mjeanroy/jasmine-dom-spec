@@ -1,11 +1,16 @@
 {
-  "extends": "google",
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
   "env": {
-    "node": true
+    "browser": true,
+    "jasmine": true,
+    "node": false
   },
   "rules": {
     "max-len": [2, 200, 2],

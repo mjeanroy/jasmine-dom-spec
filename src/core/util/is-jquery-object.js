@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+/* global jQuery */
+
 import {every} from './every';
 import {isFunction} from './is-function';
 import {isNumber} from './is-number';
