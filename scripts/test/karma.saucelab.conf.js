@@ -189,7 +189,7 @@ function githubSauceLabsConfiguration() {
 function localSauceLabsConfiguration() {
   return {
     build: `LOCAL #${Date.now()}`,
-    startConnect: false,
+    startConnect: true,
     tunnelIdentifier: `${Date.now()}`,
   };
 }
