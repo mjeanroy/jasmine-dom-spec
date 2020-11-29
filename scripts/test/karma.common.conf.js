@@ -27,7 +27,7 @@
  */
 
 const path = require('path');
-const babel = require('rollup-plugin-babel');
+const babel = require('@rollup/plugin-babel').default;
 const nodeResolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const conf = require('../config');
