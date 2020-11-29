@@ -14,7 +14,6 @@
     "lint": "gulp lint",
     "test": "gulp test",
     "tdd": "gulp tdd",
-    "travis": "gulp travis",
     "build": "gulp build",
     "release": "gulp release:minor",
     "release:patch": "gulp release:patch",

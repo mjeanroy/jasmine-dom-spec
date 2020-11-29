@@ -68,7 +68,7 @@ function saucelab(done) {
  * @param {function} done The `done` callback.
  * @return {void}
  */
-function travis(done) {
+function auto(done) {
   if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
     log.debug('SauceLab environment not set, running classic test suite');
     test(done);
@@ -99,5 +99,5 @@ function startKarma(mode, done) {
 module.exports = {
   tdd,
   test,
-  travis,
+  auto,
 };
