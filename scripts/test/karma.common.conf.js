@@ -29,7 +29,7 @@
 const path = require('path');
 const babel = require('@rollup/plugin-babel').default;
 const nodeResolve = require('@rollup/plugin-node-resolve').default;
-const commonjs = require('rollup-plugin-commonjs');
+const commonjs = require('@rollup/plugin-commonjs');
 const conf = require('../config');
 const entryPoint = path.join(conf.test, 'index.js');
 
