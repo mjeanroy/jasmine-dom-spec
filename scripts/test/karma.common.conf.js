@@ -115,7 +115,9 @@ module.exports = (config) => ({
     plugins: [
       nodeResolve(),
       commonjs(),
-      babel(),
+      babel({
+        babelHelpers: 'bundled',
+      }),
     ],
   },
 });
