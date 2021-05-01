@@ -27,7 +27,7 @@
 const path = require('path');
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
-const tslint = require('gulp-tslint');
+const log = require('../log');
 const config = require('../config');
 
 /**
@@ -50,25 +50,20 @@ function getSources(ext) {
  *
  * @return {WritableStream} The stream pipeline.
  */
-function runESLint() {
-  return gulp.src(getSources('js'))
+module.exports = function lint() {
+  const inputs = [
+    ...getSources('js'),
+    ...getSources('ts'),
+  ];
+
+  log.debug('Linting files: ');
+
+  inputs.forEach((input) => (
+    log.debug(`  ${input}`)
+  ));
+
+  return gulp.src(inputs)
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
-}
-
-/**
- * Run TSLint against TypeScript source files.
- *
- * @return {WritableStream} The stream pipeline.
- */
-function runTSLint() {
-  return gulp.src(getSources('ts'))
-      .pipe(tslint({formatter: 'verbose'}))
-      .pipe(tslint.report());
-}
-
-module.exports = gulp.series(
-    runESLint,
-    runTSLint
-);
+};

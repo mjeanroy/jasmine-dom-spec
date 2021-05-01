@@ -3,15 +3,18 @@
     "eslint:recommended",
     "google"
   ],
+
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
+
   "env": {
     "browser": true,
     "jasmine": true,
     "node": false
   },
+
   "rules": {
     "max-len": [2, 200, 2],
     "valid-jsdoc": [2, {
@@ -27,5 +30,36 @@
         "object": "object"
       }
     }]
-  }
+  },
+
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "env": {
+        "browser": true,
+        "es6": true,
+        "jasmine": true,
+        "node": false
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "rules": {
+        "indent": "off",
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "single"],
+        "comma-dangle": ["error", "always-multiline"],
+        "@typescript-eslint/indent": ["error", 2],
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ]
 }

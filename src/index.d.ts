@@ -44,6 +44,7 @@ interface NodePropsDictionary {
 }
 
 declare namespace jasmine {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Matchers<T> {
     toBeChecked(): boolean;
     toBeDetachedElement(): boolean;
