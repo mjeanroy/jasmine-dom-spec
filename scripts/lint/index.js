@@ -34,7 +34,7 @@ const config = require('../config');
  * Get all potential sources to run against lint validator.
  *
  * @param {string} ext The file exstension to look for.
- * @return {void}
+ * @return {Array<string>} List of paths.
  */
 function getSources(ext) {
   return [
