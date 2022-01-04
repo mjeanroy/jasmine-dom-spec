@@ -24,6 +24,8 @@
 
 import './j1-matcher-factory.spec';
 import './j2-matcher-factory.spec';
+import './j3-matcher-factory.spec';
+import './j4-matcher-factory.spec';
 import './matcher-factory.spec';
 import './negate-message.spec';
 import './pp.spec';

@@ -27,30 +27,26 @@ import {negateMessage} from './negate-message.js';
 import {pp} from './pp.js';
 
 /**
- * This factory will create a matcher supported by Jasmine 3.X.X.
+ * This factory will create a matcher supported by Jasmine 4.X.X.
  *
  * This factory takes a generic matcher function (matcher defined in this project)
- * and returns the matcher that can be used with Jasmine 3.
+ * and returns the matcher that can be used with Jasmine 4.
  *
  * @param {function} fn Generic matcher function.
- * @return {function} Jasmine 3 official matcher.
- * @see https://jasmine.github.io/2.5/custom_matcher.html
+ * @return {function} Jasmine 4 official matcher.
  */
-export function jasmine3MatcherFactory(fn) {
+export function jasmine4MatcherFactory(fn) {
   /**
-   * Jasmine 3.X.X matcher.
+   * Jasmine 4.X.X matcher.
    *
    * @param {Object} matchersUtil Jasmine util object.
-   * @param {Object} args Extra arguments, may contain customEqualityTesters for jasmine < 3.6.
    * @return {Object} An object containing `compare` and `negativeCompare` function that will be executed by Jasmine.
    */
-  return function jasmine3Matcher(matchersUtil, ...args) {
-    const customEqualityTesters = args[0] && !args[0].deprecated ? args[0] : undefined;
+  return function jasmine4Matcher(matchersUtil) {
     const ctx = {
       // Adapter for custom equals functions.
-      // See: https://jasmine.github.io/2.5/custom_equality.html
       equals(a, b) {
-        return matchersUtil.equals(a, b, customEqualityTesters);
+        return matchersUtil.equals(a, b);
       },
 
       // Adapter for pretty printer function.
