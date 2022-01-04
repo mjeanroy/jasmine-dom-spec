@@ -25,25 +25,28 @@
 import {pp} from '../../../src/core/jasmine/pp.js';
 
 describe('pp', () => {
+  let prettyPrinter;
+
   beforeEach(() => {
+    prettyPrinter = jasmine.makePrettyPrinter ? jasmine.makePrettyPrinter() : jasmine.pp;
     spyOn(console, 'error');
   });
 
   it('should pretty-print null', () => {
-    expect(pp(null)).toBe('null');
+    expect(pp(null, prettyPrinter)).toBe('null');
   });
 
   it('should pretty-print undefined', () => {
-    expect(pp(undefined)).toBe('undefined');
+    expect(pp(undefined, prettyPrinter)).toBe('undefined');
   });
 
   it('should pretty-print empty array', () => {
-    expect(pp([])).toBe('[  ]');
+    expect(pp([], prettyPrinter)).toBe('[  ]');
   });
 
   it('should pretty-print DOM Node', () => {
     const value = document.createElement('div');
-    const str = pp(value);
+    const str = pp(value, prettyPrinter);
     expect(str).toBe(`'${value.outerHTML}'`);
   });
 });
