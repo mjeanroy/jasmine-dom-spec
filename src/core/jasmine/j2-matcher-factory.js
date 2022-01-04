@@ -46,18 +46,6 @@ export function jasmine2MatcherFactory(fn) {
    */
   return function jasmine2Matcher(util, customEqualityTesters) {
     const ctx = {
-      // Adapter for `callCount`.
-      // See: https://jasmine.github.io/2.5/introduction#section-Spies
-      callCount(spy) {
-        return spy.calls.count();
-      },
-
-      // Adapter for `argsFor`.
-      // See: https://jasmine.github.io/2.5/introduction#section-Spies
-      argsFor(spy, call) {
-        return spy.calls.argsFor(call);
-      },
-
       // Adapter for custom equals functions.
       // See: https://jasmine.github.io/2.5/custom_equality.html
       equals(a, b) {

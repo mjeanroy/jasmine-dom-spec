@@ -59,18 +59,6 @@ export function jasmine1MatcherFactory(fn) {
       actual: actual,
       isNot: isNot,
 
-      // Adapter for `callCount`
-      // https://jasmine.github.io/1.3/introduction#section-Spies
-      callCount(spy) {
-        return spy.callCount;
-      },
-
-      // Adapter for `argsFor`
-      // https://jasmine.github.io/1.3/introduction#section-Spies
-      argsFor(spy, call) {
-        return spy.argsForCall[call];
-      },
-
       // Adapter for custom equality.
       equals(...equalsArgs) {
         return equals_.apply(env, equalsArgs);

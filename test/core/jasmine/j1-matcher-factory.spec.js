@@ -71,8 +71,6 @@ describe('jasmine1MatcherFactory', () => {
       expect(args[0]).toEqual({
         actual: actual,
         isNot: false,
-        callCount: jasmine.any(Function),
-        argsFor: jasmine.any(Function),
         equals: jasmine.any(Function),
       });
     });

@@ -75,8 +75,6 @@ describe('jasmine2MatcherFactory', () => {
       expect(args[0]).toEqual({
         actual: actual,
         isNot: false,
-        callCount: jasmine.any(Function),
-        argsFor: jasmine.any(Function),
         equals: jasmine.any(Function),
       });
 
@@ -115,8 +113,6 @@ describe('jasmine2MatcherFactory', () => {
       expect(args[0]).toEqual({
         actual: actual,
         isNot: true,
-        callCount: jasmine.any(Function),
-        argsFor: jasmine.any(Function),
         equals: jasmine.any(Function),
       });
     });
@@ -132,30 +128,6 @@ describe('jasmine2MatcherFactory', () => {
 
         j2Matcher(util, customEqualityTesters).negativeCompare({});
         ctx = matcher.calls.mostRecent().args[0];
-      });
-
-      it('should return callCount of a spy', () => {
-        const callCount = ctx.callCount({
-          calls: {
-            count: jasmine.createSpy('callCount').and.returnValue(1),
-          },
-        });
-
-        expect(callCount).toBe(1);
-      });
-
-      it('should get args for a given call', () => {
-        const actualArgs = [0, 1, 2];
-        const spy = {
-          calls: {
-            argsFor: jasmine.createSpy('argsFor').and.returnValue(actualArgs),
-          },
-        };
-
-        const argsForCall0 = ctx.argsFor(spy, 0);
-
-        expect(argsForCall0).toEqual(actualArgs);
-        expect(spy.calls.argsFor).toHaveBeenCalledWith(0);
       });
 
       it('should check for equality', () => {
