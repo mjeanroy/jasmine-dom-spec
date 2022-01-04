@@ -132,7 +132,7 @@ describe('toDomElement', () => {
   it('should fail to return DOM Node with a date', () => {
     const value = new Date();
     expect(() => toDomElement(value, pp)).toThrow(
-        Error(`Expect DOM node but found: ${jasmine.pp(value)}`)
+        Error(`Expect DOM node but found: ${pp(value)}`)
     );
   });
 
