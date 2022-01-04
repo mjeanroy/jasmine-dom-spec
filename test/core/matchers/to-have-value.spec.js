@@ -23,15 +23,20 @@
  */
 
 import {toHaveValue} from '../../../src/core/matchers/to-have-value';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveValue', () => {
   it('should pass with a dom node with expected value', () => {
     const value = 'foo';
     const actual = document.createElement('input');
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
+
     actual.value = value;
 
-    const result = toHaveValue({actual, equals}, value);
+    const result = toHaveValue(ctx, value);
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -46,10 +51,11 @@ describe('toHaveValue', () => {
 
   it('should pass with a dom node with expected regexp value', () => {
     const actual = document.createElement('input');
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual);
+
     actual.value = 'foo';
 
-    const result = toHaveValue({actual, equals}, /foo/);
+    const result = toHaveValue(ctx, /foo/);
 
     expect(result).toEqual({
       pass: true,
@@ -63,7 +69,8 @@ describe('toHaveValue', () => {
 
   it('should fail with a DOM node without `value` property', () => {
     const actual = document.createElement('div');
-    expect(() => toHaveValue({actual})).toThrow(new Error(
+    const ctx = createFakeContext(actual);
+    expect(() => toHaveValue(ctx)).toThrow(new Error(
         'Cannot run `toHaveValue` matcher on a DOM node without `value` property'
     ));
   });

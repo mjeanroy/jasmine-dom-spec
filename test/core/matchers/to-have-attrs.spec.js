@@ -23,15 +23,19 @@
  */
 
 import {toHaveAttrs} from '../../../src/core/matchers/to-have-attrs';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveAttrs', () => {
   it('should pass with a dom node with expected attributes', () => {
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     actual.setAttribute('data-foo', 1);
 
-    const result = toHaveAttrs({actual, equals}, 'data-foo', '1');
+    const result = toHaveAttrs(ctx, 'data-foo', '1');
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -47,10 +51,13 @@ describe('toHaveAttrs', () => {
   it('should pass without attribute value', () => {
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     actual.setAttribute('data-foo', 1);
 
-    const result = toHaveAttrs({actual, equals}, 'data-foo');
+    const result = toHaveAttrs(ctx, 'data-foo');
 
     expect(equals).not.toHaveBeenCalled();
     expect(result).toEqual({
@@ -66,10 +73,13 @@ describe('toHaveAttrs', () => {
   it('should not pass with a dom node without expected attributes', () => {
     const actual = document.createElement('input');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     actual.setAttribute('data-foo', '0');
 
-    const result = toHaveAttrs({actual, equals}, 'data-foo', '1');
+    const result = toHaveAttrs(ctx, 'data-foo', '1');
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -83,11 +93,12 @@ describe('toHaveAttrs', () => {
   });
 
   it('should pass with a dom node with matching attribute regexp', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.setAttribute('data-foo', 1);
 
-    const result = toHaveAttrs({actual, equals}, 'data-foo', /1/);
+    const result = toHaveAttrs(ctx, 'data-foo', /1/);
 
     expect(result).toEqual({
       pass: true,
@@ -100,11 +111,12 @@ describe('toHaveAttrs', () => {
   });
 
   it('should pass with a dom node with matching attribute object containing a regexp', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.setAttribute('data-foo', 1);
 
-    const result = toHaveAttrs({actual, equals}, {
+    const result = toHaveAttrs(ctx, {
       'data-foo': /1/,
     });
 

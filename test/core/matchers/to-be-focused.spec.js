@@ -23,6 +23,7 @@
  */
 
 import {toBeFocused} from '../../../src/core/matchers/to-be-focused';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeFocused', () => {
   let fixtures;
@@ -38,13 +39,15 @@ describe('toBeFocused', () => {
 
   it('should pass with a focused element', () => {
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     fixtures.appendChild(actual);
 
     // Call it twice, it seems to fix a weird (and random) bug in IE8...
     actual.focus();
     actual.focus();
 
-    const result = toBeFocused({actual});
+    const result = toBeFocused(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -58,9 +61,11 @@ describe('toBeFocused', () => {
 
   it('should not pass with a non-focused element', () => {
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     fixtures.appendChild(actual);
 
-    const result = toBeFocused({actual});
+    const result = toBeFocused(ctx);
 
     expect(result).toEqual({
       pass: false,

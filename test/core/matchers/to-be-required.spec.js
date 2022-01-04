@@ -23,13 +23,16 @@
  */
 
 import {toBeRequired} from '../../../src/core/matchers/to-be-required';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeRequired', () => {
   it('should pass with a required input', () => {
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     actual.required = true;
 
-    const result = toBeRequired({actual});
+    const result = toBeRequired(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -43,7 +46,9 @@ describe('toBeRequired', () => {
 
   it('should not pass with a non-required input', () => {
     const actual = document.createElement('input');
-    const result = toBeRequired({actual});
+    const ctx = createFakeContext(actual);
+
+    const result = toBeRequired(ctx);
 
     expect(result).toEqual({
       pass: false,
@@ -57,7 +62,9 @@ describe('toBeRequired', () => {
 
   it('should fail with a DOM node without `required` property', () => {
     const actual = document.createElement('div');
-    expect(() => toBeRequired({actual})).toThrow(new Error(
+    const ctx = createFakeContext(actual);
+
+    expect(() => toBeRequired(ctx)).toThrow(new Error(
         'Cannot run `toBeRequired` matcher on a DOM node without `required` property'
     ));
   });

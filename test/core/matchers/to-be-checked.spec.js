@@ -23,6 +23,7 @@
  */
 
 import {toBeChecked} from '../../../src/core/matchers/to-be-checked';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeChecked', () => {
   it('should pass with a checked checkbox', () => {
@@ -30,7 +31,9 @@ describe('toBeChecked', () => {
     actual.type = 'checkbox';
     actual.checked = true;
 
-    const result = toBeChecked({actual});
+    const ctx = createFakeContext(actual);
+
+    const result = toBeChecked(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -45,7 +48,10 @@ describe('toBeChecked', () => {
   it('should not pass with a non-checked checkbox', () => {
     const actual = document.createElement('input');
     actual.type = 'checkbox';
-    const result = toBeChecked({actual});
+
+    const ctx = createFakeContext(actual);
+
+    const result = toBeChecked(ctx);
 
     expect(result).toEqual({
       pass: false,
@@ -59,7 +65,9 @@ describe('toBeChecked', () => {
 
   it('should fail without a checked checkbox', () => {
     const actual = document.createElement('div');
-    expect(() => toBeChecked({actual})).toThrow(new Error(
+    const ctx = createFakeContext(actual);
+
+    expect(() => toBeChecked(ctx)).toThrow(new Error(
         'Cannot run `toBeChecked` matcher on a DOM node without `checked` property'
     ));
   });

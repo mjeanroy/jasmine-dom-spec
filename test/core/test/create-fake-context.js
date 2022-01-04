@@ -22,39 +22,18 @@
  * THE SOFTWARE.
  */
 
-import {toHaveTagName} from '../../../src/core/matchers/to-have-tag-name';
-import {createFakeContext} from '../test/create-fake-context';
-
-describe('toHaveTagName', () => {
-  it('should pass with a dom node with expected tag name', () => {
-    const actual = document.createElement('input');
-    const ctx = createFakeContext(actual);
-
-    const result = toHaveTagName(ctx, 'input');
-
-    expect(result).toEqual({
-      pass: true,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`
-    );
-  });
-
-  it('should pass with a dom node with a regexp', () => {
-    const actual = document.createElement('input');
-    const ctx = createFakeContext(actual);
-
-    const result = toHaveTagName(ctx, /input|select/i);
-
-    expect(result).toEqual({
-      pass: true,
-      message: jasmine.any(Function),
-    });
-
-    expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have tag name /input|select/i but was '${actual.tagName}'`
-    );
-  });
-});
+/**
+ * Create fake matcher context to use in unit tests.
+ *
+ * @param {*} actual Actual Object.
+ * @param {Object} options Optional parameter.
+ * @returns {Object} Matcher context.
+ */
+export function createFakeContext(actual, options = {}) {
+  return {
+    actual,
+    equals: options.equals || jasmine.createSpy('equals').and.callFake((x, y) => (
+      x === y
+    )),
+  };
+}

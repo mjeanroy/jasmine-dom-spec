@@ -23,14 +23,17 @@
  */
 
 import {toBeIndeterminate} from '../../../src/core/matchers/to-be-indeterminate';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeIndeterminate', () => {
   it('should pass with an indeterminate checkbox', () => {
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     actual.type = 'checkbox';
     actual.indeterminate = true;
 
-    const result = toBeIndeterminate({actual});
+    const result = toBeIndeterminate(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -44,8 +47,11 @@ describe('toBeIndeterminate', () => {
 
   it('should not pass with a non-indeterminate checkbox', () => {
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     actual.type = 'checkbox';
-    const result = toBeIndeterminate({actual});
+
+    const result = toBeIndeterminate(ctx);
 
     expect(result).toEqual({
       pass: false,
@@ -59,7 +65,9 @@ describe('toBeIndeterminate', () => {
 
   it('should fail with a DOM node missing an `indeterminate` property', () => {
     const actual = document.createElement('div');
-    expect(() => toBeIndeterminate({actual})).toThrow(new Error(
+    const ctx = createFakeContext(actual);
+
+    expect(() => toBeIndeterminate(ctx)).toThrow(new Error(
         'Cannot run `toBeIndeterminate` matcher on a DOM node without `indeterminate` property'
     ));
   });

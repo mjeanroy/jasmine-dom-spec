@@ -23,6 +23,7 @@
  */
 
 import {toBeDisplayed} from '../../../src/core/matchers/to-be-displayed';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeDisplayed', () => {
   let fixtures;
@@ -38,10 +39,14 @@ describe('toBeDisplayed', () => {
 
   it('should pass with a simple div', () => {
     const actual = document.createElement('div');
+    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
+
     fixtures.appendChild(actual);
 
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
-    const result = toBeDisplayed({actual, equals});
+    const result = toBeDisplayed(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -56,10 +61,15 @@ describe('toBeDisplayed', () => {
   it('should not pass with a display:none div', () => {
     const actual = document.createElement('div');
     actual.style.display = 'none';
-    fixtures.appendChild(actual);
 
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
-    const result = toBeDisplayed({actual, equals});
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
+
+    fixtures.appendChild(actual);
+
+    const result = toBeDisplayed(ctx);
 
     expect(result).toEqual({
       pass: false,
@@ -74,7 +84,11 @@ describe('toBeDisplayed', () => {
   it('should be ok with a detached node', () => {
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
-    const result = toBeDisplayed({actual, equals});
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
+
+    const result = toBeDisplayed(ctx);
 
     expect(result).toEqual({
       pass: true,

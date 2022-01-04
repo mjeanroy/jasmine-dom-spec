@@ -24,13 +24,16 @@
 
 import {toBeDisabled} from '../../../src/core/matchers/to-be-disabled';
 import {assumeNotIE} from '../test/assume-not-ie';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeDisabled', () => {
   it('should pass with a disabled input', () => {
     const actual = document.createElement('input');
     actual.disabled = true;
 
-    const result = toBeDisabled({actual});
+    const ctx = createFakeContext(actual);
+
+    const result = toBeDisabled(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -44,7 +47,9 @@ describe('toBeDisabled', () => {
 
   it('should not pass with a non-disabled input', () => {
     const actual = document.createElement('input');
-    const result = toBeDisabled({actual});
+    const ctx = createFakeContext(actual);
+
+    const result = toBeDisabled(ctx);
 
     expect(result).toEqual({
       pass: false,
@@ -62,7 +67,8 @@ describe('toBeDisabled', () => {
     assumeNotIE();
 
     const actual = document.createElement('div');
-    expect(() => toBeDisabled({actual})).toThrow(new Error(
+    const ctx = createFakeContext(actual);
+    expect(() => toBeDisabled(ctx)).toThrow(new Error(
         'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property'
     ));
   });

@@ -23,13 +23,16 @@
  */
 
 import {toBeSelected} from '../../../src/core/matchers/to-be-selected';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeSelected', () => {
   it('should pass with a selected option', () => {
     const actual = document.createElement('option');
+    const ctx = createFakeContext(actual);
+
     actual.selected = true;
 
-    const result = toBeSelected({actual});
+    const result = toBeSelected(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -43,7 +46,9 @@ describe('toBeSelected', () => {
 
   it('should not pass with a non-selected option', () => {
     const actual = document.createElement('option');
-    const result = toBeSelected({actual});
+    const ctx = createFakeContext(actual);
+
+    const result = toBeSelected(ctx);
 
     expect(result).toEqual({
       pass: false,
@@ -57,7 +62,9 @@ describe('toBeSelected', () => {
 
   it('should fail with a DOM node without `selected` property', () => {
     const actual = document.createElement('div');
-    expect(() => toBeSelected({actual})).toThrow(new Error(
+    const ctx = createFakeContext(actual);
+
+    expect(() => toBeSelected(ctx)).toThrow(new Error(
         'Cannot run `toBeSelected` matcher on a DOM node without `selected` property'
     ));
   });

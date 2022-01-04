@@ -23,13 +23,16 @@
  */
 
 import {toHaveCssClass} from '../../../src/core/matchers/to-have-css-class';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveCssClass', () => {
   it('should pass with a dom node with expected class', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo bar';
 
-    const result = toHaveCssClass({actual}, 'foo');
+    const result = toHaveCssClass(ctx, 'foo');
 
     expect(result).toEqual({
       pass: true,
@@ -43,9 +46,11 @@ describe('toHaveCssClass', () => {
 
   it('should pass with a list of classes', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo bar';
 
-    const result = toHaveCssClass({actual}, 'bar foo');
+    const result = toHaveCssClass(ctx, 'bar foo');
 
     expect(result).toEqual({
       pass: true,
@@ -59,9 +64,11 @@ describe('toHaveCssClass', () => {
 
   it('should pass with an array of classes', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo bar';
 
-    const result = toHaveCssClass({actual}, ['foo', 'bar']);
+    const result = toHaveCssClass(ctx, ['foo', 'bar']);
 
     expect(result).toEqual({
       pass: true,
@@ -75,9 +82,11 @@ describe('toHaveCssClass', () => {
 
   it('should not pass if a css class is missing with a list of classes', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo';
 
-    const result = toHaveCssClass({actual}, 'foo bar');
+    const result = toHaveCssClass(ctx, 'foo bar');
 
     expect(result).toEqual({
       pass: false,
@@ -91,9 +100,11 @@ describe('toHaveCssClass', () => {
 
   it('should not pass if a css class is missing with an array of classes', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo';
 
-    const result = toHaveCssClass({actual}, ['foo', 'bar']);
+    const result = toHaveCssClass(ctx, ['foo', 'bar']);
 
     expect(result).toEqual({
       pass: false,
@@ -107,9 +118,11 @@ describe('toHaveCssClass', () => {
 
   it('should pass with a dom node with expected regexp class', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo bar';
 
-    const result = toHaveCssClass({actual}, /foo/);
+    const result = toHaveCssClass(ctx, /foo/);
 
     expect(result).toEqual({
       pass: true,
@@ -123,9 +136,11 @@ describe('toHaveCssClass', () => {
 
   it('should pass with a dom node with expected array of regexp class', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo bar';
 
-    const result = toHaveCssClass({actual}, [/foo/, /bar/]);
+    const result = toHaveCssClass(ctx, [/foo/, /bar/]);
 
     expect(result).toEqual({
       pass: true,
@@ -139,9 +154,11 @@ describe('toHaveCssClass', () => {
 
   it('should not pass with a dom node with missing regexp in array', () => {
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.className = 'foo';
 
-    const result = toHaveCssClass({actual}, [/foo/, /bar/]);
+    const result = toHaveCssClass(ctx, [/foo/, /bar/]);
 
     expect(result).toEqual({
       pass: false,

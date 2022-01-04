@@ -23,15 +23,19 @@
  */
 
 import {toHaveProps} from '../../../src/core/matchers/to-have-props';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveProps', () => {
   it('should pass with a dom node with expected id', () => {
     const actual = document.createElement('input');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     actual.required = true;
 
-    const result = toHaveProps({actual, equals}, 'required', true);
+    const result = toHaveProps(ctx, 'required', true);
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -47,10 +51,13 @@ describe('toHaveProps', () => {
   it('should not pass with a dom node without expected id', () => {
     const actual = document.createElement('input');
     const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     actual.required = true;
 
-    const result = toHaveProps({actual, equals}, 'required', false);
+    const result = toHaveProps(ctx, 'required', false);
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -64,11 +71,12 @@ describe('toHaveProps', () => {
   });
 
   it('should pass with a dom node with expected id regexp', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     actual.id = 'awesome-id-123456';
 
-    const result = toHaveProps({actual, equals}, 'id', /awesome-id/);
+    const result = toHaveProps(ctx, 'id', /awesome-id/);
 
     expect(result).toEqual({
       pass: true,
@@ -81,12 +89,13 @@ describe('toHaveProps', () => {
   });
 
   it('should pass with a dom node with expected props object containing regexp', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     actual.id = 'awesome-id-123456';
     actual.required = true;
 
-    const result = toHaveProps({actual, equals}, {
+    const result = toHaveProps(ctx, {
       id: /awesome-id/,
       required: /true/,
     });

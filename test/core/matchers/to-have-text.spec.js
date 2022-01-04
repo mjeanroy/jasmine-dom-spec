@@ -23,15 +23,17 @@
  */
 
 import {toHaveText} from '../../../src/core/matchers/to-have-text';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveText', () => {
   it('should pass with a dom node with expected text content', () => {
     const txt = 'foo';
     const actual = document.createElement('div');
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual);
+
     actual.innerHTML = txt;
 
-    const result = toHaveText({actual, equals}, txt);
+    const result = toHaveText(ctx, txt);
 
     expect(result).toEqual({
       pass: true,
@@ -46,10 +48,11 @@ describe('toHaveText', () => {
   it('should pass with a dom node with expected number content', () => {
     const txt = 1;
     const actual = document.createElement('div');
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual);
+
     actual.innerHTML = txt;
 
-    const result = toHaveText({actual, equals}, txt);
+    const result = toHaveText(ctx, txt);
 
     expect(result).toEqual({
       pass: true,
@@ -64,10 +67,11 @@ describe('toHaveText', () => {
   it('should pass with a dom node with expected boolean content', () => {
     const txt = true;
     const actual = document.createElement('div');
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual);
+
     actual.innerHTML = txt;
 
-    const result = toHaveText({actual, equals}, txt);
+    const result = toHaveText(ctx, txt);
 
     expect(result).toEqual({
       pass: true,
@@ -82,10 +86,11 @@ describe('toHaveText', () => {
   it('should pass with a dom node with expected regexp content', () => {
     const regexp = /true/;
     const actual = document.createElement('div');
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual);
+
     actual.innerHTML = 'true';
 
-    const result = toHaveText({actual, equals}, regexp);
+    const result = toHaveText(ctx, regexp);
 
     expect(result).toEqual({
       pass: true,

@@ -23,16 +23,20 @@
  */
 
 import {toHaveId} from '../../../src/core/matchers/to-have-id';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveId', () => {
   it('should pass with a dom node with expected id', () => {
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
     const id = 'foo';
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     actual.id = id;
 
-    const result = toHaveId({actual, equals}, id);
+    const result = toHaveId(ctx, id);
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -48,9 +52,13 @@ describe('toHaveId', () => {
   it('should pass without parameter', () => {
     const actual = document.createElement('div');
     const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
+
     actual.id = 'foo';
 
-    const result = toHaveId({actual, equals});
+    const result = toHaveId(ctx);
 
     expect(equals).not.toHaveBeenCalled();
     expect(result).toEqual({
@@ -64,11 +72,12 @@ describe('toHaveId', () => {
   });
 
   it('should pass with a dom node with regexp', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((x, y) => x === y);
     const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
     actual.id = 'foo';
 
-    const result = toHaveId({actual, equals}, /foo/);
+    const result = toHaveId(ctx, /foo/);
 
     expect(result).toEqual({
       pass: true,

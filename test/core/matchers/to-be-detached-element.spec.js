@@ -23,6 +23,7 @@
  */
 
 import {toBeDetachedElement} from '../../../src/core/matchers/to-be-detached-element';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toBeFocused', () => {
   let fixtures;
@@ -38,7 +39,9 @@ describe('toBeFocused', () => {
 
   it('should pass with a detached element', () => {
     const actual = document.createElement('input');
-    const result = toBeDetachedElement({actual});
+    const ctx = createFakeContext(actual);
+
+    const result = toBeDetachedElement(ctx);
 
     expect(result).toEqual({
       pass: true,
@@ -52,9 +55,11 @@ describe('toBeFocused', () => {
 
   it('should not pass with a non-detached element', () => {
     const actual = document.createElement('input');
+    const ctx = createFakeContext(actual);
+
     fixtures.appendChild(actual);
 
-    const result = toBeDetachedElement({actual});
+    const result = toBeDetachedElement(ctx);
 
     expect(result).toEqual({
       pass: false,

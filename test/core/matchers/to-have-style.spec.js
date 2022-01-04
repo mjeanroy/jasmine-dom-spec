@@ -23,6 +23,7 @@
  */
 
 import {toHaveStyle} from '../../../src/core/matchers/to-have-style';
+import {createFakeContext} from '../test/create-fake-context';
 
 describe('toHaveStyle', () => {
   let fixtures;
@@ -41,11 +42,14 @@ describe('toHaveStyle', () => {
     const actual = document.createElement('input');
     const name = 'fontSize';
     const value = '10px';
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     fixtures.appendChild(actual);
     actual.style[name] = value;
 
-    const result = toHaveStyle({actual, equals}, name, value);
+    const result = toHaveStyle(ctx, name, value);
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -63,11 +67,14 @@ describe('toHaveStyle', () => {
     const actual = document.createElement('input');
     const name = 'fontSize';
     const value = '10px';
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     fixtures.appendChild(actual);
     actual.style[name] = value;
 
-    const result = toHaveStyle({actual, equals}, {
+    const result = toHaveStyle(ctx, {
       [name]: value,
     });
 
@@ -87,11 +94,14 @@ describe('toHaveStyle', () => {
     const actual = document.createElement('input');
     const name = 'fontSize';
     const value = '10px';
+    const ctx = createFakeContext(actual, {
+      equals,
+    });
 
     fixtures.appendChild(actual);
     actual.style[name] = value;
 
-    const result = toHaveStyle({actual, equals}, 'font-size', value);
+    const result = toHaveStyle(ctx, 'font-size', value);
 
     expect(equals).toHaveBeenCalled();
     expect(result).toEqual({
@@ -105,15 +115,15 @@ describe('toHaveStyle', () => {
   });
 
   it('should pass with a dom node with expected regexp style', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
     const actual = document.createElement('input');
     const name = 'fontSize';
     const value = /10/;
+    const ctx = createFakeContext(actual);
 
     fixtures.appendChild(actual);
     actual.style[name] = '10px';
 
-    const result = toHaveStyle({actual, equals}, 'font-size', value);
+    const result = toHaveStyle(ctx, 'font-size', value);
 
     expect(result).toEqual({
       pass: true,
@@ -126,15 +136,15 @@ describe('toHaveStyle', () => {
   });
 
   it('should pass with a dom node with expected style as object containing regexp', () => {
-    const equals = jasmine.createSpy('equals').and.callFake((a, b) => a === b);
     const actual = document.createElement('input');
     const name = 'fontSize';
     const value = /10/;
+    const ctx = createFakeContext(actual);
 
     fixtures.appendChild(actual);
     actual.style[name] = '10px';
 
-    const result = toHaveStyle({actual, equals}, {
+    const result = toHaveStyle(ctx, {
       [name]: value,
     });
 
