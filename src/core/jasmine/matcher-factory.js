@@ -25,13 +25,12 @@
 import {version} from './version.js';
 import {jasmine1MatcherFactory} from './j1-matcher-factory.js';
 import {jasmine2MatcherFactory} from './j2-matcher-factory.js';
+import {jasmine3MatcherFactory} from './j3-matcher-factory.js';
 
 const factories = {
   1: jasmine1MatcherFactory,
-
-  // Api for custom matchers with jasmine 2 and jasmine 3 is the same.
   2: jasmine2MatcherFactory,
-  3: jasmine2MatcherFactory,
+  3: jasmine3MatcherFactory,
 };
 
 /**
@@ -39,8 +38,8 @@ const factories = {
  * The created matcher will depends on the jasmine's version being used.
  *
  * @param {function} matcher Generic matcher function.
- * @return {function} A matcher that can be used with Jasmine 1.3.X / 2.X.X.
+ * @return {function} A matcher that can be used with Jasmine 1.3.X / 2.X.X / 3.X.X.
  */
 export function createMatcher(matcher) {
-  return (factories[version] || jasmine2MatcherFactory)(matcher);
+  return (factories[version] || jasmine3MatcherFactory)(matcher);
 }
