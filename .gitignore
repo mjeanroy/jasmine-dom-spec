@@ -22,6 +22,9 @@
 # THE SOFTWARE.
 ##
 
+# IDE
+/.idea
+
 # Node
 /node_modules
 /npm-debug.log
