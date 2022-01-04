@@ -22,6 +22,18 @@
  * THE SOFTWARE.
  */
 
-export {version} from './version';
-export {createMatcher} from './matcher-factory';
-export {negateMessage} from './negate-message';
+import {pp} from '../../../src/core/jasmine/pp.js';
+
+/**
+ * Create fake matcher context to use in unit tests.
+ *
+ * @param {*} actual Actual Object.
+ * @param {Object} options Optional parameter.
+ * @returns {Object} Matcher context.
+ */
+export function createFakePrettyPrinter() {
+  return jasmine.createSpy('pp').and.callFake((value) => {
+    const prettyPrinter = jasmine.makePrettyPrinter ? jasmine.makePrettyPrinter() : jasmine.pp;
+    return pp(value, prettyPrinter);
+  });
+}

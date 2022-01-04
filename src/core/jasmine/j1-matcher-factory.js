@@ -23,6 +23,7 @@
  */
 
 import {negateMessage} from './negate-message.js';
+import {pp} from './pp.js';
 
 /**
  * This factory will create a matcher supported by Jasmine 1.3.X.
@@ -62,6 +63,11 @@ export function jasmine1MatcherFactory(fn) {
       // Adapter for custom equality.
       equals(...equalsArgs) {
         return equals_.apply(env, equalsArgs);
+      },
+
+      // Adapter for pretty printer function.
+      pp(value) {
+        return pp(value);
       },
     };
 

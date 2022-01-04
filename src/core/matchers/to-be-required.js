@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {ensureHasIn} from '../preconditions/ensure-has-in';
 import {toDomElement} from '../util/to-dom-element';
 
@@ -40,8 +39,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeRequired({actual}) {
-  const node = toDomElement(actual);
+export function toBeRequired({actual, pp}) {
+  const node = toDomElement(actual, pp);
 
   ensureHasIn(node, 'required', 'Cannot run `toBeRequired` matcher on a DOM node without `required` property');
 

@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {dashToCamel} from '../util/dash-to-camel';
 import {every} from '../util/every';
 import {isObject} from '../util/is-object';
@@ -52,8 +51,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveStyle({actual, equals}, styleName, styleValue) {
-  const node = toDomElement(actual);
+export function toHaveStyle({actual, equals, pp}, styleName, styleValue) {
+  const node = toDomElement(actual, pp);
   const expected = isObject(styleName) ? styleName : {[styleName]: styleValue};
   const props = keys(expected);
   const ok = every(props, (name) => {

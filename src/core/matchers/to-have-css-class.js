@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {isArray} from '../util/is-array';
 import {every} from '../util/every';
 import {has} from '../util/has';
@@ -58,8 +57,8 @@ import {trim} from '../util/trim';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveCssClass({actual}, expected) {
-  const node = toDomElement(actual);
+export function toHaveCssClass({actual, pp}, expected) {
+  const node = toDomElement(actual, pp);
   const actualClasses = extract(node.className);
   const expectedClasses = isArray(expected) ? expected : extract(expected);
   const mapOfClasses = indexBy(actualClasses, (x) => x);

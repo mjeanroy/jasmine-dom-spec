@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {every} from '../util/every';
 import {isObject} from '../util/is-object';
 import {isUndefined} from '../util/is-undefined';
@@ -50,8 +49,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveAttrs({actual, equals}, attrName, attrValue) {
-  const node = toDomElement(actual);
+export function toHaveAttrs({actual, equals, pp}, attrName, attrValue) {
+  const node = toDomElement(actual, pp);
   const expected = isObject(attrName) ? attrName : {[attrName]: attrValue};
   const props = keys(expected);
   const ok = every(props, (attr) => {

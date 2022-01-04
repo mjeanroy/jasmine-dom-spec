@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {isString} from './is-string';
 import {isNodeCollection} from './is-node-collection';
 import {isJqueryObject} from './is-jquery-object';
@@ -35,16 +34,17 @@ import {isDomElement} from './is-dom-element';
  * - Throw error otherwise.
  *
  * @param {*} value Value to translate to a DOM element.
+ * @param {function} pp A pretty printer function used to format error message in case of an error.
  * @return {HTMLElement} The DOM element.
  */
-export function toDomElement(value) {
+export function toDomElement(value, pp) {
   if (isDomElement(value)) {
     return value;
   }
 
   const nodes = isString(value) ? createNodes(value) : value;
   if (isNodeCollection(nodes) || isJqueryObject(nodes) || isArray(nodes)) {
-    return extractSingleNode(nodes);
+    return extractSingleNode(nodes, pp);
   }
 
   throw new Error(`Expect DOM node but found: ${pp(value)}`);
@@ -68,9 +68,10 @@ function createNodes(html) {
  * - Throw error if collection contains more than one element.
  *
  * @param {Object} value Array like object (such as `NodeList`, `HTMLCollection` or `jQuery` instance).
+ * @param {function} pp A pretty printer function used to format error message in case of an error.
  * @return {HTMLElement} DOM Node.
  */
-function extractSingleNode(value) {
+function extractSingleNode(value, pp) {
   const size = value.length;
   if (size === 0) {
     throw new Error('Expect valid node but found empty node list');

@@ -24,6 +24,7 @@
  */
 
 import {negateMessage} from './negate-message.js';
+import {pp} from './pp.js';
 
 /**
  * This factory will create a matcher supported by Jasmine 2.X.X.
@@ -50,6 +51,11 @@ export function jasmine2MatcherFactory(fn) {
       // See: https://jasmine.github.io/2.5/custom_equality.html
       equals(a, b) {
         return util.equals(a, b, customEqualityTesters);
+      },
+
+      // Adapter for pretty printer function.
+      pp(value) {
+        return pp(value);
       },
     };
 

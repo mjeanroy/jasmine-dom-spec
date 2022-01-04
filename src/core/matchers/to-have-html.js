@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {isPrimitive} from '../util/is-primitive';
 import {matchOrEquals} from '../util/match-or-equals';
 import {toDomElement} from '../util/to-dom-element';
@@ -46,8 +45,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveHtml({actual, equals}, html) {
-  const node = toDomElement(actual);
+export function toHaveHtml({actual, equals, pp}, html) {
+  const node = toDomElement(actual, pp);
   const actualHtml = node.innerHTML;
 
   // Html may be a string **or** a jasmine asymetric matcher object.

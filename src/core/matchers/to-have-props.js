@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {every} from '../util/every';
 import {isObject} from '../util/is-object';
 import {keys} from '../util/keys';
@@ -51,8 +50,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveProps({actual, equals}, propName, propValue) {
-  const node = toDomElement(actual);
+export function toHaveProps({actual, equals, pp}, propName, propValue) {
+  const node = toDomElement(actual, pp);
   const expected = isObject(propName) ? propName : {[propName]: propValue};
   const props = keys(expected);
   const ok = every(props, (p) => (

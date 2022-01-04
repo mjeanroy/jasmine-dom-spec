@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {ensureHasIn} from '../preconditions/ensure-has-in';
 import {toDomElement} from '../util/to-dom-element';
 
@@ -41,8 +40,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeChecked({actual}) {
-  const node = toDomElement(actual);
+export function toBeChecked({actual, pp}) {
+  const node = toDomElement(actual, pp);
 
   ensureHasIn(node, 'checked', 'Cannot run `toBeChecked` matcher on a DOM node without `checked` property');
 

@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {isNil} from '../util/is-nil';
 import {isUndefined} from '../util/is-undefined';
 import {matchOrEquals} from '../util/match-or-equals';
@@ -45,8 +44,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveId({actual, equals}, id) {
-  const node = toDomElement(actual);
+export function toHaveId({actual, equals, pp}, id) {
+  const node = toDomElement(actual, pp);
   const actualId = node.id;
   const checkId = !isUndefined(id);
 

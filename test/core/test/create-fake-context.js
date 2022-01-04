@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+import {createFakePrettyPrinter} from './create-fake-pretty-printer';
+
 /**
  * Create fake matcher context to use in unit tests.
  *
@@ -32,6 +34,7 @@
 export function createFakeContext(actual, options = {}) {
   return {
     actual,
+    pp: options.pp || createFakePrettyPrinter(),
     equals: options.equals || jasmine.createSpy('equals').and.callFake((x, y) => (
       x === y
     )),

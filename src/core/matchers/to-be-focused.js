@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -39,8 +38,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeFocused({actual}) {
-  const node = toDomElement(actual);
+export function toBeFocused({actual, pp}) {
+  const node = toDomElement(actual, pp);
   const activeElement = document.activeElement;
   return {
     pass: activeElement === node,

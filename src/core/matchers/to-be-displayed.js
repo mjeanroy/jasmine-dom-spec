@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {isIn} from '../util/is-in';
 import {toDomElement} from '../util/to-dom-element';
 
@@ -42,8 +41,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.4.0
  */
-export function toBeDisplayed({actual, equals}) {
-  const node = toDomElement(actual);
+export function toBeDisplayed({actual, equals, pp}) {
+  const node = toDomElement(actual, pp);
   const display = getCurrentDisplayStyleValue(node);
   const ok = !equals(display, 'none');
 

@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {toDomElement} from '../util/to-dom-element';
 
 /**
@@ -40,8 +39,8 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeDetachedElement({actual}) {
-  const node = toDomElement(actual);
+export function toBeDetachedElement({actual, pp}) {
+  const node = toDomElement(actual, pp);
 
   let isDetached = true;
   let parentNode = node;

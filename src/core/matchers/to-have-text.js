@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../jasmine/index';
 import {isPrimitive} from '../util/is-primitive';
 import {matchOrEquals} from '../util/match-or-equals';
 import {toDomElement} from '../util/to-dom-element';
@@ -47,9 +46,9 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveText({actual, equals}, text) {
+export function toHaveText({actual, equals, pp}, text) {
   // IE8 does not know textContent but knows innerText.
-  const node = toDomElement(actual);
+  const node = toDomElement(actual, pp);
   const actualText = 'textContent' in node ? node.textContent : node.innerText;
   const expectedText = isPrimitive(text) ? text.toString() : text;
   const ok = matchOrEquals(actualText, expectedText, equals);

@@ -76,6 +76,7 @@ describe('jasmine2MatcherFactory', () => {
         actual: actual,
         isNot: false,
         equals: jasmine.any(Function),
+        pp: jasmine.any(Function),
       });
 
       expect(args[1]).toBe(arg0);
@@ -114,6 +115,7 @@ describe('jasmine2MatcherFactory', () => {
         actual: actual,
         isNot: true,
         equals: jasmine.any(Function),
+        pp: jasmine.any(Function),
       });
     });
 
