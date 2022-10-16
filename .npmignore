@@ -35,4 +35,5 @@
 /src
 /test
 /scripts
+/*.iml
 /npm-debug.log
