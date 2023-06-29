@@ -37,7 +37,7 @@
     "@rollup/plugin-babel": "6.0.3",
     "@rollup/plugin-commonjs": "25.0.0",
     "@rollup/plugin-node-resolve": "15.1.0",
-    "@types/jasmine": "4.3.1",
+    "@types/jasmine": "4.3.5",
     "@typescript-eslint/eslint-plugin": "5.59.6",
     "@typescript-eslint/parser": "5.59.6",
     "ansi-colors": "4.1.3",
