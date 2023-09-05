@@ -2,7 +2,7 @@
   "env": {
     "node": true,
     "browser": false,
-    "jasmine": false
+    "jasmine": false,
+    "es6": true
   }
 }
-  
