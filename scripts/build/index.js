@@ -24,7 +24,7 @@
 
 'use strict';
 
-const path = require('path');
+const path = require('node:path');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const rollup = require('rollup');

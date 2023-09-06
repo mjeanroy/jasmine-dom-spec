@@ -26,7 +26,7 @@
  * Karma Configuration.
  */
 
-const path = require('path');
+const path = require('node:path');
 const babel = require('@rollup/plugin-babel').default;
 const nodeResolve = require('@rollup/plugin-node-resolve').default;
 const commonjs = require('@rollup/plugin-commonjs');

@@ -24,7 +24,7 @@
 
 'use strict';
 
-const path = require('path');
+const path = require('node:path');
 const karma = require('karma');
 const log = require('../log');
 
