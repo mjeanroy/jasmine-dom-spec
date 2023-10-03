@@ -31,6 +31,13 @@ const conf = require('./karma.common.conf.js');
 
 module.exports = (config) => {
   config.set(_.extend(conf(config), {
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-rollup-preprocessor'),
+      require('karma-chrome-launcher'),
+      require('karma-jasmine-html-reporter'),
+    ],
+
     singleRun: false,
     autoWatch: true,
     browsers: ['Chrome'],
