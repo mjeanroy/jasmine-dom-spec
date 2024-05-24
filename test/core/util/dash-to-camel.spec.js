@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {dashToCamel} from '../../../src/core/util/dash-to-camel.js';
+import { dashToCamel } from '../../../src/core/util/dash-to-camel';
 
 describe('dashToCamel', () => {
   it('should convert dash-case to camelCase', () => {

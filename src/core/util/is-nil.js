@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
-import {isUndefined} from './is-undefined';
+import { isNull } from './is-null';
+import { isUndefined } from './is-undefined';
 
 /**
  * Check that a given value is NIL (`null` or `undefined`).

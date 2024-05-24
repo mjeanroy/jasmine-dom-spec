@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {some} from '../../../src/core/util/some.js';
+import { some } from '../../../src/core/util/some';
 
 describe('some', () => {
   it('should return true if predicate returns a truthy value for at least one element', () => {

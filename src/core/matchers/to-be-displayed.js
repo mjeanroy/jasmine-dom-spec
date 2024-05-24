@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {isIn} from '../util/is-in';
-import {toDomElement} from '../util/to-dom-element';
+import { isIn } from '../util/is-in';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is displayed: it means that it does not
@@ -41,7 +41,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.4.0
  */
-export function toBeDisplayed({actual, equals, pp}) {
+export function toBeDisplayed({ actual, equals, pp }) {
   const node = toDomElement(actual, pp);
   const display = getCurrentDisplayStyleValue(node);
   const ok = !equals(display, 'none');

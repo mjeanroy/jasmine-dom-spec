@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {toDomElement} from '../util/to-dom-element';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object has focus on the active document window (note that if
@@ -38,9 +38,9 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeFocused({actual, pp}) {
+export function toBeFocused({ actual, pp }) {
   const node = toDomElement(actual, pp);
-  const activeElement = document.activeElement;
+  const { activeElement } = document;
   return {
     pass: activeElement === node,
     message() {

@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveValue} from '../../../src/core/matchers/to-have-value';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveValue } from '../../../src/core/matchers/to-have-value';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveValue', () => {
   it('should pass with a dom node with expected value', () => {
@@ -45,7 +45,7 @@ describe('toHaveValue', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`
+      `Expect '${actual.outerHTML}' [NOT] to have value 'foo' but was 'foo'`,
     );
   });
 
@@ -63,7 +63,7 @@ describe('toHaveValue', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have value /foo/ but was 'foo'`
+      `Expect '${actual.outerHTML}' [NOT] to have value /foo/ but was 'foo'`,
     );
   });
 
@@ -71,7 +71,7 @@ describe('toHaveValue', () => {
     const actual = document.createElement('div');
     const ctx = createFakeContext(actual);
     expect(() => toHaveValue(ctx)).toThrow(new Error(
-        'Cannot run `toHaveValue` matcher on a DOM node without `value` property'
+      'Cannot run `toHaveValue` matcher on a DOM node without `value` property',
     ));
   });
 });

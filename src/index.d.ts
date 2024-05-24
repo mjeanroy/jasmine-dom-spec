@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+/* eslint-disable no-use-before-define */
+
 type NodeId = string | RegExp | jasmine.Any;
 type NodeTagName = string | RegExp | jasmine.Any;
 type NodeContent = string | number | boolean | RegExp | jasmine.Any;

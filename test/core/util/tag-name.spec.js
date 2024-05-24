@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {tagName} from '../../../src/core/util/tag-name.js';
+import { tagName } from '../../../src/core/util/tag-name';
 
 describe('tagName', () => {
   it('should get [object Null] with null', () => {

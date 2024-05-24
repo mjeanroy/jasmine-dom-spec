@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {toBeDisabled} from '../../../src/core/matchers/to-be-disabled';
-import {assumeNotIE} from '../test/assume-not-ie';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeDisabled } from '../../../src/core/matchers/to-be-disabled';
+import { assumeNotIE } from '../test/assume-not-ie';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeDisabled', () => {
   it('should pass with a disabled input', () => {
@@ -41,7 +41,7 @@ describe('toBeDisabled', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be disabled`
+      `Expect '${actual.outerHTML}' [NOT] to be disabled`,
     );
   });
 
@@ -57,7 +57,7 @@ describe('toBeDisabled', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be disabled`
+      `Expect '${actual.outerHTML}' [NOT] to be disabled`,
     );
   });
 
@@ -69,7 +69,7 @@ describe('toBeDisabled', () => {
     const actual = document.createElement('div');
     const ctx = createFakeContext(actual);
     expect(() => toBeDisabled(ctx)).toThrow(new Error(
-        'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property'
+      'Cannot run `toBeDisabled` matcher on a DOM node without `disabled` property',
     ));
   });
 });

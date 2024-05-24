@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {has} from './has';
-import {isNull} from './is-null';
-import {isUndefined} from './is-undefined';
+import { has } from './has';
+import { isNull } from './is-null';
+import { isUndefined } from './is-undefined';
 
 /**
  * Return the tag name of the object (a.k.a the result of `Object.prototype.toString`).

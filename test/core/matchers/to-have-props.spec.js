@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveProps} from '../../../src/core/matchers/to-have-props';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveProps } from '../../../src/core/matchers/to-have-props';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveProps', () => {
   it('should pass with a dom node with expected id', () => {
@@ -44,7 +44,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: true })`,
     );
   });
 
@@ -66,7 +66,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ required: false })`,
     );
   });
 
@@ -84,7 +84,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/ })`
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/ })`,
     );
   });
 
@@ -106,7 +106,7 @@ describe('toHaveProps', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/, required: /true/ })`
+      `Expect '${actual.outerHTML}' [NOT] to have properties Object({ id: /awesome-id/, required: /true/ })`,
     );
   });
 });

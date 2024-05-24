@@ -22,11 +22,11 @@
  * THE SOFTWARE.
  */
 
-import {every} from '../util/every';
-import {isObject} from '../util/is-object';
-import {keys} from '../util/keys';
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
+import { every } from '../util/every';
+import { isObject } from '../util/is-object';
+import { keys } from '../util/keys';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object has expected properties.
@@ -50,9 +50,9 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveProps({actual, equals, pp}, propName, propValue) {
+export function toHaveProps({ actual, equals, pp }, propName, propValue) {
   const node = toDomElement(actual, pp);
-  const expected = isObject(propName) ? propName : {[propName]: propValue};
+  const expected = isObject(propName) ? propName : { [propName]: propValue };
   const props = keys(expected);
   const ok = every(props, (p) => (
     matchOrEquals(node[p], expected[p], equals)

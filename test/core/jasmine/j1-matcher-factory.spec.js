@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {jasmine1MatcherFactory} from '../../../src/core/jasmine/j1-matcher-factory.js';
+import { jasmine1MatcherFactory } from '../../../src/core/jasmine/j1-matcher-factory';
 
 describe('jasmine1MatcherFactory', () => {
   it('should create matcher function', () => {
@@ -49,7 +49,7 @@ describe('jasmine1MatcherFactory', () => {
       const arg0 = 0;
       const arg1 = 1;
       const jasmineContext = {
-        actual: actual,
+        actual,
         isNot: false,
         env: {
           equals_: jasmine.createSpy('equals_').and.returnValue(true),
@@ -61,7 +61,7 @@ describe('jasmine1MatcherFactory', () => {
       expect(result).toBe(true);
       expect(matcher).toHaveBeenCalled();
 
-      const args = matcher.calls.mostRecent().args;
+      const { args } = matcher.calls.mostRecent();
 
       expect(args.length).toBe(3);
       expect(args[1]).toBe(arg0);
@@ -69,7 +69,7 @@ describe('jasmine1MatcherFactory', () => {
 
       // Check for expected context.
       expect(args[0]).toEqual({
-        actual: actual,
+        actual,
         isNot: false,
         equals: jasmine.any(Function),
         pp: jasmine.any(Function),
@@ -89,7 +89,7 @@ describe('jasmine1MatcherFactory', () => {
       const arg0 = 0;
       const arg1 = 1;
       const jasmineContext = {
-        actual: actual,
+        actual,
         isNot: false,
         env: {
           equals_: jasmine.createSpy('equals_').and.returnValue(true),
@@ -119,7 +119,7 @@ describe('jasmine1MatcherFactory', () => {
       const arg0 = 0;
       const arg1 = 1;
       const jasmineContext = {
-        actual: actual,
+        actual,
         isNot: true,
         env: {
           equals_: jasmine.createSpy('equals_').and.returnValue(true),
@@ -149,7 +149,7 @@ describe('jasmine1MatcherFactory', () => {
       const arg0 = 0;
       const arg1 = 1;
       const jasmineContext = {
-        actual: actual,
+        actual,
         isNot: false,
         env: {
           equals_: jasmine.createSpy('equals_').and.returnValue(true),

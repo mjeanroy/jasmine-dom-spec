@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {isArray} from './is-array';
-import {isNil} from './is-nil';
-import {isRegExp} from './is-regexp';
+import { isArray } from './is-array';
+import { isNil } from './is-nil';
+import { isRegExp } from './is-regexp';
 
 /**
  * Check if a `string` match a regexp or is equal to an expected other `string`

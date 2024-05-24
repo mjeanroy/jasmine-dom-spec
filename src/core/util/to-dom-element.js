@@ -22,11 +22,11 @@
  * THE SOFTWARE.
  */
 
-import {isString} from './is-string';
-import {isNodeCollection} from './is-node-collection';
-import {isJqueryObject} from './is-jquery-object';
-import {isArray} from './is-array';
-import {isDomElement} from './is-dom-element';
+import { isString } from './is-string';
+import { isNodeCollection } from './is-node-collection';
+import { isJqueryObject } from './is-jquery-object';
+import { isArray } from './is-array';
+import { isDomElement } from './is-dom-element';
 
 /**
  * Translate a value to a valid DOM Node:

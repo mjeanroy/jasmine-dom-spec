@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {ensureHasIn} from '../preconditions/ensure-has-in';
-import {toDomElement} from '../util/to-dom-element';
+import { ensureHasIn } from '../preconditions/ensure-has-in';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with a property `required` equal
@@ -39,7 +39,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeRequired({actual, pp}) {
+export function toBeRequired({ actual, pp }) {
   const node = toDomElement(actual, pp);
 
   ensureHasIn(node, 'required', 'Cannot run `toBeRequired` matcher on a DOM node without `required` property');

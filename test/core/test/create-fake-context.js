@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {createFakePrettyPrinter} from './create-fake-pretty-printer';
+import { createFakePrettyPrinter } from './create-fake-pretty-printer';
 
 /**
  * Create fake matcher context to use in unit tests.

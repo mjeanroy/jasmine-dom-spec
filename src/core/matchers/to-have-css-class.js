@@ -22,18 +22,18 @@
  * THE SOFTWARE.
  */
 
-import {isArray} from '../util/is-array';
-import {every} from '../util/every';
-import {has} from '../util/has';
-import {filter} from '../util/filter';
-import {indexBy} from '../util/index-by';
-import {isRegExp} from '../util/is-regexp';
-import {isTruthy} from '../util/is-truthy';
-import {map} from '../util/map';
-import {matchOrEquals} from '../util/match-or-equals';
-import {some} from '../util/some';
-import {toDomElement} from '../util/to-dom-element';
-import {trim} from '../util/trim';
+import { isArray } from '../util/is-array';
+import { every } from '../util/every';
+import { has } from '../util/has';
+import { filter } from '../util/filter';
+import { indexBy } from '../util/index-by';
+import { isRegExp } from '../util/is-regexp';
+import { isTruthy } from '../util/is-truthy';
+import { map } from '../util/map';
+import { matchOrEquals } from '../util/match-or-equals';
+import { some } from '../util/some';
+import { toDomElement } from '../util/to-dom-element';
+import { trim } from '../util/trim';
 
 /**
  * Check that the tested object has expected css classes.
@@ -57,14 +57,14 @@ import {trim} from '../util/trim';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveCssClass({actual, pp}, expected) {
+export function toHaveCssClass({ actual, pp }, expected) {
   const node = toDomElement(actual, pp);
   const actualClasses = extract(node.className);
   const expectedClasses = isArray(expected) ? expected : extract(expected);
   const mapOfClasses = indexBy(actualClasses, (x) => x);
   const ok = every(expectedClasses, (cssClass) => (
-    isRegExp(cssClass) ? matchOne(actualClasses, cssClass) : has(mapOfClasses, cssClass))
-  );
+    isRegExp(cssClass) ? matchOne(actualClasses, cssClass) : has(mapOfClasses, cssClass)
+  ));
 
   return {
     pass: ok,
@@ -99,6 +99,6 @@ function extract(classes) {
  */
 function matchOne(array, regexp) {
   return some(array, (x) => (
-    matchOrEquals(x, regexp, (x, y) => x === y)
+    matchOrEquals(x, regexp, (x1, x2) => x1 === x2)
   ));
 }

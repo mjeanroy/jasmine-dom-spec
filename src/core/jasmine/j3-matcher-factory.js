@@ -1,4 +1,3 @@
-
 /**
  * The MIT License (MIT)
  *
@@ -23,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {negateMessage} from './negate-message.js';
-import {pp} from './pp.js';
+import { negateMessage } from './negate-message';
+import { pp } from './pp';
 
 /**
  * This factory will create a matcher supported by Jasmine 3.X.X.
@@ -65,14 +64,14 @@ export function jasmine3MatcherFactory(fn) {
        *  `expect(value).toCustomMatcher(...)`.
        *
        * @param {*} actual Object being tested (the object being given in `expect` call).
-       * @param {Array<*>} args The matcher arguments (arguments being given to `toCustomMatcher` call).
+       * @param {Array<*>} compareArgs The matcher arguments (arguments being given to `toCustomMatcher` call).
        * @return {Object} The test result.
        */
-      compare(actual, ...args) {
+      compare(actual, ...compareArgs) {
         ctx.actual = actual;
         ctx.isNot = false;
 
-        const result = fn(...[ctx].concat(args));
+        const result = fn(...[ctx].concat(compareArgs));
         return {
           pass: result.pass,
           message() {
@@ -86,14 +85,14 @@ export function jasmine3MatcherFactory(fn) {
        *  `expect(value).not.toCustomMatcher(...)`.
        *
        * @param {*} actual Object being tested (the object being given in `expect` call).
-       * @param {Array<*>} args The matcher arguments (arguments being given to `toCustomMatcher` call).
+       * @param {Array<*>} compareArgs The matcher arguments (arguments being given to `toCustomMatcher` call).
        * @return {void}
        */
-      negativeCompare(actual, ...args) {
+      negativeCompare(actual, ...compareArgs) {
         ctx.actual = actual;
         ctx.isNot = true;
 
-        const result = fn(...[ctx].concat(args));
+        const result = fn(...[ctx].concat(compareArgs));
         return {
           pass: !result.pass,
           message() {

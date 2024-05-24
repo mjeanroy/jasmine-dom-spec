@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {is} from './is';
+import { is } from './is';
 
 /**
  * Check if a value is a regexp instance.

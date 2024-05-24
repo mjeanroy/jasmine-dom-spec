@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
-import {ensureHasIn} from '../preconditions/ensure-has-in';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
+import { ensureHasIn } from '../preconditions/ensure-has-in';
 
 /**
  * Check that the tested object is a DOM node property `value` equal
@@ -44,7 +44,7 @@ import {ensureHasIn} from '../preconditions/ensure-has-in';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveValue({actual, equals, pp}, expectedValue) {
+export function toHaveValue({ actual, equals, pp }, expectedValue) {
   const node = toDomElement(actual, pp);
 
   ensureHasIn(node, 'value', 'Cannot run `toHaveValue` matcher on a DOM node without `value` property');

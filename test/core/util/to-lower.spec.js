@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {toLower} from '../../../src/core/util/to-lower.js';
+import { toLower } from '../../../src/core/util/to-lower';
 
 describe('toLower', () => {
   it('should return lower case string', () => {

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
+import { isNull } from './is-null';
 
 /**
  * Check that a given value is an object.

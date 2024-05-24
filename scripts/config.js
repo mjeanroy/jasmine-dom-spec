@@ -23,6 +23,7 @@
  */
 
 const path = require('node:path');
+
 const ROOT = path.join(__dirname, '..');
 const SRC = path.join(ROOT, 'src');
 const DIST = path.join(ROOT, 'dist');

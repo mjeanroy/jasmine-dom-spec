@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeFocused} from '../../../src/core/matchers/to-be-focused';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeFocused } from '../../../src/core/matchers/to-be-focused';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeFocused', () => {
   let fixtures;
@@ -55,7 +55,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be focused`
+      `Expect '${actual.outerHTML}' [NOT] to be focused`,
     );
   });
 
@@ -73,7 +73,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be focused`
+      `Expect '${actual.outerHTML}' [NOT] to be focused`,
     );
   });
 });

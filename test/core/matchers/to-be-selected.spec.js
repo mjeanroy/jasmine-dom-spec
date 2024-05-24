@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeSelected} from '../../../src/core/matchers/to-be-selected';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeSelected } from '../../../src/core/matchers/to-be-selected';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeSelected', () => {
   it('should pass with a selected option', () => {
@@ -40,7 +40,7 @@ describe('toBeSelected', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be selected`
+      `Expect '${actual.outerHTML}' [NOT] to be selected`,
     );
   });
 
@@ -56,7 +56,7 @@ describe('toBeSelected', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be selected`
+      `Expect '${actual.outerHTML}' [NOT] to be selected`,
     );
   });
 
@@ -65,7 +65,7 @@ describe('toBeSelected', () => {
     const ctx = createFakeContext(actual);
 
     expect(() => toBeSelected(ctx)).toThrow(new Error(
-        'Cannot run `toBeSelected` matcher on a DOM node without `selected` property'
+      'Cannot run `toBeSelected` matcher on a DOM node without `selected` property',
     ));
   });
 });

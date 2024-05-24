@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-import {isNil} from '../util/is-nil';
-import {isUndefined} from '../util/is-undefined';
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
+import { isNil } from '../util/is-nil';
+import { isUndefined } from '../util/is-undefined';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with expected `id`.
@@ -44,7 +44,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveId({actual, equals, pp}, id) {
+export function toHaveId({ actual, equals, pp }, id) {
   const node = toDomElement(actual, pp);
   const actualId = node.id;
   const checkId = !isUndefined(id);
@@ -56,7 +56,7 @@ export function toHaveId({actual, equals, pp}, id) {
   return {
     pass,
     message() {
-      return `Expect ${pp(actual)} [NOT] to have id` + (checkId ? ` ${pp(id)} but was ${pp(actualId)}` : '');
+      return `Expect ${pp(actual)} [NOT] to have id${checkId ? ` ${pp(id)} but was ${pp(actualId)}` : ''}`;
     },
   };
 }

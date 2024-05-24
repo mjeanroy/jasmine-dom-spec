@@ -22,20 +22,20 @@
  * THE SOFTWARE.
  */
 
-export {toBeChecked} from './to-be-checked';
-export {toBeDetachedElement} from './to-be-detached-element';
-export {toBeDisabled} from './to-be-disabled';
-export {toBeDisplayed} from './to-be-displayed';
-export {toBeFocused} from './to-be-focused';
-export {toBeIndeterminate} from './to-be-indeterminate';
-export {toBeRequired} from './to-be-required';
-export {toBeSelected} from './to-be-selected';
-export {toHaveId} from './to-have-id';
-export {toHaveAttrs} from './to-have-attrs';
-export {toHaveCssClass} from './to-have-css-class';
-export {toHaveHtml} from './to-have-html';
-export {toHaveProps} from './to-have-props';
-export {toHaveStyle} from './to-have-style';
-export {toHaveTagName} from './to-have-tag-name';
-export {toHaveText} from './to-have-text';
-export {toHaveValue} from './to-have-value';
+export { toBeChecked } from './to-be-checked';
+export { toBeDetachedElement } from './to-be-detached-element';
+export { toBeDisabled } from './to-be-disabled';
+export { toBeDisplayed } from './to-be-displayed';
+export { toBeFocused } from './to-be-focused';
+export { toBeIndeterminate } from './to-be-indeterminate';
+export { toBeRequired } from './to-be-required';
+export { toBeSelected } from './to-be-selected';
+export { toHaveId } from './to-have-id';
+export { toHaveAttrs } from './to-have-attrs';
+export { toHaveCssClass } from './to-have-css-class';
+export { toHaveHtml } from './to-have-html';
+export { toHaveProps } from './to-have-props';
+export { toHaveStyle } from './to-have-style';
+export { toHaveTagName } from './to-have-tag-name';
+export { toHaveText } from './to-have-text';
+export { toHaveValue } from './to-have-value';

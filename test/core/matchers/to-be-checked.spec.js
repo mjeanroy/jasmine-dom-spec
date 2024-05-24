@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeChecked} from '../../../src/core/matchers/to-be-checked';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeChecked } from '../../../src/core/matchers/to-be-checked';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeChecked', () => {
   it('should pass with a checked checkbox', () => {
@@ -41,7 +41,7 @@ describe('toBeChecked', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be checked`
+      `Expect '${actual.outerHTML}' [NOT] to be checked`,
     );
   });
 
@@ -59,7 +59,7 @@ describe('toBeChecked', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be checked`
+      `Expect '${actual.outerHTML}' [NOT] to be checked`,
     );
   });
 
@@ -68,7 +68,7 @@ describe('toBeChecked', () => {
     const ctx = createFakeContext(actual);
 
     expect(() => toBeChecked(ctx)).toThrow(new Error(
-        'Cannot run `toBeChecked` matcher on a DOM node without `checked` property'
+      'Cannot run `toBeChecked` matcher on a DOM node without `checked` property',
     ));
   });
 });

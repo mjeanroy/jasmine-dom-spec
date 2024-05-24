@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {keys} from '../../../src/core/util/keys';
+import { keys } from '../../../src/core/util/keys';
 
 describe('keys', () => {
   it('should return all own keys of object', () => {

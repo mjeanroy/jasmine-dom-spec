@@ -22,12 +22,14 @@
  * THE SOFTWARE.
  */
 
+/* eslint-disable global-require */
+
 /**
  * Karma Configuration.
  */
 
 const _ = require('lodash');
-const commonConf = require('./karma.common.conf.js');
+const commonConf = require('./karma.common.conf');
 
 module.exports = (config) => {
   config.set(_.extend(commonConf(config), {

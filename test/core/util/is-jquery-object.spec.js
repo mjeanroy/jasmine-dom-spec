@@ -23,7 +23,7 @@
  */
 
 import $ from 'jquery';
-import {isJqueryObject} from '../../../src/core/util/is-jquery-object';
+import { isJqueryObject } from '../../../src/core/util/is-jquery-object';
 
 describe('isJqueryObject', () => {
   it('should return true if object is an instance of jQuery object', () => {

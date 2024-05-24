@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isFunction} from '../../../src/core/util/is-function';
+import { isFunction } from '../../../src/core/util/is-function';
 
 describe('isFunction', () => {
   it('should return true with a function', () => {

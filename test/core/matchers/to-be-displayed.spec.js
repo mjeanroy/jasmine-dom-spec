@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeDisplayed} from '../../../src/core/matchers/to-be-displayed';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeDisplayed } from '../../../src/core/matchers/to-be-displayed';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeDisplayed', () => {
   let fixtures;
@@ -54,7 +54,7 @@ describe('toBeDisplayed', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be displayed`
+      `Expect '${actual.outerHTML}' [NOT] to be displayed`,
     );
   });
 
@@ -77,7 +77,7 @@ describe('toBeDisplayed', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be displayed`
+      `Expect '${actual.outerHTML}' [NOT] to be displayed`,
     );
   });
 
@@ -96,7 +96,7 @@ describe('toBeDisplayed', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be displayed`
+      `Expect '${actual.outerHTML}' [NOT] to be displayed`,
     );
   });
 });

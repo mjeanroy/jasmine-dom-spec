@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {is} from './is';
+import { is } from './is';
 
 /**
  * Check if the parameter is a node list (i.e collections of nodes such as
