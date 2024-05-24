@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveCssClass} from '../../../src/core/matchers/to-have-css-class';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveCssClass } from '../../../src/core/matchers/to-have-css-class';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveCssClass', () => {
   it('should pass with a dom node with expected class', () => {
@@ -40,7 +40,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`
+      `Expect '${actual.outerHTML}' [NOT] to have css class 'foo'`,
     );
   });
 
@@ -58,7 +58,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`
+      `Expect '${actual.outerHTML}' [NOT] to have css class 'bar foo'`,
     );
   });
 
@@ -76,7 +76,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`,
     );
   });
 
@@ -94,7 +94,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`
+      `Expect '${actual.outerHTML}' [NOT] to have css class 'foo bar'`,
     );
   });
 
@@ -112,7 +112,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ 'foo', 'bar' ]`,
     );
   });
 
@@ -130,7 +130,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class /foo/`
+      `Expect '${actual.outerHTML}' [NOT] to have css class /foo/`,
     );
   });
 
@@ -148,7 +148,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`,
     );
   });
 
@@ -166,7 +166,7 @@ describe('toHaveCssClass', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`
+      `Expect '${actual.outerHTML}' [NOT] to have css class [ /foo/, /bar/ ]`,
     );
   });
 });

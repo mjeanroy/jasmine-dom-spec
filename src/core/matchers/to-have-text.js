@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {isPrimitive} from '../util/is-primitive';
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
+import { isPrimitive } from '../util/is-primitive';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with expected text content.
@@ -46,7 +46,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveText({actual, equals, pp}, text) {
+export function toHaveText({ actual, equals, pp }, text) {
   // IE8 does not know textContent but knows innerText.
   const node = toDomElement(actual, pp);
   const actualText = 'textContent' in node ? node.textContent : node.innerText;

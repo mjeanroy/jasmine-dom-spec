@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isDomElement} from '../util/is-dom-element';
+import { isDomElement } from '../util/is-dom-element';
 
 /**
  * Pretty-Print object (use `jasmine.pp` by default).

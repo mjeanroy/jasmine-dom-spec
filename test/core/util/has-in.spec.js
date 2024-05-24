@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {hasIn} from '../../../src/core/util/has-in';
+import { hasIn } from '../../../src/core/util/has-in';
 
 describe('hasIn', () => {
   it('should return true if object has key', () => {

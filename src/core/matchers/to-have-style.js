@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-import {dashToCamel} from '../util/dash-to-camel';
-import {every} from '../util/every';
-import {isObject} from '../util/is-object';
-import {keys} from '../util/keys';
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
+import { dashToCamel } from '../util/dash-to-camel';
+import { every } from '../util/every';
+import { isObject } from '../util/is-object';
+import { keys } from '../util/keys';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object has expected style value (the css style property
@@ -51,9 +51,9 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveStyle({actual, equals, pp}, styleName, styleValue) {
+export function toHaveStyle({ actual, equals, pp }, styleName, styleValue) {
   const node = toDomElement(actual, pp);
-  const expected = isObject(styleName) ? styleName : {[styleName]: styleValue};
+  const expected = isObject(styleName) ? styleName : { [styleName]: styleValue };
   const props = keys(expected);
   const ok = every(props, (name) => {
     const camelCaseName = dashToCamel(name);

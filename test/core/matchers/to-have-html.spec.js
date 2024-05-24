@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveHtml} from '../../../src/core/matchers/to-have-html';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveHtml } from '../../../src/core/matchers/to-have-html';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveHtml', () => {
   it('should pass with a dom node with expected html content', () => {
@@ -44,7 +44,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`
+      `Expect '${actual.outerHTML}' [NOT] to have HTML '${expected.innerHTML}' but was '${actual.innerHTML}'`,
     );
   });
 
@@ -63,7 +63,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`
+      `Expect '${actual.outerHTML}' [NOT] to have HTML '1' but was '1'`,
     );
   });
 
@@ -82,7 +82,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`
+      `Expect '${actual.outerHTML}' [NOT] to have HTML 'true' but was 'true'`,
     );
   });
 
@@ -101,7 +101,7 @@ describe('toHaveHtml', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have HTML /true/ but was 'true'`
+      `Expect '${actual.outerHTML}' [NOT] to have HTML /true/ but was 'true'`,
     );
   });
 });

@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {version, createMatcher} from './core/jasmine/index';
-import {forEach} from './core/util/for-each';
-import {keys} from './core/util/keys';
+import { version, createMatcher } from './core/jasmine/index';
+import { forEach } from './core/util/for-each';
+import { keys } from './core/util/keys';
 import * as matchers from './core/matchers/index';
 
 // Create matchers and add it to the current jasmine environment.

@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeDetachedElement} from '../../../src/core/matchers/to-be-detached-element';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeDetachedElement } from '../../../src/core/matchers/to-be-detached-element';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeFocused', () => {
   let fixtures;
@@ -49,7 +49,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be detached element`
+      `Expect '${actual.outerHTML}' [NOT] to be detached element`,
     );
   });
 
@@ -67,7 +67,7 @@ describe('toBeFocused', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be detached element`
+      `Expect '${actual.outerHTML}' [NOT] to be detached element`,
     );
   });
 });

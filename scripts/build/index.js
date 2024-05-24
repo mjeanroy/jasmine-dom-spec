@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-'use strict';
-
 const path = require('node:path');
 const gulp = require('gulp');
 const rename = require('gulp-rename');
@@ -40,8 +38,8 @@ const config = require('../config');
 function bundle() {
   log.debug('Generating rollup bundle');
   return rollup
-      .rollup(rollupConf)
-      .then((bundle) => bundle.write(rollupConf.output));
+    .rollup(rollupConf)
+    .then((bundleOutput) => bundleOutput.write(rollupConf.output));
 }
 
 /**
@@ -62,11 +60,11 @@ function typings() {
   log.debug(`Copy typings from ${src} to ${dest}`);
 
   return gulp.src(path.join(config.src, src))
-      .pipe(rename(dest))
-      .pipe(gulp.dest(config.dist));
+    .pipe(rename(dest))
+    .pipe(gulp.dest(config.dist));
 }
 
 module.exports = gulp.series(
-    bundle,
-    typings
+  bundle,
+  typings,
 );

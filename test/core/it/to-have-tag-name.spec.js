@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import '../../../src/index.js';
+import '../../../src/index';
 
 describe('toHaveTagName', () => {
   it('should pass with a DOM node', () => {

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isString} from './is-string';
+import { isString } from './is-string';
 
 /**
  * Turn a `string` to a lower case string.

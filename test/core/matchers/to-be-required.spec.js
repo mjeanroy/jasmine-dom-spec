@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeRequired} from '../../../src/core/matchers/to-be-required';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeRequired } from '../../../src/core/matchers/to-be-required';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeRequired', () => {
   it('should pass with a required input', () => {
@@ -40,7 +40,7 @@ describe('toBeRequired', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
+      `Expect '${actual.outerHTML}' [NOT] to be required`,
     );
   });
 
@@ -56,7 +56,7 @@ describe('toBeRequired', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be required`
+      `Expect '${actual.outerHTML}' [NOT] to be required`,
     );
   });
 
@@ -65,7 +65,7 @@ describe('toBeRequired', () => {
     const ctx = createFakeContext(actual);
 
     expect(() => toBeRequired(ctx)).toThrow(new Error(
-        'Cannot run `toBeRequired` matcher on a DOM node without `required` property'
+      'Cannot run `toBeRequired` matcher on a DOM node without `required` property',
     ));
   });
 });

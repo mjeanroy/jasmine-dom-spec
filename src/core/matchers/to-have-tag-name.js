@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
-import {toLower} from '../util/to-lower';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
+import { toLower } from '../util/to-lower';
 
 /**
  * Check that the tested object is a DOM node with expected tag name.
@@ -42,7 +42,7 @@ import {toLower} from '../util/to-lower';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveTagName({actual, equals, pp}, tagName) {
+export function toHaveTagName({ actual, equals, pp }, tagName) {
   // IE8 does not know textContent but knows innerText.
   const node = toDomElement(actual, pp);
   const actualTagName = node.tagName;

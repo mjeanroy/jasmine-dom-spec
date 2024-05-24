@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveStyle} from '../../../src/core/matchers/to-have-style';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveStyle } from '../../../src/core/matchers/to-have-style';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveStyle', () => {
   let fixtures;
@@ -58,7 +58,7 @@ describe('toHaveStyle', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`,
     );
   });
 
@@ -85,7 +85,7 @@ describe('toHaveStyle', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: '10px' })`,
     );
   });
 
@@ -110,7 +110,7 @@ describe('toHaveStyle', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: '10px' })`
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: '10px' })`,
     );
   });
 
@@ -131,7 +131,7 @@ describe('toHaveStyle', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: /10/ })`
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ font-size: /10/ })`,
     );
   });
 
@@ -154,7 +154,7 @@ describe('toHaveStyle', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: /10/ })`
+      `Expect '${actual.outerHTML}' [NOT] to have styles Object({ fontSize: /10/ })`,
     );
   });
 });

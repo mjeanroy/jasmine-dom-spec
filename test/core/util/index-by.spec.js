@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {indexBy} from '../../../src/core/util/index-by';
+import { indexBy } from '../../../src/core/util/index-by';
 
 describe('indexBy', () => {
   it('should index elements using predicate', () => {

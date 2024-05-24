@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isObject} from '../../../src/core/util/is-object.js';
+import { isObject } from '../../../src/core/util/is-object';
 
 describe('isObject', () => {
   it('should return true with object', () => {

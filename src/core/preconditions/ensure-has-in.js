@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {hasIn} from '../util/has-in';
+import { hasIn } from '../util/has-in';
 
 /**
  * Check that given object has given property in its prototype chain.

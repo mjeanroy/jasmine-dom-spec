@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isIn} from '../../../src/core/util/is-in';
+import { isIn } from '../../../src/core/util/is-in';
 
 describe('isIn', () => {
   it('should return true if object has key in its prototype chain', () => {

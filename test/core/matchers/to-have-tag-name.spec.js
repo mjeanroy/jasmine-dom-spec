@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveTagName} from '../../../src/core/matchers/to-have-tag-name';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveTagName } from '../../../src/core/matchers/to-have-tag-name';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveTagName', () => {
   it('should pass with a dom node with expected tag name', () => {
@@ -38,7 +38,7 @@ describe('toHaveTagName', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`
+      `Expect '${actual.outerHTML}' [NOT] to have tag name 'input' but was '${actual.tagName}'`,
     );
   });
 
@@ -54,7 +54,7 @@ describe('toHaveTagName', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have tag name /input|select/i but was '${actual.tagName}'`
+      `Expect '${actual.outerHTML}' [NOT] to have tag name /input|select/i but was '${actual.tagName}'`,
     );
   });
 });

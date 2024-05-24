@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toHaveId} from '../../../src/core/matchers/to-have-id';
-import {createFakeContext} from '../test/create-fake-context';
+import { toHaveId } from '../../../src/core/matchers/to-have-id';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toHaveId', () => {
   it('should pass with a dom node with expected id', () => {
@@ -45,7 +45,7 @@ describe('toHaveId', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`
+      `Expect '${actual.outerHTML}' [NOT] to have id 'foo' but was 'foo'`,
     );
   });
 
@@ -67,7 +67,7 @@ describe('toHaveId', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have id`
+      `Expect '${actual.outerHTML}' [NOT] to have id`,
     );
   });
 
@@ -85,7 +85,7 @@ describe('toHaveId', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to have id /foo/ but was 'foo'`
+      `Expect '${actual.outerHTML}' [NOT] to have id /foo/ but was 'foo'`,
     );
   });
 });

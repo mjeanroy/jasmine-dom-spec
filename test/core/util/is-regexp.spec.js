@@ -22,12 +22,16 @@
  * THE SOFTWARE.
  */
 
-import {isRegExp} from '../../../src/core/util/is-regexp.js';
+import { isRegExp } from '../../../src/core/util/is-regexp';
 
 describe('isRegExp', () => {
   it('should check if value is a regexp', () => {
     expect(isRegExp(/foo/)).toBe(true);
+
+    // eslint-disable-next-line prefer-regex-literals
     expect(isRegExp(new RegExp('foo'))).toBe(true);
+
+    // eslint-disable-next-line prefer-regex-literals
     expect(isRegExp(RegExp('foo'))).toBe(true);
 
     expect(isRegExp(null)).toBe(false);

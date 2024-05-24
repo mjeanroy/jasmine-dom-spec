@@ -22,9 +22,7 @@
  * THE SOFTWARE.
  */
 
-'use strict';
-
-const {rimraf} = require('rimraf');
+const { rimraf } = require('rimraf');
 const config = require('../config');
 
 module.exports = function clean() {

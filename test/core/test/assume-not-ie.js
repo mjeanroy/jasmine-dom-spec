@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {skip} from './skip';
+import { skip } from './skip';
 
 /**
  * Check for a given predicate and mark current test as pending if predicate returns a falsy

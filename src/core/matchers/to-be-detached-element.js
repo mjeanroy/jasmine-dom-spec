@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {toDomElement} from '../util/to-dom-element';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node not attached to the
@@ -39,7 +39,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeDetachedElement({actual, pp}) {
+export function toBeDetachedElement({ actual, pp }) {
   const node = toDomElement(actual, pp);
 
   let isDetached = true;

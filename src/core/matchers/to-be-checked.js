@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {ensureHasIn} from '../preconditions/ensure-has-in';
-import {toDomElement} from '../util/to-dom-element';
+import { ensureHasIn } from '../preconditions/ensure-has-in';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with a property `checked` equal
@@ -40,7 +40,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeChecked({actual, pp}) {
+export function toBeChecked({ actual, pp }) {
   const node = toDomElement(actual, pp);
 
   ensureHasIn(node, 'checked', 'Cannot run `toBeChecked` matcher on a DOM node without `checked` property');

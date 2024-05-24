@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../../../src/core/jasmine/pp.js';
+import { pp } from '../../../src/core/jasmine/pp';
 
 describe('pp', () => {
   let prettyPrinter;

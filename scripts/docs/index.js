@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-'use strict';
-
 const path = require('node:path');
 const fs = require('node:fs');
 const _ = require('lodash');
@@ -37,17 +35,17 @@ const config = require('../config');
 
 module.exports = function docs(done) {
   listFiles(path.join(config.src, 'core', 'matchers'))
-      .then((files) => readJsDoc(files))
-      .then((comments) => generateMarkdown(comments))
-      .then((result) => writeMarkdown(result))
+    .then((files) => readJsDoc(files))
+    .then((comments) => generateMarkdown(comments))
+    .then((result) => writeMarkdown(result))
 
-      .catch((err) => {
-        log.error(`Error occured while generating documentation: ${err}`);
-      })
+    .catch((err) => {
+      log.error(`Error occured while generating documentation: ${err}`);
+    })
 
-      .finally(() => {
-        done();
-      });
+    .finally(() => {
+      done();
+    });
 };
 
 /**
@@ -57,11 +55,14 @@ module.exports = function docs(done) {
  * @return {Promise<Array<Object>>} The promise, resolved with JS Doc comments.
  */
 function readJsDoc(files) {
-  return Q.all(_.map(files, (file) => readFile(file)
-      .then((content) => dox.parseComments(content, {raw: true}))
-      .then((jsdoc) => keepFunctions(jsdoc))
-      .then((api) => parseComments(api))
-  ));
+  return Q.all(
+    _.map(files, (file) => (
+      readFile(file)
+        .then((content) => dox.parseComments(content, { raw: true }))
+        .then((jsdoc) => keepFunctions(jsdoc))
+        .then((api) => parseComments(api))
+    )),
+  );
 }
 
 /**
@@ -72,10 +73,10 @@ function readJsDoc(files) {
  */
 function generateMarkdown(comments) {
   return readFile(path.join(config.root, '.readme'))
-      .then((template) => Handlebars.compile(template, {noEscape: true}))
-      .then((templateFn) => templateFn({
-        matchers: _.map(comments, (comment) => comment[0]),
-      }));
+    .then((template) => Handlebars.compile(template, { noEscape: true }))
+    .then((templateFn) => templateFn({
+      matchers: _.map(comments, (comment) => comment[0]),
+    }));
 }
 
 /**
@@ -104,9 +105,9 @@ function listFiles(dir) {
       deferred.reject(err);
     } else {
       deferred.resolve(_.chain(files)
-          .reject((f) => path.basename(f) === 'index.js')
-          .sortBy((f) => path.basename(f))
-          .value());
+        .reject((f) => path.basename(f) === 'index.js')
+        .sortBy((f) => path.basename(f))
+        .value());
     }
   });
 
@@ -155,9 +156,9 @@ function writeFile(file, content) {
     if (err) {
       deferred.reject(err);
     } else {
-      fs.writeFile(file, content, 'utf-8', (err) => {
-        if (err) {
-          deferred.reject(err);
+      fs.writeFile(file, content, 'utf-8', (writeErr) => {
+        if (writeErr) {
+          deferred.reject(writeErr);
         } else {
           deferred.resolve();
         }
@@ -208,25 +209,25 @@ function parseComments(comments) {
       code: comment.code,
 
       since: _(tags.since)
-          .map('string')
-          .map(trimAll)
-          .value()[0],
+        .map('string')
+        .map(trimAll)
+        .value()[0],
 
       messages: _(tags.message)
-          .map('string')
-          .map(trimAll)
-          .value(),
+        .map('string')
+        .map(trimAll)
+        .value(),
 
       examples: _(tags.example)
-          .map('string')
-          .flatMap((x) => x.split('\n'))
-          .map(trimAll)
-          .value(),
+        .map('string')
+        .flatMap((x) => x.split('\n'))
+        .map(trimAll)
+        .value(),
 
       params: _(tags.param)
-          .slice(1)
-          .map((param) => _.assign(param, {types: _.isEmpty(param.types) ? ['*'] : param.types}))
-          .value(),
+        .slice(1)
+        .map((param) => _.assign(param, { types: _.isEmpty(param.types) ? ['*'] : param.types }))
+        .value(),
     };
   });
 }

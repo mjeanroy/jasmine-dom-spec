@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {toBeIndeterminate} from '../../../src/core/matchers/to-be-indeterminate';
-import {createFakeContext} from '../test/create-fake-context';
+import { toBeIndeterminate } from '../../../src/core/matchers/to-be-indeterminate';
+import { createFakeContext } from '../test/create-fake-context';
 
 describe('toBeIndeterminate', () => {
   it('should pass with an indeterminate checkbox', () => {
@@ -41,7 +41,7 @@ describe('toBeIndeterminate', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
+      `Expect '${actual.outerHTML}' [NOT] to be indeterminate`,
     );
   });
 
@@ -59,7 +59,7 @@ describe('toBeIndeterminate', () => {
     });
 
     expect(result.message()).toBe(
-        `Expect '${actual.outerHTML}' [NOT] to be indeterminate`
+      `Expect '${actual.outerHTML}' [NOT] to be indeterminate`,
     );
   });
 
@@ -68,7 +68,7 @@ describe('toBeIndeterminate', () => {
     const ctx = createFakeContext(actual);
 
     expect(() => toBeIndeterminate(ctx)).toThrow(new Error(
-        'Cannot run `toBeIndeterminate` matcher on a DOM node without `indeterminate` property'
+      'Cannot run `toBeIndeterminate` matcher on a DOM node without `indeterminate` property',
     ));
   });
 });

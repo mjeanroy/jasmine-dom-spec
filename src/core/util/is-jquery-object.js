@@ -24,10 +24,10 @@
 
 /* global jQuery */
 
-import {every} from './every';
-import {isFunction} from './is-function';
-import {isNumber} from './is-number';
-import {isObject} from './is-object';
+import { every } from './every';
+import { isFunction } from './is-function';
+import { isNumber } from './is-number';
+import { isObject } from './is-object';
 
 // Main jQuery methods.
 // An object with these methods will be considered a jQuery object.

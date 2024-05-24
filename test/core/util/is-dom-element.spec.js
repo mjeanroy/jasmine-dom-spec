@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {isDomElement} from '../../../src/core/util/is-dom-element';
+import { isDomElement } from '../../../src/core/util/is-dom-element';
 
 describe('isDomNode', () => {
   it('should return false with null or undefined', () => {

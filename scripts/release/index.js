@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-'use strict';
-
 const gulp = require('gulp');
 const git = require('gulp-git');
 const bump = require('gulp-bump');
@@ -40,8 +38,8 @@ const config = require('../config');
 function bumpVersion(type) {
   log.debug(`Bump version to next ${type} version`);
   return gulp.src([config.pkg, config.bower])
-      .pipe(bump({type}))
-      .pipe(gulp.dest(config.root));
+    .pipe(bump({ type }))
+    .pipe(gulp.dest(config.root));
 }
 
 /**
@@ -54,8 +52,8 @@ function bumpVersion(type) {
 function performRelease() {
   log.debug('Perform release, commit current working directory');
   return gulp.src([config.pkg, config.bower, config.dist, config.readme])
-      .pipe(git.add({args: '-f'}))
-      .pipe(git.commit('release: release version'));
+    .pipe(git.add({ args: '-f' }))
+    .pipe(git.commit('release: release version'));
 }
 
 /**
@@ -79,8 +77,8 @@ function tagRelease() {
 function prepareNextRelease() {
   log.debug('Prepare repository for next release');
   return gulp.src(config.dist)
-      .pipe(git.rm({args: '-r'}))
-      .pipe(git.commit('release: prepare next release'));
+    .pipe(git.rm({ args: '-r' }))
+    .pipe(git.commit('release: prepare next release'));
 }
 
 /**
@@ -101,10 +99,10 @@ function createReleaseTask(type) {
   }
 
   return gulp.series(
-      prepareRelease,
-      performRelease,
-      tagRelease,
-      prepareNextRelease
+    prepareRelease,
+    performRelease,
+    tagRelease,
+    prepareNextRelease,
   );
 }
 

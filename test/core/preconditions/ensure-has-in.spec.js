@@ -22,18 +22,18 @@
  * THE SOFTWARE.
  */
 
-import {ensureHasIn} from '../../../src/core/preconditions/ensure-has-in';
+import { ensureHasIn } from '../../../src/core/preconditions/ensure-has-in';
 
 describe('ensureHasIn', () => {
   it('should check that object has given key', () => {
-    const obj = {k1: true};
+    const obj = { k1: true };
     expect(ensureHasIn(obj, 'k1', '')).toBe(obj);
     expect(ensureHasIn(obj, 'toString', '')).toBe(obj);
   });
 
   it('should fail if object does not have given key', () => {
     const message = 'A message';
-    const obj = {k1: true, k2: false};
+    const obj = { k1: true, k2: false };
     expect(() => ensureHasIn(obj, 'k3', message)).toThrow(new Error(message));
   });
 });

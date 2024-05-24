@@ -22,12 +22,13 @@
  * THE SOFTWARE.
  */
 
-import {has} from './has.js';
+import { has } from './has';
 
 // Use a fallback for `Object.keys` if needed (for old browsers).
 const objectKeys = Object.keys || function _keys(o) {
   const results = [];
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const key in o) {
     if (has(o, key)) {
       results.push(key);

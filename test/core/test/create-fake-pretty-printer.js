@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {pp} from '../../../src/core/jasmine/pp.js';
+import { pp } from '../../../src/core/jasmine/pp';
 
 /**
  * Create fake matcher context to use in unit tests.

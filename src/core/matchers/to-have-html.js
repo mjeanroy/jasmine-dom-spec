@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {isPrimitive} from '../util/is-primitive';
-import {matchOrEquals} from '../util/match-or-equals';
-import {toDomElement} from '../util/to-dom-element';
+import { isPrimitive } from '../util/is-primitive';
+import { matchOrEquals } from '../util/match-or-equals';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node with expected html content.
@@ -45,7 +45,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toHaveHtml({actual, equals, pp}, html) {
+export function toHaveHtml({ actual, equals, pp }, html) {
   const node = toDomElement(actual, pp);
   const actualHtml = node.innerHTML;
 

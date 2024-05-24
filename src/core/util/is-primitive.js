@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {isNumber} from './is-number';
-import {isString} from './is-string';
-import {isBoolean} from './is-boolean';
+import { isNumber } from './is-number';
+import { isString } from './is-string';
+import { isBoolean } from './is-boolean';
 
 /**
  * Check that a given value is a primitive object, i.e one of:

@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-import {isNull} from './is-null';
-import {isUndefined} from './is-undefined';
-import {isObject} from './is-object';
+import { isNull } from './is-null';
+import { isUndefined } from './is-undefined';
+import { isObject } from './is-object';
 
 /**
  * The type value for element nodes.

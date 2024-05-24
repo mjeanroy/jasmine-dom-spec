@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import {every} from '../../../src/core/util/every.js';
+import { every } from '../../../src/core/util/every';
 
 describe('every', () => {
   it('should return true if predicate always returns a truthy value', () => {
@@ -39,9 +39,9 @@ describe('every', () => {
 
   it('should return false if predicate returns a falsy value', () => {
     const array = [1, 2, 3];
-    const predicate = jasmine.createSpy('predicate').and.callFake((x) => {
-      return x < 3;
-    });
+    const predicate = jasmine.createSpy('predicate').and.callFake((x) => (
+      x < 3
+    ));
 
     const result = every(array, predicate);
 

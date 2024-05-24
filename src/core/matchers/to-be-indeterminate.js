@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import {ensureHasIn} from '../preconditions/ensure-has-in';
-import {toDomElement} from '../util/to-dom-element';
+import { ensureHasIn } from '../preconditions/ensure-has-in';
+import { toDomElement } from '../util/to-dom-element';
 
 /**
  * Check that the tested object is a DOM node property `indeterminate` equal
@@ -40,7 +40,7 @@ import {toDomElement} from '../util/to-dom-element';
  * @return {Object} Test result.
  * @since 0.1.0
  */
-export function toBeIndeterminate({actual, pp}) {
+export function toBeIndeterminate({ actual, pp }) {
   const node = toDomElement(actual, pp);
 
   ensureHasIn(node, 'indeterminate', 'Cannot run `toBeIndeterminate` matcher on a DOM node without `indeterminate` property');
