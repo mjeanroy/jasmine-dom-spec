@@ -22,10 +22,11 @@
  * THE SOFTWARE.
  */
 
-import { isString } from './is-string';
-import { isNodeCollection } from './is-node-collection';
 import { isArrayLike } from './is-array-like';
 import { isDomElement } from './is-dom-element';
+import { isString } from './is-string';
+import { isNil } from './is-nil';
+import { isNodeCollection } from './is-node-collection';
 
 /**
  * Translate a value to a valid DOM Node:
@@ -42,11 +43,75 @@ export function toDomElement(value, pp) {
   }
 
   const nodes = isString(value) ? createNodes(value) : value;
-  if (isNodeCollection(nodes) || isArrayLike(nodes)) {
-    return extractSingleNode(nodes, pp);
+  const maybeDomNode = isNodeCollection(nodes) || isArrayLike(nodes) ? extractSingleNode(nodes, pp) : nodes;
+
+  if (isDomElement(maybeDomNode)) {
+    return maybeDomNode;
   }
 
-  throw new Error(`Expect DOM node but found: ${pp(value)}`);
+  const unwrappedDomNode = unwrapDomNode(maybeDomNode);
+  if (!unwrappedDomNode) {
+    throw new Error(`Expect DOM node but found: ${pp(value)}`);
+  }
+
+  return unwrappedDomNode;
+}
+
+/**
+ * Unwrap angular `DebugElement` to return associated native DOM node.
+ *
+ * @param {*} value Angular `DebugElement`
+ * @returns {*} DOM Node if `value` is a `DebugElement`, or something else.
+ */
+function unwrapNgDebugElement(value) {
+  return value.nativeElement;
+}
+
+/**
+ * Unwrap angular `VueWrapper` to return associated native DOM node.
+ *
+ * @param {*} value Vue `VueWrapper`
+ * @returns {*} DOM Node if `value` is a `VueWrapper`, or something else.
+ */
+function unwrapVueWrapper(value) {
+  return value.element;
+}
+
+/**
+ * Unwrap render result of react-testing-library to return associated native DOM node.
+ *
+ * @param {*} value Result of react-testing-library `render`.
+ * @returns {*} DOM Node if `value` is the result of react-testing-library `render`, or something else.
+ */
+function unwrapReactTestingLibraryResult(value) {
+  return value.baseElement;
+}
+
+const unwrapFunctions = [
+  unwrapNgDebugElement,
+  unwrapVueWrapper,
+  unwrapReactTestingLibraryResult,
+];
+
+/**
+ * Try to unwrap DOM Node from given structure.
+ *
+ * @param {*} wrapper DOM Node wrapper.
+ * @returns {HTMLElement | null} The unwrapped DOM node, `null` otherwise.
+ */
+function unwrapDomNode(wrapper) {
+  if (isNil(wrapper)) {
+    return null;
+  }
+
+  for (let i = 0; i < unwrapFunctions.length; ++i) {
+    const unwrappedNode = unwrapFunctions[i](wrapper);
+    if (isDomElement(unwrappedNode)) {
+      return unwrappedNode;
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -80,11 +145,5 @@ function extractSingleNode(value, pp) {
     throw new Error(`Expect single node but found node list of ${size} nodes: ${pp(value)}`);
   }
 
-  const node = value[0];
-
-  if (!isDomElement(node)) {
-    throw new Error(`Expect single node but found value: ${pp(value)}`);
-  }
-
-  return node;
+  return value[0];
 }

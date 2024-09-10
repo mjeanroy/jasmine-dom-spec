@@ -83,16 +83,22 @@ describe('toDomElement', () => {
 
   it('should fail to return DOM Node from an empty node list', () => {
     const nodeList = fixtures.childNodes;
-    expect(() => toDomElement(nodeList, pp)).toThrow(Error('Expect valid node but found empty node list'));
+    expect(() => toDomElement(nodeList, pp)).toThrow(
+      Error('Expect valid node but found empty node list'),
+    );
   });
 
   it('should fail to return DOM Node from an empty jQuery object', () => {
     const nodes = $(fixtures).children();
-    expect(() => toDomElement(nodes, pp)).toThrow(Error('Expect valid node but found empty node list'));
+    expect(() => toDomElement(nodes, pp)).toThrow(
+      Error('Expect valid node but found empty node list'),
+    );
   });
 
   it('should fail to return DOM Node from an empty array', () => {
-    expect(() => toDomElement([], pp)).toThrow(Error('Expect valid node but found empty node list'));
+    expect(() => toDomElement([], pp)).toThrow(
+      Error('Expect valid node but found empty node list'),
+    );
   });
 
   it('should fail to return DOM Node if node list contains more than one element', () => {
@@ -122,11 +128,15 @@ describe('toDomElement', () => {
 
   it('should fail to return DOM Node from an array containing a single value that is not a DOM node', () => {
     const array = ['foo'];
-    expect(() => toDomElement(array, pp)).toThrow(Error("Expect single node but found value: [ 'foo' ]"));
+    expect(() => toDomElement(array, pp)).toThrow(
+      Error("Expect DOM node but found: [ 'foo' ]"),
+    );
   });
 
   it('should fail to return DOM Node with a number', () => {
-    expect(() => toDomElement(0, pp)).toThrow(Error('Expect DOM node but found: 0'));
+    expect(() => toDomElement(0, pp)).toThrow(
+      Error('Expect DOM node but found: 0'),
+    );
   });
 
   it('should fail to return DOM Node with a date', () => {
@@ -137,10 +147,14 @@ describe('toDomElement', () => {
   });
 
   it('should fail to return DOM Node with null', () => {
-    expect(() => toDomElement(null, pp)).toThrow(Error('Expect DOM node but found: null'));
+    expect(() => toDomElement(null, pp)).toThrow(
+      Error('Expect DOM node but found: null'),
+    );
   });
 
   it('should fail to return DOM Node with undefined', () => {
-    expect(() => toDomElement(undefined, pp)).toThrow(Error('Expect DOM node but found: undefined'));
+    expect(() => toDomElement(undefined, pp)).toThrow(
+      Error('Expect DOM node but found: undefined'),
+    );
   });
 });

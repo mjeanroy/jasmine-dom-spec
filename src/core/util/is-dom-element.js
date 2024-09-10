@@ -22,8 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { isNull } from './is-null';
-import { isUndefined } from './is-undefined';
+import { isNil } from './is-nil';
 import { isObject } from './is-object';
 
 /**
@@ -39,7 +38,7 @@ const ELEMENT_NODE = 1;
  * @return {boolean} `true` if `actual` is a DOM node, `false` otherwise.
  */
 export function isDomElement(actual) {
-  if (isNull(actual) || isUndefined(actual)) {
+  if (isNil(actual)) {
     return false;
   }
 
