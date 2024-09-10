@@ -22,35 +22,26 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has-in.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array-like.spec';
-import './is-array.spec';
-import './is-boolean.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-in.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-primitive.spec';
-import './is-regexp.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './some.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './to-lower.spec';
-import './trim.spec';
+import { isArray } from './is-array';
+import { isFunction } from './is-function';
+import { isNil } from './is-nil';
+import { isNumber } from './is-number';
+
+const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
+
+export function isArrayLike(value) {
+  if (isNil(value) || isFunction(value)) {
+    return false;
+  }
+
+  if (isArray(value)) {
+    return true;
+  }
+
+  return (
+    isNumber(value.length)
+    && value.length > -1
+    && value.length % 1 === 0
+    && value.length <= MAX_SAFE_INTEGER
+  );
+}

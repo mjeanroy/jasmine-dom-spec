@@ -22,35 +22,23 @@
  * THE SOFTWARE.
  */
 
-import './dash-to-camel.spec';
-import './filter.spec';
-import './for-each.spec';
-import './every.spec';
-import './has-in.spec';
-import './has.spec';
-import './index-by.spec';
-import './is.spec';
-import './is-array-like.spec';
-import './is-array.spec';
-import './is-boolean.spec';
-import './is-dom-element.spec';
-import './is-function.spec';
-import './is-in.spec';
-import './is-jquery-object.spec';
-import './is-node-collection.spec';
-import './is-nil.spec';
-import './is-null.spec';
-import './is-number.spec';
-import './is-string.spec';
-import './is-object.spec';
-import './is-primitive.spec';
-import './is-regexp.spec';
-import './is-truthy.spec';
-import './is-undefined.spec';
-import './keys.spec';
-import './map.spec';
-import './some.spec';
-import './tag-name.spec';
-import './to-dom-element.spec';
-import './to-lower.spec';
-import './trim.spec';
+import { isArrayLike } from '../../../src/core/util/is-array-like';
+
+describe('isArrayLike', () => {
+  it('should return true with array or something that looks like an array', () => {
+    expect(isArrayLike([0, 1, 2])).toBe(true);
+    expect(isArrayLike(Array(10))).toBe(true);
+    expect(isArrayLike({ length: 2 })).toBe(true);
+
+    // eslint-disable-next-line no-array-constructor
+    expect(isArrayLike(new Array(1, 2, 3))).toBe(true);
+  });
+
+  it('should return false without array or something not compatible with an array', () => {
+    expect(isArrayLike(0)).toBe(false);
+    expect(isArrayLike(true)).toBe(false);
+    expect(isArrayLike({})).toBe(false);
+    expect(isArrayLike({ length: 1.5 })).toBe(false);
+    expect(isArrayLike(() => {})).toBe(false);
+  });
+});

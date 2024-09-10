@@ -24,8 +24,7 @@
 
 import { isString } from './is-string';
 import { isNodeCollection } from './is-node-collection';
-import { isJqueryObject } from './is-jquery-object';
-import { isArray } from './is-array';
+import { isArrayLike } from './is-array-like';
 import { isDomElement } from './is-dom-element';
 
 /**
@@ -43,7 +42,7 @@ export function toDomElement(value, pp) {
   }
 
   const nodes = isString(value) ? createNodes(value) : value;
-  if (isNodeCollection(nodes) || isJqueryObject(nodes) || isArray(nodes)) {
+  if (isNodeCollection(nodes) || isArrayLike(nodes)) {
     return extractSingleNode(nodes, pp);
   }
 
