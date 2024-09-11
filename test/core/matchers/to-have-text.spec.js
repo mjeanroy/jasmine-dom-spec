@@ -45,6 +45,27 @@ describe('toHaveText', () => {
     );
   });
 
+  it('should pass with a dom node with expected array of text content', () => {
+    const txt = ['line 1', 'line 2'];
+    const rawTxt = txt.join('\n');
+
+    const actual = document.createElement('div');
+    const ctx = createFakeContext(actual);
+
+    actual.innerHTML = rawTxt;
+
+    const result = toHaveText(ctx, txt);
+
+    expect(result).toEqual({
+      pass: true,
+      message: jasmine.any(Function),
+    });
+
+    expect(result.message()).toBe(
+      `Expect '${actual.outerHTML}' [NOT] to have text '${rawTxt}' but was '${rawTxt}'`,
+    );
+  });
+
   it('should pass with a dom node with expected number content', () => {
     const txt = 1;
     const actual = document.createElement('div');

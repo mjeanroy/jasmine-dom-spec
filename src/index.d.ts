@@ -24,9 +24,10 @@
 
 /* eslint-disable no-use-before-define */
 
+type Primitive = string | number | boolean;
 type NodeId = string | RegExp | jasmine.Any;
 type NodeTagName = string | RegExp | jasmine.Any;
-type NodeContent = string | number | boolean | RegExp | jasmine.Any;
+type NodeContent = Primitive | Array<Primitive> | RegExp | jasmine.Any;
 type NodeInputValue = string | RegExp | jasmine.Any;
 type NodeClassName = string | RegExp | jasmine.Any;
 type NodeStyle = string | RegExp | jasmine.Any;

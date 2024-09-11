@@ -22,8 +22,9 @@
  * THE SOFTWARE.
  */
 
-import { isString } from '../util/is-string';
+import { isArray } from '../util/is-array';
 import { isPrimitive } from '../util/is-primitive';
+import { isString } from '../util/is-string';
 import { matchOrEquals } from '../util/match-or-equals';
 import { toDomElement } from '../util/to-dom-element';
 import { trim } from '../util/trim';
@@ -44,7 +45,7 @@ import { trim } from '../util/trim';
  *   expect(actual).not.toHaveText('foobar');
  *
  * @param {Object} ctx Test context.
- * @param {String|Number|Boolean|RegExp|jasmine.Any|jasmine.Anything} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @param {String|Number|Boolean|RegExp|Array<String|Number|Boolean>|jasmine.Any|jasmine.Anything} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
  * @return {Object} Test result.
  * @since 0.1.0
  */
@@ -52,7 +53,8 @@ export function toHaveText({ actual, equals, pp }, text) {
   // IE8 does not know textContent but knows innerText.
   const node = toDomElement(actual, pp);
   const actualText = 'textContent' in node ? node.textContent : node.innerText;
-  const expectedText = isPrimitive(text) ? text.toString() : text;
+  const expectedText = toString(text);
+
   const ok = matchOrEquals(
     normalizeTextContent(actualText),
     normalizeTextContent(expectedText),
@@ -65,6 +67,27 @@ export function toHaveText({ actual, equals, pp }, text) {
       return `Expect ${pp(actual)} [NOT] to have text ${pp(expectedText)} but was ${pp(actualText)}`;
     },
   };
+}
+
+/**
+ * Transform `text` to string if possible:
+ * - Serialize primitive types (number, boolean, string) to string.
+ * - Join array elements with the line separator character.
+ * - Otherwise, returns `text`.
+ *
+ * @param {String|Number|Boolean|RegExp|Array<String|Number|Boolean>|jasmine.Any|jasmine.Anything} text The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`).
+ * @return {*|string} String value, or `text`.
+ */
+function toString(text) {
+  if (isPrimitive(text)) {
+    return text.toString();
+  }
+
+  if (isArray(text)) {
+    return text.join('\n');
+  }
+
+  return text;
 }
 
 /**
