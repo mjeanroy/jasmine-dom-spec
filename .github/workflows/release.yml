@@ -1,7 +1,7 @@
 ##
 # The MIT License (MIT)
 #
-# Copyright (c) 2014-2022 Mickael Jeanroy
+# Copyright (c) 2014-2024 Mickael Jeanroy
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,33 +22,44 @@
 # THE SOFTWARE.
 ##
 
-name: CI
-on: [push]
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version"
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest ]
-        node: [ 20 ]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4.1.7
       - uses: actions/setup-node@v4.0.3
         name: Set up NodeJS
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 20
+      - name: Configure Git User
+        run: |
+          git config user.email "mickael.jeanroy@gmail.com"
+          git config user.name "Mickael Jeanroy"
       - name: Install
         run: npm install
-      - uses: saucelabs/sauce-connect-action@v2.3.6
-        with:
-          username: ${{ secrets.SAUCE_USERNAME }}
-          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          tunnelIdentifier: github-action-tunnel-jasmine-dom-spec-${{ github.run_id }}
       - name: Test
-        timeout-minutes: 10
-        env:
-          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
         run: npm test
-concurrency:
-  group: jasmine-dom-spec
+      - name: Release
+        run: npm run release:${{ inputs.version }}
+      - name: Git log
+        run: |
+          git log -n5 --oneline
+          git tag --sort=-creatordate
+      - name: Git push
+        run: |
+          git push origin ${{ github.ref_name }} 
+          git push --tags
