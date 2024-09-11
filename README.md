@@ -178,6 +178,33 @@ it('should pass', () => {
 });
 ```
 
+### toBeReadOnly
+
+Check that the tested object is a DOM node with a property `readOnly` equal
+to `true`.
+
+#### Since
+
+0.9.0
+
+#### Parameters
+
+*No parameters*
+
+#### Message
+
+`Expect [actual] [NOT] to be read-only`
+
+#### Example:
+
+```javascript
+it('should pass', () => {
+  const actual = document.createElement('input');
+  actual.readOnly = true;
+  expect(actual).toBeReadOnly();
+});
+```
+
 ### toBeRequired
 
 Check that the tested object is a DOM node with a property `required` equal
@@ -263,6 +290,42 @@ it('should pass', () => {
   expect(actual).toHaveAttrs({'data-id': '1'});
   expect(actual).toHaveAttrs({'data-id': /1/});
   expect(actual).toHaveAttrs({'data-id': jasmine.anything()});
+});
+```
+
+### toHaveComputedStyle
+
+Check that the tested object has expected computed style value (the css style property
+name can dash-cased, such as `font-size`, or camel cased, such as `fontSize`).
+
+#### Since
+
+0.9.0
+
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `styleName` | `String,Object` | Style name or object of styles. |
+| `styleValue` | `String,RegExp,[object Object],[object Object]` | Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+
+#### Message
+
+`Expect [actual] [NOT] to have computed styles [expected]`
+
+#### Example:
+
+```javascript
+it('should pass', () => {
+  const actual = document.createElement('input');
+  actual.required = true;
+  actual.checked = false;
+  expect(actual).toHaveComputedStyle('display', 'none');
+  expect(actual).toHaveComputedStyle('font-size', '10px');
+  expect(actual).toHaveComputedStyle('font-size', /10/);
+  expect(actual).toHaveComputedStyle({fontSize: '10px', display: 'none'});
+  expect(actual).toHaveComputedStyle({fontSize: /10/, display: 'none'});
+  expect(actual).toHaveComputedStyle({fontSize: jasmine.anything()});
 });
 ```
 
@@ -402,6 +465,37 @@ it('should pass', () => {
 });
 ```
 
+### toHaveSelectedIndex
+
+Check that the tested object is a DOM node with a `selectedIndex` property with an expected value.
+
+#### Since
+
+0.9.0
+
+#### Parameters
+
+| Name | Type | Description |
+|------|------|-------------|
+| `selectedIndex` | `Number,[object Object],[object Object]` | The expected selectedIndex or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+
+#### Message
+
+`Expect [actual] [NOT] to have id [id] but was [id]`
+
+#### Example:
+
+```javascript
+it('should pass', () => {
+  const actual = document.createElement('select');
+  actual.appendChild(document.createElement('option'));
+  actual.appendChild(document.createElement('option'));
+  actual.selectedIndex = 1;
+  expect(actual).toHaveSelectedIndex(1);
+  expect(actual).not.toHaveSelectedIndex(0);
+});
+```
+
 ### toHaveStyle
 
 Check that the tested object has expected style value (the css style property
@@ -482,7 +576,7 @@ converted to a `string` using its `toString` method.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `text` | `String,Number,Boolean,RegExp,[object Object],[object Object]` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `text` | `String,Number,Boolean,RegExp,Array<String|Number|Boolean>,[object Object],[object Object]` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
