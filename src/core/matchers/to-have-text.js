@@ -22,9 +22,11 @@
  * THE SOFTWARE.
  */
 
+import { isString } from '../util/is-string';
 import { isPrimitive } from '../util/is-primitive';
 import { matchOrEquals } from '../util/match-or-equals';
 import { toDomElement } from '../util/to-dom-element';
+import { trim } from '../util/trim';
 
 /**
  * Check that the tested object is a DOM node with expected text content.
@@ -51,7 +53,11 @@ export function toHaveText({ actual, equals, pp }, text) {
   const node = toDomElement(actual, pp);
   const actualText = 'textContent' in node ? node.textContent : node.innerText;
   const expectedText = isPrimitive(text) ? text.toString() : text;
-  const ok = matchOrEquals(actualText, expectedText, equals);
+  const ok = matchOrEquals(
+    normalizeTextContent(actualText),
+    normalizeTextContent(expectedText),
+    equals,
+  );
 
   return {
     pass: ok,
@@ -59,4 +65,14 @@ export function toHaveText({ actual, equals, pp }, text) {
       return `Expect ${pp(actual)} [NOT] to have text ${pp(expectedText)} but was ${pp(actualText)}`;
     },
   };
+}
+
+/**
+ * Normalize text content by trimming it if it is a string.
+ *
+ * @param  {String|Number|Boolean|RegExp|jasmine.Any|jasmine.Anything} text The text to normalize.
+ * @returns {string|*} The normalized output.
+ */
+function normalizeTextContent(text) {
+  return isString(text) ? trim(text) : text;
 }

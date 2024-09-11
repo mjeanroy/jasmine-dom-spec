@@ -49,4 +49,11 @@ describe('toHaveText', () => {
     node.innerHTML = nb;
     expect(node).toHaveText(nb);
   });
+
+  it('should pass with trimmed content', () => {
+    const text = 'Hello World';
+    const node = document.createElement('div');
+    node.innerHTML = ` ${text} `;
+    expect(node).toHaveText(text);
+  });
 });
