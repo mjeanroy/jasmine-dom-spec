@@ -62,6 +62,7 @@ declare namespace jasmine {
     toHaveAttrs(name: string, value?: NodeAttribute): boolean;
     toHaveAttrs(attrs: NodeAttributeDictionary): boolean;
     toHaveComputedStyle(name: string, value: NodeStyle): boolean;
+    toHaveComputedStyle(styles: NodeStyleDictionary): boolean;
     toHaveCssClass(classNames: NodeClassName | NodeClassName[]): boolean;
     toHaveHtml(text: NodeContent): boolean;
     toHaveId(id: NodeId): boolean;
