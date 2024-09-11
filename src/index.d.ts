@@ -26,6 +26,7 @@
 
 type Primitive = string | number | boolean;
 type NodeId = string | RegExp | jasmine.Any;
+type NodeSelectedIndex = number | jasmine.Any;
 type NodeTagName = string | RegExp | jasmine.Any;
 type NodeContent = Primitive | Array<Primitive> | RegExp | jasmine.Any;
 type NodeInputValue = string | RegExp | jasmine.Any;
@@ -66,6 +67,7 @@ declare namespace jasmine {
     toHaveId(id: NodeId): boolean;
     toHaveProps(name: string, value: NodeProps): boolean;
     toHaveProps(props: NodePropsDictionary): boolean;
+    toHaveSelectedIndex(props: NodeSelectedIndex): boolean;
     toHaveStyle(name: string, value: NodeStyle): boolean;
     toHaveStyle(styles: NodeStyleDictionary): boolean;
     toHaveTagName(tagName: NodeTagName): boolean;
