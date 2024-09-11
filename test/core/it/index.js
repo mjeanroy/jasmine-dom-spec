@@ -28,6 +28,7 @@ import './to-be-disabled.spec';
 import './to-be-displayed.spec';
 import './to-be-focused.spec';
 import './to-be-indeterminate.spec';
+import './to-be-read-only.spec';
 import './to-be-required.spec';
 import './to-be-selected.spec';
 import './to-have-id.spec';

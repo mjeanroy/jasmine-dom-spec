@@ -55,6 +55,7 @@ declare namespace jasmine {
     toBeDisplayed(expected: any): boolean;
     toBeFocused(): boolean;
     toBeIndeterminate(): boolean;
+    toBeReadOnly(): boolean;
     toBeRequired(): boolean;
     toBeSelected(): boolean;
     toHaveAttrs(name: string, value?: NodeAttribute): boolean;

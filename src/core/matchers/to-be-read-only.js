@@ -22,22 +22,32 @@
  * THE SOFTWARE.
  */
 
-export { toBeChecked } from './to-be-checked';
-export { toBeDetachedElement } from './to-be-detached-element';
-export { toBeDisabled } from './to-be-disabled';
-export { toBeDisplayed } from './to-be-displayed';
-export { toBeFocused } from './to-be-focused';
-export { toBeIndeterminate } from './to-be-indeterminate';
-export { toBeReadOnly } from './to-be-read-only';
-export { toBeRequired } from './to-be-required';
-export { toBeSelected } from './to-be-selected';
-export { toHaveId } from './to-have-id';
-export { toHaveAttrs } from './to-have-attrs';
-export { toHaveComputedStyle } from './to-have-computed-style';
-export { toHaveCssClass } from './to-have-css-class';
-export { toHaveHtml } from './to-have-html';
-export { toHaveProps } from './to-have-props';
-export { toHaveStyle } from './to-have-style';
-export { toHaveTagName } from './to-have-tag-name';
-export { toHaveText } from './to-have-text';
-export { toHaveValue } from './to-have-value';
+import { ensureHasIn } from '../preconditions/ensure-has-in';
+import { toDomElement } from '../util/to-dom-element';
+
+/**
+ * Check that the tested object is a DOM node with a property `readOnly` equal
+ * to `true`.
+ *
+ * @message Expect [actual] [NOT] to be read-only
+ * @example
+ *   const actual = document.createElement('input');
+ *   actual.readOnly = true;
+ *   expect(actual).toBeReadOnly();
+ *
+ * @param {Object} ctx Test context.
+ * @return {Object} Test result.
+ * @since 0.9.0
+ */
+export function toBeReadOnly({ actual, pp }) {
+  const node = toDomElement(actual, pp);
+
+  ensureHasIn(node, 'readOnly', 'Cannot run `toBeReadOnly` matcher on a DOM node without `readOnly` property');
+
+  return {
+    pass: node.readOnly === true,
+    message() {
+      return `Expect ${pp(actual)} [NOT] to be read-only`;
+    },
+  };
+}
