@@ -66,7 +66,6 @@
     "karma-sauce-launcher": "4.3.6",
     "lodash": "4.17.21",
     "phantomjs-prebuilt": "2.1.16",
-    "q": "1.5.1",
     "rimraf": "6.0.1",
     "rollup": "4.21.2",
     "rollup-plugin-esformatter": "3.1.0",

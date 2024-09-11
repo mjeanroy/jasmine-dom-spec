@@ -27,7 +27,6 @@ const fs = require('node:fs');
 const _ = require('lodash');
 const glob = require('glob');
 const touch = require('touch');
-const Q = require('q');
 const Handlebars = require('handlebars');
 const dox = require('dox');
 const log = require('../log');
@@ -55,7 +54,7 @@ module.exports = function docs(done) {
  * @return {Promise<Array<Object>>} The promise, resolved with JS Doc comments.
  */
 function readJsDoc(files) {
-  return Q.all(
+  return Promise.all(
     _.map(files, (file) => (
       readFile(file)
         .then((content) => dox.parseComments(content, { raw: true }))
@@ -98,20 +97,12 @@ function writeMarkdown(result) {
  * @returns {Promise} The promise.
  */
 function listFiles(dir) {
-  const deferred = Q.defer();
-
-  glob(path.join(dir, '**', '*.js'), (err, files) => {
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve(_.chain(files)
-        .reject((f) => path.basename(f) === 'index.js')
-        .sortBy((f) => path.basename(f))
-        .value());
-    }
-  });
-
-  return deferred.promise;
+  return glob.glob(path.join(dir, '**', '*.js')).then((files) => (
+    _.chain(files)
+      .reject((f) => path.basename(f) === 'index.js')
+      .sortBy((f) => path.basename(f))
+      .value()
+  ));
 }
 
 /**
@@ -123,19 +114,17 @@ function listFiles(dir) {
  * @return {Promise} The promise.
  */
 function readFile(file) {
-  const deferred = Q.defer();
+  return new Promise((resolve, reject) => {
+    log.debug(`Reading: ${file}`);
 
-  log.debug(`Reading: ${file}`);
-
-  fs.readFile(file, 'utf-8', (err, data) => {
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve(data);
-    }
+    fs.readFile(file, 'utf-8', (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
   });
-
-  return deferred.promise;
 }
 
 /**
@@ -148,25 +137,24 @@ function readFile(file) {
  * @return {Promise} The promise.
  */
 function writeFile(file, content) {
-  const deferred = Q.defer();
+  return new Promise((resolve, reject) => {
+    log.debug(`Writing: ${file}`);
 
-  log.debug(`Writing: ${file}`);
+    touch(file, (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
 
-  touch(file, (err) => {
-    if (err) {
-      deferred.reject(err);
-    } else {
       fs.writeFile(file, content, 'utf-8', (writeErr) => {
         if (writeErr) {
-          deferred.reject(writeErr);
+          reject(writeErr);
         } else {
-          deferred.resolve();
+          resolve();
         }
       });
-    }
+    });
   });
-
-  return deferred.promise;
 }
 
 /**
