@@ -245,7 +245,7 @@ Check that the tested object has expected attributes.
 | Name | Type | Description |
 |------|------|-------------|
 | `attrName` | `String,Object` | Attribute name (or map of attributes). |
-| `attrValue` | `String,RegExp,jasmine.Any,jasmine.Anything` | Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `attrValue` | `String,RegExp,[object Object],[object Object]` | Attribute value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -278,7 +278,7 @@ Check that the tested object has expected css classes.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expected` | `Array.<string>,String` | The expected class name. |
+| `expected` | `Array<string>,String` | The expected class name. |
 
 #### Message
 
@@ -316,7 +316,7 @@ converted to a `string` using its `toString` method.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `html` | `String,Number,Boolean,RegExp,jasmine.Any,jasmine.Anything` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `html` | `String,Number,Boolean,RegExp,[object Object],[object Object]` | The expected html or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -347,7 +347,7 @@ Check that the tested object is a DOM node with expected `id`.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `id` | `String,RegExp,jasmine.Any,jasmine.Anything` | The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `id` | `String,RegExp,[object Object],[object Object]` | The expected id or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -379,7 +379,7 @@ Check that the tested object has expected properties.
 | Name | Type | Description |
 |------|------|-------------|
 | `propName` | `String,Object` | Property name (or object of properties). |
-| `propValue` | `*` | Property value. |
+| `propValue` | `[object Object]` | Property value. |
 
 #### Message
 
@@ -416,7 +416,7 @@ name can dash-cased, such as `font-size`, or camel cased, such as `fontSize`).
 | Name | Type | Description |
 |------|------|-------------|
 | `styleName` | `String,Object` | Style name or object of styles. |
-| `styleValue` | `String,RegExp,jasmine.Any,jasmine.Anything` | Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `styleValue` | `String,RegExp,[object Object],[object Object]` | Style value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -450,7 +450,7 @@ Check that the tested object is a DOM node with expected tag name.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `tagName` | `String,RegExp,jasmine.Any,jasmine.Anything` | The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `tagName` | `String,RegExp,[object Object],[object Object]` | The expected tag name or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -482,7 +482,7 @@ converted to a `string` using its `toString` method.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `text` | `String,Number,Boolean,RegExp,jasmine.Any,jasmine.Anything` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `text` | `String,Number,Boolean,RegExp,[object Object],[object Object]` | The expected text or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 
@@ -515,7 +515,7 @@ to an expected value.
 
 | Name | Type | Description |
 |------|------|-------------|
-| `expectedValue` | `String,RegExp,jasmine.Any,jasmine.Anything` | The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
+| `expectedValue` | `String,RegExp,[object Object],[object Object]` | The expected value or a jasmine matcher (i.e `jasmine.any(<Type>)`). |
 
 #### Message
 

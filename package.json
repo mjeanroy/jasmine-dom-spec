@@ -1,6 +1,6 @@
 {
   "name": "jasmine-dom-spec",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "DOM Matchers and assertions for Jasmine framework",
   "main": "dist/jasmine-dom-spec.js",
   "typings": "dist/jasmine-dom-spec.d.ts",
