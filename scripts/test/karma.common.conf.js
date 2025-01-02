@@ -44,7 +44,6 @@ module.exports = (config) => ({
     require('karma-jasmine'),
     require('karma-rollup-preprocessor'),
     require('karma-chrome-launcher'),
-    require('karma-phantomjs-launcher'),
   ],
 
   frameworks: [
@@ -91,11 +90,10 @@ module.exports = (config) => ({
   // - Firefox
   // - Opera
   // - Safari (only Mac)
-  // - PhantomJS
   // - IE (only Windows)
   // CLI --browsers Chrome,Firefox,Safari
   browsers: [
-    'PhantomJS',
+    'Chrome',
   ],
 
   // If browser does not capture in given timeout [ms], kill it

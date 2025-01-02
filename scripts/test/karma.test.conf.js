@@ -37,7 +37,6 @@ module.exports = (config) => {
       require('karma-jasmine'),
       require('karma-rollup-preprocessor'),
       require('karma-chrome-launcher'),
-      require('karma-phantomjs-launcher'),
     ],
 
     autoWatch: false,
@@ -46,7 +45,6 @@ module.exports = (config) => {
 
     browsers: [
       'CustomHeadlessChrome',
-      'PhantomJS',
     ],
 
     reporters: [
