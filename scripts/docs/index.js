@@ -24,7 +24,6 @@
 
 const path = require('node:path');
 const fs = require('node:fs');
-const _ = require('lodash');
 const glob = require('glob');
 const touch = require('touch');
 const Handlebars = require('handlebars');
@@ -55,7 +54,7 @@ module.exports = function docs(done) {
  */
 function readJsDoc(files) {
   return Promise.all(
-    _.map(files, (file) => (
+    files.map((file) => (
       readFile(file)
         .then((content) => dox.parseComments(content, { raw: true }))
         .then((jsdoc) => keepFunctions(jsdoc))
@@ -74,7 +73,7 @@ function generateMarkdown(comments) {
   return readFile(path.join(config.root, '.readme'))
     .then((template) => Handlebars.compile(template, { noEscape: true }))
     .then((templateFn) => templateFn({
-      matchers: _.map(comments, (comment) => comment[0]),
+      matchers: comments.map((comment) => comment[0]),
     }));
 }
 
@@ -98,10 +97,9 @@ function writeMarkdown(result) {
  */
 function listFiles(dir) {
   return glob.glob(path.join(dir, '**', '*.js')).then((files) => (
-    _.chain(files)
-      .reject((f) => path.basename(f) === 'index.js')
-      .sortBy((f) => path.basename(f))
-      .value()
+    files.filter((f) => path.basename(f) !== 'index.js').sort((f1, f2) => (
+      path.basename(f1).localeCompare(path.basename(f2))
+    ))
   ));
 }
 
@@ -164,7 +162,7 @@ function writeFile(file, content) {
  * @returns {Array<Object>} The array containing only jsdoc of functions.
  */
 function keepFunctions(comments) {
-  return _.filter(comments, (comment) => (
+  return comments.filter((comment) => (
     !!comment.ctx && comment.ctx.type === 'function'
   ));
 }
@@ -176,9 +174,31 @@ function keepFunctions(comments) {
  * @return {string} The same text with all lines trimmed.
  */
 function trimAll(txt) {
-  const lines = txt.split('\n');
-  const trimmedLines = _.map(lines, _.trim);
-  return trimmedLines.join('\n');
+  return txt.split('\n').map((line) => line.trim()).join('\n');
+}
+
+/**
+ * Group all value of given `inputs`, where each group key is produced using the `keyFn` function.
+ *
+ * @param {Array<any>} inputs Array of inputs.
+ * @param {function} keyFn The key function, produce the indexed key.
+ * @returns {Map<any, any[]>} Map, where each value is grouped by given key.
+ */
+function groupBy(inputs, keyFn) {
+  const map = new Map();
+
+  for (let i = 0; i < inputs.length; ++i) {
+    const v = inputs[i];
+    const k = keyFn(v);
+
+    if (!map.has(k)) {
+      map.set(k, []);
+    }
+
+    map.get(k).push(v);
+  }
+
+  return map;
 }
 
 /**
@@ -189,33 +209,32 @@ function trimAll(txt) {
  * @returns {Array<Object>} The new comments.
  */
 function parseComments(comments) {
-  return _.map(comments, (comment) => {
-    const tags = _.groupBy(comment.tags, 'type');
+  return comments.map((comment) => {
+    const tags = groupBy(comment.tags, (t) => t.type);
     return {
       name: comment.ctx.name,
-      description: _.trim(comment.description.full),
+      description: (comment.description.full || '').trim(),
       code: comment.code,
 
-      since: _(tags.since)
-        .map('string')
-        .map(trimAll)
-        .value()[0],
+      since: (tags.get('since') || [])
+        .map((node) => node.string)
+        .map((txt) => trimAll(txt))
+        .at(0),
 
-      messages: _(tags.message)
-        .map('string')
-        .map(trimAll)
-        .value(),
+      messages: (tags.get('message') || [])
+        .map((node) => node.string)
+        .map((txt) => trimAll(txt)),
 
-      examples: _(tags.example)
-        .map('string')
-        .flatMap((x) => x.split('\n'))
-        .map(trimAll)
-        .value(),
+      examples: (tags.get('example') || [])
+        .map((node) => node.string)
+        .flatMap((txt) => txt.split('\n'))
+        .map((txt) => trimAll(txt)),
 
-      params: _(tags.param)
+      params: (tags.get('param') || [])
         .slice(1)
-        .map((param) => _.assign(param, { types: _.isEmpty(param.types) ? ['*'] : param.types }))
-        .value(),
+        .map((param) => Object.assign(param, {
+          types: param.types.length === 0 ? ['*'] : param.types,
+        })),
     };
   });
 }
