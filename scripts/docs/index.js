@@ -23,7 +23,7 @@
  */
 
 const path = require('node:path');
-const fs = require('node:fs');
+const fs = require('node:fs/promises');
 const glob = require('glob');
 const Handlebars = require('handlebars');
 const dox = require('dox');
@@ -111,17 +111,8 @@ function listFiles(dir) {
  * @return {Promise} The promise.
  */
 function readFile(file) {
-  return new Promise((resolve, reject) => {
-    log.debug(`Reading: ${file}`);
-
-    fs.readFile(file, 'utf-8', (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
+  log.debug(`Reading: ${file}`);
+  return fs.readFile(file, 'utf-8');
 }
 
 /**
@@ -131,19 +122,11 @@ function readFile(file) {
  *
  * @param {string} file The full path.
  * @param {string} content File content.
- * @return {Promise} The promise.
+ * @return {Promise<void>} The promise.
  */
 function writeFile(file, content) {
-  return new Promise((resolve, reject) => {
-    log.debug(`Writing: ${file}`);
-    fs.writeFile(file, content, 'utf-8', (writeErr) => {
-      if (writeErr) {
-        reject(writeErr);
-      } else {
-        resolve();
-      }
-    });
-  });
+  log.debug(`Writing: ${file}`);
+  return fs.writeFile(file, content, 'utf-8');
 }
 
 /**
