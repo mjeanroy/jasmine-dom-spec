@@ -25,7 +25,6 @@
 const path = require('node:path');
 const fs = require('node:fs');
 const glob = require('glob');
-const touch = require('touch');
 const Handlebars = require('handlebars');
 const dox = require('dox');
 const log = require('../log');
@@ -137,20 +136,12 @@ function readFile(file) {
 function writeFile(file, content) {
   return new Promise((resolve, reject) => {
     log.debug(`Writing: ${file}`);
-
-    touch(file, (err) => {
-      if (err) {
-        reject(err);
-        return;
+    fs.writeFile(file, content, 'utf-8', (writeErr) => {
+      if (writeErr) {
+        reject(writeErr);
+      } else {
+        resolve();
       }
-
-      fs.writeFile(file, content, 'utf-8', (writeErr) => {
-        if (writeErr) {
-          reject(writeErr);
-        } else {
-          resolve();
-        }
-      });
     });
   });
 }
