@@ -35,6 +35,11 @@ on:
           - patch
           - minor
           - major
+      dry_run:
+        description: "Dry run"
+        required: true
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -59,12 +64,21 @@ jobs:
       - name: Test
         run: pnpm test
       - name: Release
-        run: pnpm run release:${{ inputs.version }}
+        run: pnpm run "release:${VERSION}"
+        env:
+          VERSION: ${{ inputs.version }}
       - name: Git log
         run: |
           git log -n5 --oneline
           git tag --sort=-creatordate
-      - name: Git push
+      - name: git push --dry-run
         run: |
-          git push origin ${{ github.ref_name }} 
+          git push --dry-run origin "${REF_NAME}"
+          git push --dry-run --tags
+      - name: git push
+        if: inputs.dry_run == false
+        run: |
+          git push origin "${REF_NAME}"
           git push --tags
+        env:
+          REF_NAME: ${{ github.ref_name }} 
