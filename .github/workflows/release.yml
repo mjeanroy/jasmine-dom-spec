@@ -47,6 +47,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ssh-signin
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         name: Checkout
@@ -54,10 +55,6 @@ jobs:
         name: Set up NodeJS
         with:
           node-version: 24
-      - name: Configure Git User
-        run: |
-          git config user.email "mickael.jeanroy@gmail.com"
-          git config user.name "Mickael Jeanroy"
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
         name: Set up PNPM
         with:
@@ -66,11 +63,17 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm test
+      - uses: photostructure/git-ssh-signing-action@eb48d0517cdf304a5fde87d539702a74ebc01e09 # v2.0.0
+        name: Setup git sign
+        with:
+          ssh-signing-key: ${{ secrets.SSH_SIGNING_KEY }}
+          git-user-name: ${{ secrets.GIT_USER_NAME }}
+          git-user-email: ${{ secrets.GIT_USER_EMAIL }}
       - name: Release
         run: pnpm run "release:${VERSION}"
         env:
           VERSION: ${{ inputs.version }}
-      - name: Git log
+      - name: git log
         run: |
           git log -n5 --oneline
           git tag --sort=-creatordate
