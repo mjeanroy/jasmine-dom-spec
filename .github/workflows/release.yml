@@ -73,6 +73,10 @@ jobs:
         run: pnpm run "release:${VERSION}"
         env:
           VERSION: ${{ inputs.version }}
+      - name: git verify-commit
+        run: |
+          git verify-commit HEAD^1
+          git verify-commit HEAD
       - name: git log
         run: |
           git log -n5 --oneline
