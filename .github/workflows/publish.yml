@@ -54,7 +54,7 @@ jobs:
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.0.1
         name: Set up NodeJS
         with:
-          node-version: 24
+          node-version: 26
           package-manager-cache: false
           registry-url: 'https://registry.npmjs.org'
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
