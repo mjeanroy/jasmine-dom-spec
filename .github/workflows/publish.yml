@@ -57,10 +57,12 @@ jobs:
           node-version: 26
           package-manager-cache: false
           registry-url: 'https://registry.npmjs.org'
-      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v5.0.0
+      - uses: pnpm/setup@731dfb6463bbd11c11fd0ee11fe00ed0e36d48a1 # v3.2.0
         name: Set up PNPM
         with:
-          version: 10.33.0
+          version: 11.28.12
+          node-version-file: false
+          install: false
           cache: false
       - name: Fetch all tags
         run: |
@@ -73,7 +75,7 @@ jobs:
       - name: pnpm install
         run: pnpm install
       - name: Publish (test)
-        run: NODE_AUTH_TOKEN="" pnpm publish --dry-run --no-git-checks
+        run: pnpm publish --dry-run --no-git-checks
       - name: Publish
         if: inputs.dry_run == false
-        run: NODE_AUTH_TOKEN="" pnpm publish --no-git-checks --provenance
+        run: pnpm publish --no-git-checks --provenance
