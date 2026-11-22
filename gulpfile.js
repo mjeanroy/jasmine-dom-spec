@@ -32,13 +32,15 @@ const test = require('./scripts/test');
 const docs = require('./scripts/docs');
 const release = require('./scripts/release');
 
-const prebuild = gulp.series(clean, lint);
+// Chained tasks (build, test, release) always lint the whole project: `--file` only restricts
+// the standalone `lint` task.
+const prebuild = gulp.series(clean, lint.lint);
 const pretest = prebuild;
 const prerelease = gulp.series(pretest, test.auto, build, docs);
 
 module.exports = {
   'clean': clean,
-  'lint': lint,
+  'lint': lint.lintCli,
   'build': gulp.series(prebuild, build),
   'test': gulp.series(pretest, test.auto),
   'tdd': test.tdd,
