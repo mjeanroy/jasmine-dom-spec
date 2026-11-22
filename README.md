@@ -3,7 +3,7 @@ jasmine-dom-spec
 
 Jasmine-Dom-Spec is a set of custom matchers to be able to test DOM nodes easily.
 
-Jasmine-Dom-Spec is compatible with __Jasmine 1.3__ and __Jasmine 2.0.X__.
+Jasmine-Dom-Spec is compatible with __Jasmine 1.3__, __Jasmine 2.X__, __Jasmine 3.X__ and __Jasmine 4.X__.
 
 ## Matchers
 
